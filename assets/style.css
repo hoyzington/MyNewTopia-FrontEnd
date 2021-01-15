@@ -69,14 +69,15 @@ svg {
   height: 100%;
   width: 25%;
   overflow-y: scroll;
-  padding: 2% 0%;
+  padding: 2% 1%;
   background-color: coral;
+  list-style: none;
 }
 
   .list-item {
     width: 80%;
     padding: 2%;
-    margin: 2% auto;
+    margin: 2.5% auto;
     border-radius: 6px;
     border-color: rgb(46, 135, 252);
     background-color: rgb(46, 135, 252);
