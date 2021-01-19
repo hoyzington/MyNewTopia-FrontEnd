@@ -13,20 +13,52 @@
         <span id="logo"><i>MyNewTopia</i></span>
         <span id="filter">
             <select id="econ" class="controls">
-              <option value="">Economy:</option>
-              <option value="">Median Hourly Wage</option>
-              <option value="">Unemployment</option>
+              <option value="">Economy: None</option>
+              <optgroup label="Median Hourly Wage">
+                <option value="25.51, 30.00">$25.51-$30.00</option>
+                <option value="21.01, 25.50">$21.01-$25.50</option>
+                <option value="16.51, 21.00">$16.51-$21.00</option>
+                <option value="12.00, 16.50">$12.00-$16.50</option>
+              </optgroup>
+              <optgroup label="Annual Unemployment Rate">
+                <option value="2.4, 3.7">Low (2.4%-3.7%)</option>
+                <option value="3.8, 5.0">Med. (3.8%-5.0%)</option>
+                <option value="5.1, 7.7">High (5.1%-7.7%)</option>
+              </optgroup>
             </select>
             <select id="clim" class="controls">
-              <option value="">Climate:</option>
-              <option value="">Heat Index</option>
-              <option value="">Cold</option>
-              <option value="">Precipitation</option>
-              <option value="">Snowfall</option>
+              <option value="">Climate: None</option>
+              <optgroup label="Typical Worst Summer Heat Index">
+                <option value="70, 80">Safe (Below 80)</option>
+                <option value="80, 90">Caution (80-90)</option>
+                <option value="91, 103">Ex. Caution (91-103)</option>
+                <option value="104, 124">Danger (104-124)</option>
+              </optgroup>
+              <optgroup label="Typical Lowest Winter Temperature (F)">
+                <option value="">Above &deg;</option>
+                <option value="">&deg; To &deg;</option>
+                <option value="">&deg; To &deg;</option>
+                <option value="">Below &deg;</option>
+              </optgroup>
+              <optgroup label="Typical Annual Precipitation">
+                <option value="">Over  Inches</option>
+                <option value=""> To  Inches</option>
+                <option value="">Up To  Inches</option>
+                <option value="">None</option>
+              </optgroup>
+              <optgroup label="Typical Annual Snowfall">
+                <option value="">Over  Inches</option>
+                <option value=""> To  Inches</option>
+                <option value="">Up To  Inches</option>
+                <option value="">None</option>
+              </optgroup>
             </select>
             <select id="well" class="controls">
-              <option value="">Wellness:</option>
-              <option value="">Air Quality Index</option>
+              <option value="">Wellness: None</option>
+              <optgroup label="Air Quality Index">
+                <option value=""></option>
+                <option value=""></option>  
+              </optgroup>
             </select>
             <button class="controls">Find</button>
             <button class="controls">Save</button>
@@ -9874,7 +9906,7 @@
         <div id="metro-list"></div>
       </div>
       <footer>
-        <div id="footer-text">Scott Hoisington</div>
+        <div id="footer-text">&copy; Scott Hoisington</div>
       </footer>
     </div>
   </body>
