@@ -1,11 +1,12 @@
 html {
-  background-color: rgb(131, 101, 192);
+  background-color: rgb(125, 90, 194);
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #222;
+  background-color: #2A2A3A;
+  color: rgb(228, 243, 255);
 }
 
 #flex-container-a {
@@ -16,32 +17,77 @@ body {
 }
 
 header, footer {
-  width: 100%;
-  color: aliceblue;
-  ;
+  position: fixed;
+  width: 97vw;
+  padding: 0% 1.5%;
+  background-color: rgb(125, 90, 194);
+  font-size: 2vh;
+  font-weight: bold;
 }
 
 header {
-  position: fixed;
   top: 0px;
-  height: 7%;
-  background-color: rgb(131, 101, 192);
+  height: 6.5vh;
 }
 
   #logo {
-    margin: .5% 0% 0% 1%;
+    position: absolute;
+    top: 14%;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 4vh;
-    font-size-adjust: inherit;
+    font-size: 3.5vh;
     color: rgb(5, 255, 201);
   }
 
+  #filter {
+    float: left;
+    width: 80vw;
+    height: 7vh;
+    color: #444;
+    text-align: center;
+  }
+
+    .controls {
+      position: relative;
+      top: 24%;
+      border-style: hidden;
+      border-radius: 3px;
+      background-color: rgb(228, 243, 255);
+      font-size: inherit;
+      font-weight: inherit;
+      color: inherit;
+    }
+
+    select {
+      width: 12.5vh;
+      margin: 0% .75%;
+      padding: .2% .1%;
+    }
+
+    button {
+      position: relative;
+      top: -.8%;
+      margin: 0% 0% 0% .75%;
+      padding: .3% .6% .2% .6%;
+    }
+
+  #menu {
+    position: absolute;
+    right: 1.5%;
+    width: 25.5vw;
+    height: 7vh;
+    text-align: center;
+  }
+
+  .menu-item {
+    position: relative;
+    top: 24%;
+    margin: auto 5%;
+  }
+
 footer {
-  position: fixed;
   bottom: 0px;
   height: 5%;
   text-align: center;
-  background-color: rgb(141, 46, 46);
 }
 
   #footer-text {
@@ -55,33 +101,35 @@ footer {
 
 svg {
   position: fixed;
-  top: 7%;
-  left: 5%;
+  top: 6%;
+  left: 3.5%;
   width: 64vw;
-  padding: 2.5% 0%;
+  padding: 3% 0%;
   overflow: scroll;
 }
 
 #metro-list {
   position: fixed;
-  top: 7%;
+  top: 6.5%;
   right: 0%;
   height: 100%;
   width: 25%;
   overflow-y: scroll;
   padding: 2% 1%;
   background-color: coral;
-  list-style: none;
 }
 
   .list-item {
     width: 80%;
-    padding: 2%;
+    padding: 2.5%;
     margin: 2.5% auto;
     border-radius: 6px;
     border-color: rgb(46, 135, 252);
     background-color: rgb(46, 135, 252);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 80%;
-    color: aliceblue;
   }
+
+li {
+  list-style: none;
+}

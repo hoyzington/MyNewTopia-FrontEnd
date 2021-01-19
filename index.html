@@ -10,7 +10,31 @@
   <body>
     <div id="flex-container-a">
       <header>
-        <div id="logo"><i>MyNewTopia</i></div>
+        <span id="logo"><i>MyNewTopia</i></span>
+        <span id="filter">
+            <select id="econ" class="controls">
+              <option value="">Economy:</option>
+              <option value="">Median Hourly Wage</option>
+              <option value="">Unemployment</option>
+            </select>
+            <select id="clim" class="controls">
+              <option value="">Climate:</option>
+              <option value="">Heat Index</option>
+              <option value="">Cold</option>
+              <option value="">Precipitation</option>
+              <option value="">Snowfall</option>
+            </select>
+            <select id="well" class="controls">
+              <option value="">Wellness:</option>
+              <option value="">Air Quality Index</option>
+            </select>
+            <button class="controls">Find</button>
+            <button class="controls">Save</button>
+        </span>
+        <span id="menu">
+          <span id="about" class="menu-item">About</span>
+          <span id="acct" class="menu-item">Account</span>
+        </span>
       </header>
       <div id="flex-container-b">
         <svg id="map" viewbox="0 0 550 350" xmlns="http://www.w3.org/2000/svg">
