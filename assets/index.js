@@ -1,44 +1,32 @@
 const endPoint = 'http://localhost:3000/api/v1/metro-areas'
 
 function mapMsas(json) {
-  document.addEventListener('DOMContentLoaded', () => {
-    console.log('Anybody there??')
-    const svgObj = document.getElementById('map_svg').contentDocument()
-    if (svgObj) {
-      console.log('got svg')
+  const svgObj = document.getElementById('map')
+  const chosen = document.getElementById('chosen-msas')
+  const not_chosen = document.getElementById('not-chosen-msas')
+  if (chosen.children.length > 0) {
+    for (const msa of chosen) {
+      not_chosen.appendChild(msa)
+    }
+  }
+  for (const msa of json) {
+    let loc = svgObj.getElementById(msa.msa_code)
+    if (loc) {
+      chosen.appendChild(loc)
     } else {
-      console.log("didn't get svg")
+      console.log(`${msa.msa_code} ${msa.name} was NOT found`)
     }
-    
-    // const prev_msas = document.getElementsByClassName('chosen')
-    // if (prev_msas.length > 0) {
-    //   for (const msa of prev_msas) {
-    //     msa.className = 'prev_chosen'
-    //   }
-    // }
-    for (const msa of json) {
-      let loc = svgObj.getElementById(`MSA_${msa.msa_code}`)
-      if (loc) {
-        console.log(`${msa.name} was found`)
-        loc.className = 'chosen'
-        console.log(`${msa.name} was classed`)
-      } else {
-        console.log(`${msa.name} was NOT found`)
-      }
-    }
-  })
+  }
 }
 
 function makeList(json) {
   for (const msa of json) {
-    let list = document.getElementById('metro-list')
-    let div = document.createElement('div')
-    let card = document.createElement('div')
-    card.className = 'list-item'
-    card.id = msa.msa_code
-    card.innerHTML = `<b>${msa.name}</b> (${msa.states})`
-    div.appendChild(card)
-    list.appendChild(div)
+    let ul = document.getElementById('metro-list')
+    let li = document.createElement('li')
+    li.className = 'list-item'
+    li.id = msa.msa_code
+    li.innerHTML = `<b>${msa.name}</b> (${msa.states})`
+    ul.appendChild(li)
   }
   mapMsas(json)
 }
@@ -47,7 +35,6 @@ function getMsas() {
   fetch(endPoint)
     .then(res => res.json())
     .then(json => makeList(json))
-    .then(json => mapMsas(json))
 }
 
 getMsas()
