@@ -10,68 +10,113 @@
   <body>
     <div id="flex-container-a">
       <header>
-        <span id="logo"><i>MyNewTopia</i></span>
-        <span id="filter">
-            <select id="econ" class="controls">
-              <option value="">Economy: None</option>
-              <optgroup label="Median Hourly Wage">
-                <option value="25.51, 30.00">$25.51-$30.00</option>
-                <option value="21.01, 25.50">$21.01-$25.50</option>
-                <option value="16.51, 21.00">$16.51-$21.00</option>
-                <option value="12.00, 16.50">$12.00-$16.50</option>
-              </optgroup>
-              <optgroup label="Annual Unemployment Rate">
-                <option value="2.4, 3.7">Low (2.4%-3.7%)</option>
-                <option value="3.8, 5.0">Med. (3.8%-5.0%)</option>
-                <option value="5.1, 7.7">High (5.1%-7.7%)</option>
-              </optgroup>
-            </select>
-            <select id="clim" class="controls">
-              <option value="">Climate: None</option>
-              <optgroup label="Typical Worst Summer Heat Index">
-                <option value="70, 80">Safe (Below 80)</option>
-                <option value="80, 90">Caution (80-90)</option>
-                <option value="91, 103">Ex. Caution (91-103)</option>
-                <option value="104, 124">Danger (104-124)</option>
-              </optgroup>
-              <optgroup label="Typical Lowest Winter Temperature (F)">
-                <option value="">Above &deg;</option>
-                <option value="">&deg; To &deg;</option>
-                <option value="">&deg; To &deg;</option>
-                <option value="">Below &deg;</option>
-              </optgroup>
-              <optgroup label="Typical Annual Precipitation">
-                <option value="">Over  Inches</option>
-                <option value=""> To  Inches</option>
-                <option value="">Up To  Inches</option>
-                <option value="">None</option>
-              </optgroup>
-              <optgroup label="Typical Annual Snowfall">
-                <option value="">Over  Inches</option>
-                <option value=""> To  Inches</option>
-                <option value="">Up To  Inches</option>
-                <option value="">None</option>
-              </optgroup>
-            </select>
-            <select id="well" class="controls">
-              <option value="">Wellness: None</option>
-              <optgroup label="Air Quality Index">
-                <option value=""></option>
-                <option value=""></option>  
-              </optgroup>
-            </select>
-            <button class="controls">Find</button>
-            <button class="controls">Save</button>
+        <span id="filter-header" class="side-header">
+          <span class="side-title">METRO AREA FILTER</span>
         </span>
-        <span id="menu">
-          <span id="about" class="menu-item">About</span>
-          <span id="acct" class="menu-item">Account</span>
+        <span id="nav-bar">
+          <span id="logo"><i>MyNewTopia</i></span>
+          <span id="menu">
+            <span id="about" class="menu-item">About</span>
+            <span id="acct" class="menu-item">Account</span>
+          </span>
+          
+        </span>
+        <span id="list-header" class="side-header">
+          <span class="side-title">METRO AREA LIST&nbsp;</span>
         </span>
       </header>
       <div id="flex-container-b">
+        <div id="filter">
+          <form action="">
+            <input type="submit" value="Find">
+            <input type="submit" value="Edit">
+            <input type="submit" value="Save"><br>
+
+            <h3>CLIMATE</h3>
+            <p>(Typical annual amounts. Temperatures are Fahrenheit.)</p>
+
+            <h4>Highest Summer Heat Index</h4>
+              <input type="checkbox" id="1" name="1" value="70, 80">
+                <label for="1"> Safe (Below 80)</label><br>
+              <input type="checkbox" id="2" name="2" value="80, 90">
+                <label for="2"> Caution (80 - 90)</label><br>
+              <input type="checkbox" id="3" name="3" value="91, 103">
+                <label for="3"> Ex. Caution (91 - 103)</label><br>
+              <input type="checkbox" id="4" name="4" value="104, 124">
+                <label for="4"> Danger (104 - 124)</label><br>
+
+            <h4>Coldest Winter Temperature</h4>
+              <input type="checkbox" id="1" name="1" value="51, 70">
+                <label for="1"> 51&deg; - 70&deg;</label><br>
+              <input type="checkbox" id="2" name="2" value="36, 50">
+                <label for="2"> 36&deg; To 50&deg;</label><br>
+              <input type="checkbox" id="3" name="3" value="21, 35">
+                <label for="3"> 21&deg; To 35&deg;</label><br>
+              <input type="checkbox" id="4" name="4" value="0, 20">
+                <label for="4"> 0&deg; - 20&deg;</label><br>
+
+            <h4>Precipitation</h4>
+              <input type="checkbox" id="1" name="1" value="51, 65">
+                <label for="1"> 51 - 65 Inches</label><br>
+              <input type="checkbox" id="2" name="2" value="36, 50">
+                <label for="2"> 36 - 50 Inches</label><br>
+              <input type="checkbox" id="3" name="3" value="21, 35">
+                <label for="3"> 21 - 35 Inches</label><br>
+              <input type="checkbox" id="4" name="4" value="0, 20">
+                <label for="4"> 0 - 20 Inches</label><br>
+
+            <h4>Snowfall</h4>
+              <input type="checkbox" id="1" name="1" value="81, 125">
+                <label for="1"> 81 - 125 Inches</label><br>
+              <input type="checkbox" id="2" name="2" value="41, 80">
+                <label for="2"> 41 - 80 Inches</label><br>
+              <input type="checkbox" id="3" name="3" value="0, 40">
+                <label for="3"> Up To 40 Inches</label><br>
+              <input type="checkbox" id="4" name="4" value="0">
+                <label for="4"> None</label><br>
+
+            <h3>ECONOMY</h3>
+            <p>(Data is the most recently available for metro areas as of January 2021)</p>
+
+            <h4>Median Hourly Wage</h4>
+              <input type="checkbox" id="1" name="1" value="25.51, 30.00">
+                <label for="1"> $25.51 - $30.00</label><br>
+              <input type="checkbox" id="2" name="2" value="21.01, 25.50">
+                <label for="2"> $21.01 - $25.50</label><br>
+              <input type="checkbox" id="3" name="3" value="16.51, 21.00">
+                <label for="3"> $16.51 - $21.00</label><br>
+              <input type="checkbox" id="4" name="4" value="12.00, 16.50">
+                <label for="4"> $12.00 - $16.50</label><br>
+
+            <h4>Annual Unemployment Rate</h4>
+              <input type="checkbox" id="1" name="1" value="2.4, 3.7">
+                <label for="1"> Low (2.4% - 3.7%)</label><br>
+              <input type="checkbox" id="2" name="2" value="3.8, 5.0">
+                <label for="2"> Medium (3.8% - 5.0%)</label><br>
+              <input type="checkbox" id="3" name="3" value="5.1, 7.7">
+                <label for="3"> High (5.1% - 7.7%)</label><br>
+
+            <h3>WELLNESS</h3>
+
+            <h4>Air Quality Index</h4>
+              <input type="checkbox" id="1" name="1" value="91, 100">
+                <label for="1"> 91% - 100% Good AQI Days</label><br>
+              <input type="checkbox" id="2" name="2" value="76, 90">
+                <label for="2"> 76% - 90% Good AQI Days</label><br>
+              <input type="checkbox" id="3" name="3" value="51, 75">
+                <label for="3"> 51% - 75% Good AQI Days</label><br>
+              <input type="checkbox" id="4" name="4" value="0, 50">
+                <label for="4"> 0% - 50% Good AQI Days</label><br><br><br>
+
+            <input type="submit" value="Find">
+            <input type="submit" value="Edit">
+            <input type="submit" value="Save"><br><br>
+
+          </form>
+        </div>
         <svg id="map" viewbox="0 0 550 350" xmlns="http://www.w3.org/2000/svg">
-          <g id="chosen-msas" fill="rgb(5, 255, 201)" stroke="rgb(5, 255, 201)" stroke-width="1px"></g>
-          <g id="not-chosen-msas" fill="#ABC" stroke="#ABC" stroke-width="1px">
+          <g id="chosen-msas" fill="rgb(3, 115, 219)" stroke="rgb(3, 115, 219)" stroke-width="1px"></g>
+          <g id="not-chosen-msas" fill="#99AABF" stroke="#99AABF" stroke-width="1px">
             <g id="13820">
               <path id="01007" d="m389.29 232.31.419-.036 1.798 2.385.136.847.185 1.902-1.537.136-2.474.301-.745.072-.054-.564-1.094.109-.159-1.663 1.109-.136-.031-1.14.27-.532.812-.901.459-.51.09-.054.703-.207z">
                 <!-- <title id="t61">Bibb County, AL</title> -->
@@ -2173,7 +2218,7 @@
               <title id="t4100">Madison, WI</title>
             </g>
           </g>
-          <g id="states" fill="#ABC" stroke="#ABC" stroke-width="1px">
+          <g id="states" fill="#AABBCF" stroke="#AABBCF" stroke-width="1px">
             <g id="Alaska">
               <path id="02185" d="m62.678 259.31.882-.881.66-.44.219.44-.439.22h.439l2.204-.66 1.983-2.425 1.762.882v.442l-.661.659v.663l.661-.221.441-1.101.44-.442.661.66.22.883.661.221.219-.441 1.101-.222h1.763l.219.222-.44.66v.22l1.323.221-.222.66h.882l1.101-.66 2.423-.221 1.542.441h.664l.658.22.223.22h.881l1.101-.22h1.323l1.542.442.44-.222.882-.66.219-.221.441-.439 1.543.219 3.524 1.101 1.101 3.526.661 2.203-9.032 2.203.441 2.422-1.762.441-4.627.884h-.223l-10.351 1.1h-2.424v-.441h-1.761v-.441h-1.763l-1.762.22h-1.323v-.438h-.66v.218h-1.982l-.441-.218h-.221v.218h-.88l-.222-.44h-1.101v.44h-.442l-3.085-.218v.878h-1.542l-1.321-.66-.661-.882.44-1.32.221-1.544 1.542.222 1.984-.222.659-.219 1.322-1.543.663-1.982 1.321-1.982.882-.883.66.223.882-.442z">
                 <!-- <title id="t0">North Slope County, AK</title> -->
