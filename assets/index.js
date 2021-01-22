@@ -24,18 +24,18 @@ const heatCtrl = document.getElementById('heat'),
       
 let heat = {}, cold = {}, precip = {}, snow = {}, wage = {}, unemp = {}, aqi = {};
 
-function activate(attrCtrl, attrHash) {
-  attrCtrl.addEventListener('click', (e) => gatherInput(e, attrHash))
+function activate(attrCtrl, inputHash) {
+  attrCtrl.addEventListener('click', (e) => gatherInput(e, inputHash))
 }
 
-function gatherInput(e, attrHash) {
+function gatherInput(e, inputHash) {
   let box = e.target
-    if (attrHash[box.id]) {
-      delete attrHash[box.id]
+    if (inputHash[box.id]) {
+      delete inputHash[box.id]
     } else {
-      attrHash[box.id] = box.value
+      inputHash[box.id] = box.value
     }
-    console.log(attrHash)
+    console.log(inputHash)
 }
 
 activate(heatCtrl, heat)
@@ -55,6 +55,7 @@ function filterMsas() {
   const filters = [heat, cold, precip, snow, wage, unemp, aqi]
   for (const f of filters) {
     filter = createFilter(f)
+    console.log(filter)
     applyFilter(filter)
   }
 }
@@ -65,6 +66,7 @@ function createFilter(hash) {
     filter = filterArray.map(item => parseFloat(item))
     if (filter.length > 1) {
       filter.sort((a, b) => a - b).splice(1, (filter.length - 2))
+      return filter
     }
   }
 }
