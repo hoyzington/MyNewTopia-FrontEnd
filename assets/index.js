@@ -48,6 +48,31 @@ activate(aqiCtrl, aqi)
 
 // make or update list & map when "Find" button is clicked
 
+const findBtn = document.getElementById('find')
+findBtn.addEventListener('click', () => filterMsas())
+
+function filterMsas() {
+  const filters = [heat, cold, precip, snow, wage, unemp, aqi]
+  for (const f of filters) {
+    filter = createFilter(f)
+    applyFilter(filter)
+  }
+}
+
+function createFilter(hash) {
+  if (Object.keys(hash).length > 0) {
+    filterArray = Object.values(hash).join(',').split(',')
+    filter = filterArray.map(item => parseFloat(item))
+    if (filter.length > 1) {
+      filter.sort((a, b) => a - b).splice(1, (filter.length - 2))
+    }
+  }
+}
+
+function applyFilter(filter) {
+  
+}
+
 function makeList(json) {
   for (const msa of json) {
     let ul = document.getElementById('metro-list')
