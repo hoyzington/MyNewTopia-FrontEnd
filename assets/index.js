@@ -1,4 +1,34 @@
+// Fetch metro area data
+
 const endPoint = 'http://localhost:3000/api/v1/metro-areas'
+
+let msas = null
+
+function getMsas() {
+  fetch(endPoint)
+    .then(res => res.json())
+    .then(json => msas = json)
+}
+
+getMsas()
+
+// Add event listeners to filter form
+
+
+
+// make or update list & map when "Find" button is clicked
+
+function makeList(json) {
+  for (const msa of json) {
+    let ul = document.getElementById('metro-list')
+    let li = document.createElement('li')
+    li.className = 'list-item'
+    li.id = msa.msa_code
+    li.innerHTML = `<b>${msa.name}</b> (${msa.states})`
+    ul.appendChild(li)
+  }
+  mapMsas(json)
+}
 
 function mapMsas(json) {
   const svgObj = document.getElementById('map')
@@ -18,23 +48,3 @@ function mapMsas(json) {
     }
   }
 }
-
-function makeList(json) {
-  for (const msa of json) {
-    let ul = document.getElementById('metro-list')
-    let li = document.createElement('li')
-    li.className = 'list-item'
-    li.id = msa.msa_code
-    li.innerHTML = `<b>${msa.name}</b> (${msa.states})`
-    ul.appendChild(li)
-  }
-  mapMsas(json)
-}
-
-function getMsas() {
-  fetch(endPoint)
-    .then(res => res.json())
-    .then(json => makeList(json))
-}
-
-getMsas()
