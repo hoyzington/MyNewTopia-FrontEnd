@@ -14,7 +14,37 @@ getMsas()
 
 // Add event listeners to filter form
 
+const heatCtrl = document.getElementById('heat'),
+      coldCtrl = document.getElementById('cold'),
+      precipCtrl = document.getElementById('precip'),
+      snowCtrl = document.getElementById('snow'),
+      wageCtrl = document.getElementById('wage'),
+      unempCtrl = document.getElementById('unemp'),
+      aqiCtrl = document.getElementById('aqi');
+      
+let heat = {}, cold = {}, precip = {}, snow = {}, wage = {}, unemp = {}, aqi = {};
 
+function activate(attrCtrl, attrHash) {
+  attrCtrl.addEventListener('click', (e) => gatherInput(e, attrHash))
+}
+
+function gatherInput(e, attrHash) {
+  let box = e.target
+    if (attrHash[box.id]) {
+      delete attrHash[box.id]
+    } else {
+      attrHash[box.id] = box.value
+    }
+    console.log(attrHash)
+}
+
+activate(heatCtrl, heat)
+activate(coldCtrl, cold)
+activate(precipCtrl, precip)
+activate(snowCtrl, snow)
+activate(wageCtrl, wage)
+activate(unempCtrl, unemp)
+activate(aqiCtrl, aqi)
 
 // make or update list & map when "Find" button is clicked
 
