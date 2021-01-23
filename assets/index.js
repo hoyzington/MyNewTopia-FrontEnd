@@ -22,18 +22,24 @@ const heatCtrl = document.getElementById('heat'),
       unempCtrl = document.getElementById('unemp'),
       aqiCtrl = document.getElementById('aqi');
       
-let heat = {}, cold = {}, precip = {}, snow = {}, wage = {}, unemp = {}, aqi = {};
+let heat = { name: 'heat', vals: {} },
+    cold = { name: 'cold', vals: {} },
+    precip = { name: 'precip', vals: {} },
+    snow = { name: 'snow', vals: {} },
+    wage = { name: 'wage', vals: {} },
+    unemp = { name: 'unemp', vals: {} },
+    aqi = { name: 'aqi', vals: {} };
 
 function activate(attrCtrl, inputHash) {
   attrCtrl.addEventListener('click', (e) => gatherInput(e, inputHash))
 }
 
 function gatherInput(e, inputHash) {
-  let box = e.target
-  if (inputHash[box.id]) {
-    delete inputHash[box.id]
+  const box = e.target
+  if (inputHash.vals[box.id]) {
+    delete inputHash.vals[box.id]
   } else {
-    inputHash[box.id] = box.value
+    inputHash.vals[box.id] = box.value
   }
 }
 
@@ -48,15 +54,19 @@ activate(aqiCtrl, aqi)
 // make or update list & map when "Find" button is clicked
 
 let msaCollection = null
-const findBtn = document.getElementById('find')
-findBtn.addEventListener('click', () => filterMsas())
+const findBtns = document.getElementsByClassName('find')
+for (const btn of findBtns) {
+  btn.addEventListener('click', () => filterMsas())
+}
 
 function filterMsas() {
   const filterHashes = [heat, cold, precip, snow, wage, unemp, aqi]
   msaCollection = msas
   for (const f of filterHashes) {
-    if (Object.keys(f).length > 0) {
-      const filter = createFilter(f)
+    hash = f.vals
+    hashKeys = Object.keys(hash)
+    if (hashKeys.length > 0) {
+      const filter = createFilter(hash)
       msaCollection = applyFilter(filter)
       checkIfEmpty(msaCollection)
     }
