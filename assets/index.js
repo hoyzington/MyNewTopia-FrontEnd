@@ -63,13 +63,17 @@ for (const btn of findBtns) {
 
 function filterMsas() {
   msaCollection = msas
+  fHashesLoop:
   for (const f of fHashes) {
     hash = f.vals
     hashKeys = Object.keys(hash)
     if (hashKeys.length > 0) {
       const filter = createFilter(hash)
       msaCollection = applyFilter(f, filter)
-      checkIfEmpty(msaCollection)
+      if (checkIfEmpty(msaCollection)) {
+        msaCollection = null
+        break fHashesLoop
+      }
     }
   }
   makeList(msaCollection)
@@ -97,31 +101,42 @@ function applyFilter(fHash, filter) {
 function checkIfEmpty(collection) {
   if (collection.length == 0) {
     document.getElementById('metro-list').innerHTML = '<h3>No Matches</h3>'
-    return
+    const chosen = document.getElementById('chosen-msas')
+    resetMap(chosen)
+    return true
+  } else {
+    return false
+  }
+}
+
+function resetMap(chosen) {
+  const not_chosen = document.getElementById('not-chosen-msas')
+  while (chosen.hasChildNodes()) {
+    not_chosen.appendChild(chosen.firstChild)
   }
 }
 
 function makeList(collection) {
-  for (const msa of collection) {
-    let ul = document.getElementById('metro-list')
-    let li = document.createElement('li')
-    li.className = 'list-item'
-    li.id = msa.code
-    li.innerHTML = `<b>${msa.name}</b> (${msa.states})`
-    ul.appendChild(li)
+  if (collection) {
+    const ul = document.getElementById('metro-list')
+    while (ul.hasChildNodes()) {  
+      ul.removeChild(ul.firstChild)
+    }
+    for (const msa of collection) {
+      let li = document.createElement('li')
+      li.className = 'list-item'
+      li.id = msa.code
+      li.innerHTML = `<b>${msa.name}</b> (${msa.states})`
+      ul.appendChild(li)
+    }
+    mapMsas(collection)
   }
-  mapMsas(collection)
 }
 
 function mapMsas(collection) {
   const svgObj = document.getElementById('map')
   const chosen = document.getElementById('chosen-msas')
-  const not_chosen = document.getElementById('not-chosen-msas')
-  if (chosen.children.length > 0) {
-    for (const msa of chosen.children) {
-      not_chosen.appendChild(msa)
-    }
-  }
+  resetMap(chosen)
   for (const msa of collection) {
     let loc = svgObj.getElementById(msa.code)
     if (loc) {
