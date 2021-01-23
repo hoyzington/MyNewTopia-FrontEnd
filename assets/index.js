@@ -30,12 +30,11 @@ function activate(attrCtrl, inputHash) {
 
 function gatherInput(e, inputHash) {
   let box = e.target
-    if (inputHash[box.id]) {
-      delete inputHash[box.id]
-    } else {
-      inputHash[box.id] = box.value
-    }
-    console.log(inputHash)
+  if (inputHash[box.id]) {
+    delete inputHash[box.id]
+  } else {
+    inputHash[box.id] = box.value
+  }
 }
 
 activate(heatCtrl, heat)
@@ -48,60 +47,76 @@ activate(aqiCtrl, aqi)
 
 // make or update list & map when "Find" button is clicked
 
+let msaCollection = null
 const findBtn = document.getElementById('find')
 findBtn.addEventListener('click', () => filterMsas())
 
 function filterMsas() {
-  const filters = [heat, cold, precip, snow, wage, unemp, aqi]
-  for (const f of filters) {
-    filter = createFilter(f)
-    console.log(filter)
-    applyFilter(filter)
+  const filterHashes = [heat, cold, precip, snow, wage, unemp, aqi]
+  msaCollection = msas
+  for (const f of filterHashes) {
+    if (Object.keys(f).length > 0) {
+      const filter = createFilter(f)
+      msaCollection = applyFilter(filter)
+      checkIfEmpty(msaCollection)
+    }
   }
+  makeList(msaCollection)
 }
 
 function createFilter(hash) {
-  if (Object.keys(hash).length > 0) {
-    filterArray = Object.values(hash).join(',').split(',')
-    filter = filterArray.map(item => parseFloat(item))
-    if (filter.length > 1) {
-      filter.sort((a, b) => a - b).splice(1, (filter.length - 2))
-      return filter
-    }
+  filterArray = Object.values(hash).join(',').split(',')
+  filter = filterArray.map(item => parseFloat(item))
+  if (filter.length > 1) {
+    filter.sort((a, b) => a - b).splice(1, (filter.length - 2))
   }
+  return filter
 }
 
 function applyFilter(filter) {
-  
+  return msaCollection.filter((m) => {
+    if (filter.length > 1) {
+      return (m.heat > filter[0]) && (m.heat < filter[1])
+    } else {
+      return m.snow == filter[0]
+    }
+  }, filter)
 }
 
-function makeList(json) {
-  for (const msa of json) {
+function checkIfEmpty(collection) {
+  if (collection.length == 0) {
+    document.getElementById('metro-list').innerHTML = '<h3>No Matches</h3>'
+    return
+  }
+}
+
+function makeList(collection) {
+  for (const msa of collection) {
     let ul = document.getElementById('metro-list')
     let li = document.createElement('li')
     li.className = 'list-item'
-    li.id = msa.msa_code
+    li.id = msa.code
     li.innerHTML = `<b>${msa.name}</b> (${msa.states})`
     ul.appendChild(li)
   }
-  mapMsas(json)
+  mapMsas(collection)
 }
 
-function mapMsas(json) {
+function mapMsas(collection) {
   const svgObj = document.getElementById('map')
   const chosen = document.getElementById('chosen-msas')
   const not_chosen = document.getElementById('not-chosen-msas')
   if (chosen.children.length > 0) {
-    for (const msa of chosen) {
+    for (const msa of chosen.children) {
       not_chosen.appendChild(msa)
     }
   }
-  for (const msa of json) {
-    let loc = svgObj.getElementById(msa.msa_code)
+  for (const msa of collection) {
+    let loc = svgObj.getElementById(msa.code)
     if (loc) {
       chosen.appendChild(loc)
     } else {
-      console.log(`${msa.msa_code} ${msa.name} was NOT found`)
+      console.log(`${msa.code} ${msa.name} was NOT found`)
     }
   }
 }
