@@ -22,13 +22,15 @@ const heatCtrl = document.getElementById('heat'),
       unempCtrl = document.getElementById('unemp'),
       aqiCtrl = document.getElementById('aqi');
       
-let heat = { name: 'heat', vals: {} },
-    cold = { name: 'cold', vals: {} },
-    precip = { name: 'precip', vals: {} },
-    snow = { name: 'snow', vals: {} },
-    wage = { name: 'wage', vals: {} },
-    unemp = { name: 'unemp', vals: {} },
-    aqi = { name: 'aqi', vals: {} };
+const heat = { name: 'heat', vals: {} },
+      cold = { name: 'cold', vals: {} },
+      precip = { name: 'precip', vals: {} },
+      snow = { name: 'snow', vals: {} },
+      wage = { name: 'wage', vals: {} },
+      unemp = { name: 'unemp', vals: {} },
+      aqi = { name: 'aqi', vals: {} };
+
+const fHashes = [heat, cold, precip, snow, wage, unemp, aqi]
 
 function activate(attrCtrl, inputHash) {
   attrCtrl.addEventListener('click', (e) => gatherInput(e, inputHash))
@@ -60,14 +62,13 @@ for (const btn of findBtns) {
 }
 
 function filterMsas() {
-  const filterHashes = [heat, cold, precip, snow, wage, unemp, aqi]
   msaCollection = msas
-  for (const f of filterHashes) {
+  for (const f of fHashes) {
     hash = f.vals
     hashKeys = Object.keys(hash)
     if (hashKeys.length > 0) {
       const filter = createFilter(hash)
-      msaCollection = applyFilter(filter)
+      msaCollection = applyFilter(f, filter)
       checkIfEmpty(msaCollection)
     }
   }
@@ -83,10 +84,10 @@ function createFilter(hash) {
   return filter
 }
 
-function applyFilter(filter) {
+function applyFilter(fHash, filter) {
   return msaCollection.filter((m) => {
     if (filter.length > 1) {
-      return (m.heat > filter[0]) && (m.heat < filter[1])
+      return (m[fHash.name] >= filter[0]) && (m[fHash.name] <= filter[1])
     } else {
       return m.snow == filter[0]
     }
