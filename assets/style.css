@@ -7,7 +7,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #242527;
-  color: rgb(228, 243, 255);
+  color: rgb(220, 240, 255);
 }
 
 #flex-container-a {
@@ -20,11 +20,9 @@ body {
 header, footer {
   position: fixed;
   left: 0vw;
-  /* width: 100vw; */
-  /* padding: 0% 1.5%; */
   font-size: 2.25vh;
   font-weight: bold;
-  /* vertical-align: middle; */
+  color: rgb(50, 245, 225);
 }
 
 header {
@@ -49,46 +47,11 @@ header {
   background-color: rgb(1, 51, 143);
 }
 
-  /* #filter {
-    float: left;
-    width: 80vw;
-    height: 7vh;
-    color: #444;
-    text-align: center;
-  } */
-
-    /* .controls {
-      position: relative;
-      top: 24%;
-      border-style: hidden;
-      border-radius: 3px;
-      background-color: rgb(228, 243, 255);
-      font-size: inherit;
-      font-weight: inherit;
-      color: inherit;
-    }
-
-    select {
-      width: 18vh;
-      margin: 0% .75%;
-      padding: .2% .1%;
-    }
-
-    button {
-      position: relative;
-      top: -.8%;
-      margin: 0% 0% 0% .75%;
-      padding: .3% .6% .2% .6%;
-    } */
-
 #nav-bar {
-  /* position: absolute;
-  right: 1.5%; */
   float: left;
   width: 60vw;
   height: 6.5vh;
   background-color: rgb(3, 115, 219);
-  /* text-align: center; */
 }
 
   #logo {
@@ -97,7 +60,7 @@ header {
     left: 4%;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 4vh;
-    color: rgb(228, 243, 255);
+    color: rgb(220, 240, 255);
   }
 
   #menu {
@@ -109,6 +72,27 @@ header {
     position: relative;
     top: 0%;
     margin: 0% 5%;
+  }
+
+  .menu-item:hover {
+    color: rgb(215, 255, 245);
+  }
+
+#menu-container {
+  position: fixed;
+  top: 6.5vh;
+  left: 40vw;
+  width: 44vh;
+  z-index: 1;
+  background-color: rgb(3, 115, 219);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+  .active {
+    height: 50vh;
+    overflow-y: auto;
+    padding: 4vh;
   }
 
 #list-header {
@@ -147,19 +131,19 @@ div#filter {
   background-color: rgb(88, 188, 255);
 }
 
-h3 {
-  margin-top: 23px;
-  margin-bottom: 5px;
-}
+  h3 {
+    margin-top: 23px;
+    margin-bottom: 5px;
+  }
 
-p {
-  margin-top: 0px;
-}
+  p {
+    margin-top: 0px;
+  }
 
-h4 {
-  margin-top: 17px;
-  margin-bottom: 5px;
-}
+  h4 {
+    margin-top: 17px;
+    margin-bottom: 5px;
+  }
 
 svg {
   position: fixed;

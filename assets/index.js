@@ -12,6 +12,43 @@ function getMsas() {
 
 getMsas()
 
+// Add event listeners to navbar
+
+const about = document.getElementById('about')
+const account = document.getElementById('account')
+const menuContainer = document.getElementById('menu-container')
+let abClick = false
+let acClick = false
+about.addEventListener('click', () => showAbout())
+account.addEventListener('click', () => showAccount())
+
+function showAbout() {
+  if (acClick) {
+    acClick = !acClick
+  }
+  abClick = !abClick
+  console.log(`abClick: ${abClick}; acClick: ${acClick}`)
+  showContainer()
+}
+
+function showAccount() {
+  if (abClick) {
+    abClick = !abClick
+  }
+  acClick = !acClick
+  console.log(`abClick: ${abClick}; acClick: ${acClick}`)
+  showContainer()
+}
+
+function showContainer() {
+  if (abClick || acClick) {
+    menuContainer.classList.add('active')
+  } else {
+    menuContainer.classList.remove('active')
+  }
+  // clicked = !clicked
+}
+
 // Add event listeners to filter form
 
 const heatCtrl = document.getElementById('heat'),
