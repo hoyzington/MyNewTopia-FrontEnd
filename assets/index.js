@@ -29,6 +29,7 @@ function showAbout() {
   abClick = !abClick
   console.log(`abClick: ${abClick}; acClick: ${acClick}`)
   showContainer()
+  menuContainer.innerText = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat eaque accusamus reiciendis nobis corrupti quidem dolorem, hic ducimus, minus, tenetur cupiditate tempore laudantium amet perspiciatis repellendus iusto vitae! Perferendis, harum. Quaerat, qui incidunt ex error deleniti repudiandae ducimus nulla perferendis libero laborum, consequuntur vitae doloribus eum veniam aperiam aut minima asperiores sunt.'
 }
 
 function showAccount() {
@@ -38,6 +39,7 @@ function showAccount() {
   acClick = !acClick
   console.log(`abClick: ${abClick}; acClick: ${acClick}`)
   showContainer()
+  menuContainer.innerHTML = ''
 }
 
 function showContainer() {

@@ -90,8 +90,8 @@ header {
 }
 
   .active {
-    height: 50vh;
-    overflow-y: auto;
+    min-height: 30vh;
+    max-height: fit-content;
     padding: 4vh;
   }
 
