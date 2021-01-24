@@ -16,39 +16,62 @@ getMsas()
 
 const about = document.getElementById('about')
 const account = document.getElementById('account')
-const menuContainer = document.getElementById('menu-container')
+const menuContent = document.getElementById('menu-content')
 let abClick = false
 let acClick = false
-about.addEventListener('click', () => showAbout())
-account.addEventListener('click', () => showAccount())
+about.addEventListener('click', () => showHideAbout())
+account.addEventListener('click', () => showHideAccount())
+clickOff()
 
-function showAbout() {
+function showHideAbout() {
   if (acClick) {
     acClick = !acClick
   }
   abClick = !abClick
-  console.log(`abClick: ${abClick}; acClick: ${acClick}`)
-  showContainer()
-  menuContainer.innerText = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat eaque accusamus reiciendis nobis corrupti quidem dolorem, hic ducimus, minus, tenetur cupiditate tempore laudantium amet perspiciatis repellendus iusto vitae! Perferendis, harum. Quaerat, qui incidunt ex error deleniti repudiandae ducimus nulla perferendis libero laborum, consequuntur vitae doloribus eum veniam aperiam aut minima asperiores sunt.'
+  if (abClick) {
+    about.classList.add('active')
+    account.classList.remove('active')
+  } else {
+    about.classList.remove('active')
+  }
+  showHideContent()
+  menuContent.innerText = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat eaque accusamus reiciendis nobis corrupti quidem dolorem, hic ducimus, minus, tenetur cupiditate tempore laudantium amet perspiciatis repellendus iusto vitae! Perferendis, harum. Quaerat, qui incidunt ex error deleniti repudiandae ducimus nulla perferendis libero laborum, consequuntur vitae doloribus eum veniam aperiam aut minima asperiores sunt.'
 }
 
-function showAccount() {
+function showHideAccount() {
   if (abClick) {
     abClick = !abClick
   }
   acClick = !acClick
-  console.log(`abClick: ${abClick}; acClick: ${acClick}`)
-  showContainer()
-  menuContainer.innerHTML = ''
+  if (acClick) {
+    account.classList.add('active')
+    about.classList.remove('active')
+  } else {
+    account.classList.remove('active')
+  }
+  showHideContent()
+  menuContent.innerHTML = 'Login'
 }
 
-function showContainer() {
+function showHideContent() {
   if (abClick || acClick) {
-    menuContainer.classList.add('active')
+    menuContent.className = 'active'
   } else {
-    menuContainer.classList.remove('active')
+    menuContent.className = 'inactive'
   }
-  // clicked = !clicked
+}
+
+function clickOff() {
+  document.addEventListener('click', (e) => {
+    const inElement = (menuContent.contains(e.target) || about.contains(e.target) || account.contains(e.target))
+    if (!inElement) {
+      about.classList.remove('active')
+      account.classList.remove('active')
+      menuContent.className = 'inactive'
+      abClick = false
+      acClick = false
+    }
+  })
 }
 
 // Add event listeners to filter form

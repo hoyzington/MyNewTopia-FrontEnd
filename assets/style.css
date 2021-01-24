@@ -20,7 +20,6 @@ body {
 header, footer {
   position: fixed;
   left: 0vw;
-  font-size: 2.25vh;
   font-weight: bold;
   color: rgb(50, 245, 225);
 }
@@ -28,6 +27,8 @@ header, footer {
 header {
   top: 0px;
   height: 6.5vh;
+  font-size: 2.25vh;
+  z-index: 2;
 }
 
 .side-header {
@@ -63,36 +64,52 @@ header {
     color: rgb(220, 240, 255);
   }
 
-  #menu {
-    position: relative;
-    left: 20%;
-  }
-
-  .menu-item {
-    position: relative;
-    top: 0%;
-    margin: 0% 5%;
-  }
-
-  .menu-item:hover {
-    color: rgb(215, 255, 245);
-  }
-
 #menu-container {
   position: fixed;
+  top: 0vh;
+  left: 42vw;
+  width: 42.5vh;
+  min-height: 6.5vh;
+  max-height: min-content;
+  padding: 0vh 4vh 4vh;
+}
+
+#menu {
+  position: inherit;
+  top: 1.4vh;
+  left: inherit;
+  width: inherit;
+  padding: 0vh 4vh;
+  text-align: center;
+}
+
+.menu-item {
+  margin: 0% 13%;
+}
+
+.menu-item:hover {
+  color: rgb(215, 255, 245);
+}
+
+#menu-content {
+  position: inherit;
   top: 6.5vh;
-  left: 40vw;
-  width: 44vh;
-  z-index: 1;
+  left: inherit;
+  width: inherit;
+  max-height: fit-content;
+  padding: 4vh;
   background-color: rgb(3, 115, 219);
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+  font-weight: normal;
 }
 
   .active {
-    min-height: 30vh;
-    max-height: fit-content;
-    padding: 4vh;
+    color: rgb(215, 255, 245);
+  }
+
+  .inactive {
+    visibility: hidden;
   }
 
 #list-header {
@@ -113,6 +130,7 @@ footer {
 
   #footer-text {
     margin: .6% 0% 0% 0%;
+    font-size: 1vh;
   }
 
 #flex-container-b {
@@ -145,6 +163,20 @@ div#filter {
     margin-bottom: 5px;
   }
 
+  button {
+    padding: 1.75% 3.75%;
+    border-radius: 5px;
+    border-style: hidden;
+    background-color: rgb(3, 115, 219);
+    font-family: inherit;
+    font-size: large;
+    color: mintcream;
+  }
+
+  button:hover {
+    background-color: rgb(5, 132, 255);
+  }
+
 svg {
   position: fixed;
   top: 6.5%;
@@ -152,6 +184,7 @@ svg {
   width: 58vw;
   padding: 4% 1%;
   overflow: scroll;
+  z-index: 1;
 }
 
 #metro-list {
