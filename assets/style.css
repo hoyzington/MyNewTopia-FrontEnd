@@ -1,13 +1,12 @@
 html {
   box-sizing: border-box;
-  background-color: rgb(3, 115, 219);
+  background-color: rgb(0, 115, 225);
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #242527;
-  color: rgb(220, 240, 255);
+  background-color: #202226;
 }
 
 #flex-container-a {
@@ -20,111 +19,116 @@ body {
 header, footer {
   position: fixed;
   left: 0vw;
+  background-color: rgb(0, 115, 225);
   font-weight: bold;
-  color: rgb(50, 245, 225);
+  color: rgb(2, 228, 179);
 }
 
 header {
   top: 0px;
   height: 6.5vh;
+  width: 100vw;
   font-size: 2.25vh;
   z-index: 2;
 }
 
-.side-header {
-  text-align: center;
-}
+  .side-header {
+    float: left;
+    text-align: center;
+    height: 6.5vh;
+    background-color: rgb(1, 51, 143);
+  }
 
-.side-title {
-  position: relative;
-  top: 15%;
-  font-size: 2.5vh;
-}
-
-#filter-header {
-  float: left;
-  width: 20vw;
-  height: 6.5vh;
-  background-color: rgb(1, 51, 143);
-}
-
-#nav-bar {
-  float: left;
-  width: 60vw;
-  height: 6.5vh;
-  background-color: rgb(3, 115, 219);
-}
-
-  #logo {
+  .side-title {
     position: relative;
-    top: 10%;
-    left: 4%;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 4vh;
-    color: rgb(220, 240, 255);
+    top: 19%;
+    font-size: 2.4vh;
   }
 
-#menu-container {
-  position: fixed;
-  top: 0vh;
-  left: 42vw;
-  width: 42.5vh;
-  min-height: 6.5vh;
-  max-height: min-content;
-  padding: 0vh 4vh 4vh;
-}
-
-#menu {
-  position: inherit;
-  top: 1.4vh;
-  left: inherit;
-  width: inherit;
-  padding: 0vh 4vh;
-  text-align: center;
-}
-
-.menu-item {
-  margin: 0% 13%;
-}
-
-.menu-item:hover {
-  color: rgb(215, 255, 245);
-}
-
-#menu-content {
-  position: inherit;
-  top: 6.5vh;
-  left: inherit;
-  width: inherit;
-  max-height: fit-content;
-  padding: 4vh;
-  background-color: rgb(3, 115, 219);
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  font-weight: normal;
-}
-
-  .active {
-    color: rgb(215, 255, 245);
+  #filter-header {
+    width: 20.1vw;
   }
 
-  .inactive {
-    visibility: hidden;
+  #filter-title {
+    padding-right: 1vw;
   }
 
-#list-header {
-  float: left;
-  width: 20vw;
-  height: 6.5vh;
-  background-color: rgb(1, 51, 143);
-}
+  #nav-bar {
+    float: left;
+    width: 59.9vw;
+    height: 6.5vh;
+  }
+
+    #logo {
+      position: relative;
+      top: 10%;
+      left: 4%;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      font-size: 4vh;
+      color: rgb(245, 250, 255);
+    }
+
+  #menu-container {
+    position: fixed;
+    top: 0vh;
+    left: 42vw;
+    width: 42.5vh;
+    min-height: 6.5vh;
+    max-height: min-content;
+    padding: 0vh 4vh 4vh;
+  }
+
+  #menu {
+    position: inherit;
+    top: 1.55vh;
+    left: inherit;
+    width: inherit;
+    padding: 0vh 4vh;
+    text-align: center;
+  }
+
+  .menu-item {
+    margin: 0% 13%;
+  }
+
+  .menu-item:hover {
+    color: rgb(48, 255, 210);
+  }
+
+  #menu-content {
+    position: inherit;
+    top: 6.5vh;
+    left: inherit;
+    width: inherit;
+    max-height: fit-content;
+    padding: 4vh;
+    background-color: rgb(3, 115, 219);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-weight: normal;
+  }
+
+    .active {
+      color: rgb(215, 255, 245);
+    }
+
+    .inactive {
+      visibility: hidden;
+    }
+
+  #list-header {
+    width: 20vw;
+  }
   
+  #list-title {
+    padding-left: 1vw;
+  }
+
 footer {
   bottom: 0px;
   left: 20vw;
   width: 60vw;
   height: 4.5%;
-  background-color: rgb(3, 115, 219);
   text-align: center;
 }
 
@@ -138,43 +142,48 @@ footer {
   flex-direction: row;
 }
 
-div#filter {
+#filter, #list {
   position: fixed;
   top: 6.5vh;
-  left: 0%;
-  height: 90vh;
-  width: 19vw;
-  overflow-y: scroll;
-  padding: 3vh .5vw;
+  height: 88vh;
+  width: 17.5vw;
+  padding: 2.75vh 1.25%;
   background-color: rgb(88, 188, 255);
 }
 
+#filter {
+  left: 0%;
+  overflow-y: scroll;
+  line-height: 1.5em;
+  color: rgb(245, 250, 255);
+}
+
   h3 {
-    margin-top: 23px;
+    margin-top: 25px;
     margin-bottom: 5px;
+  }
+
+  h4 {
+    margin-top: 19px;
+    margin-bottom: 7px;
   }
 
   p {
     margin-top: 0px;
   }
 
-  h4 {
-    margin-top: 17px;
-    margin-bottom: 5px;
-  }
-
   button {
     padding: 1.75% 3.75%;
     border-radius: 5px;
     border-style: hidden;
-    background-color: rgb(3, 115, 219);
+    background-color: rgb(0, 115, 225);
     font-family: inherit;
     font-size: large;
-    color: mintcream;
+    color: rgb(210, 230, 245);
   }
 
-  button:hover {
-    background-color: rgb(5, 132, 255);
+  button:hover, .highlighted {
+    background-color: rgb(32, 141, 250);
   }
 
 svg {
@@ -187,26 +196,48 @@ svg {
   z-index: 1;
 }
 
-#metro-list {
-  position: fixed;
-  top: 6.5vh;
+  #chosen-msas {
+    fill: rgb(0, 122, 112);
+    stroke: rgb(0, 122, 112);
+  }
+
+  #chosen-msas title {
+    background: none;
+
+  }
+
+  #chosen-msas g:hover, #highlight-msa {
+    fill: rgb(115, 255, 210);
+    stroke: rgb(115, 255, 210);
+  }
+
+  #not-chosen-msas {
+    fill: #97989E;
+    stroke: #97989E;
+  }
+
+  #states {
+    fill: #A7A8AE;
+    stroke: #A7A8AE;
+  }
+
+  #state-lines {
+    fill: none;
+    stroke: #221e1f;
+  }
+
+#list {
   right: 0%;
-  height: 90vh;
-  width: 19vw;
   overflow-y: auto;
-  padding: 2vh .5vw;
-  background-color: rgb(88, 188, 255);
 }
 
-  .list-item {
-    width: 80%;
-    padding: 2.5%;
-    margin: 2.5% auto;
-    border-radius: 6px;
-    border-style: hidden;
-    background-color: rgb(3, 115, 219);
-    font-family: Arial, Helvetica, sans-serif;
+  button.list-item {
+    width: 92%;
+    padding: 4% 7%;
+    margin: 1.5% 4% 4%;
+    font-family: inherit;
     font-size: 80%;
+    text-align: left;
   }
 
 li {
