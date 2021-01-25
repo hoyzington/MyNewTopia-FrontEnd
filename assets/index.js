@@ -50,7 +50,31 @@ function showHideAccount() {
     account.classList.remove('active')
   }
   showHideContent()
-  menuContent.innerHTML = 'Login'
+  menuContent.innerHTML = `
+    <div id="menu-login">
+      <h3>Sign up / Log in to save the lists and maps you create!</h3>
+      <form action="">
+        <div class="inputs-row">
+          <div class="col-25">
+            <label for="username">Username</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="username" name="username">
+          </div>
+        </div>
+        <div class="inputs-row">
+          <div class="col-25">
+            <label for="password">Password</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="password" name="password">
+          </div>
+        </div>
+        <div class="submit-row">
+          <input type="submit" id="menu-submit" value="Submit">
+        </div>
+      </form>
+    </div>`
 }
 
 function showHideContent() {
