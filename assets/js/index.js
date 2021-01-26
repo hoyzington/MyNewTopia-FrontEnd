@@ -11,89 +11,7 @@ getMsas()
 
 // Add event listeners to navbar
 
-let abClick = false
-let acClick = false
-Html.menuAbout.addEventListener('click', () => showHideAbout())
-Html.menuAccount.addEventListener('click', () => showHideAcct())
-clickOff()
-
-function showHideAbout() {
-  if (acClick) {
-    acClick = !acClick
-  }
-  abClick = !abClick
-  if (abClick) {
-    Html.menuAbout.classList.add('active')
-    Html.menuAccount.classList.remove('active')
-  } else {
-    Html.menuAbout.classList.remove('active')
-  }
-  showHideContent()
-  Html.menuContent.innerText = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat eaque accusamus reiciendis nobis corrupti quidem dolorem, hic ducimus, minus, tenetur cupiditate tempore laudantium amet perspiciatis repellendus iusto vitae! Perferendis, harum. Quaerat, qui incidunt ex error deleniti repudiandae ducimus nulla perferendis libero laborum, consequuntur vitae doloribus eum veniam aperiam aut minima asperiores sunt.'
-}
-
-function showHideAcct() {
-  if (abClick) {
-    abClick = !abClick
-  }
-  acClick = !acClick
-  if (acClick) {
-    Html.menuAccount.classList.add('active')
-    Html.menuAbout.classList.remove('active')
-  } else {
-    Html.menuAccount.classList.remove('active')
-  }
-  showHideContent()
-  Html.menuContent.innerHTML = `
-    <div id="menu-login">
-      <h3>Sign up / Log in to save the lists and maps you create!</h3>
-      <form action="">
-        <div class="inputs-row">
-          <div class="col-25">
-            <label for="username">Username</label>
-          </div>
-          <div class="col-75">
-            <input type="text" id="username" name="username">
-          </div>
-        </div>
-        <div class="inputs-row">
-          <div class="col-25">
-            <label for="password">Password</label>
-          </div>
-          <div class="col-75">
-            <input type="text" id="password" name="password">
-          </div>
-        </div>
-        <div class="submit-row">
-          <input type="submit" id="menu-submit" value="Submit">
-        </div>
-      </form>
-    </div>`
-}
-
-function showHideContent() {
-  if (abClick || acClick) {
-    Html.menuContent.className = 'active'
-  } else {
-    Html.menuContent.className = 'inactive'
-  }
-}
-
-function clickOff() {
-  document.addEventListener('click', (e) => {
-    const content = Html.menuContent,
-          about = Html.menuAbout,
-          account = Html.menuAccount;
-    const inElement = (content.contains(e.target) || about.contains(e.target) || account.contains(e.target))
-    if (!inElement) {
-      about.classList.remove('active')
-      account.classList.remove('active')
-      content.className = 'inactive'
-      abClick = false
-      acClick = false
-    }
-  })
-}
+EventListener.menuItems()
 
 // Add event listeners to filter form
 
@@ -174,7 +92,7 @@ function applyFilter(fHash, filter) {
 
 function checkIfEmpty(collection) {
   if (collection.length == 0) {
-    Html.listMsg.innerHTML = '<h1>No Matches</h1><h2>None of the 100 most populated metropolitan areas in the USA meet the criteria you selected.</h2>'
+    Html.listMsg.innerHTML = Html.noMatches
     resetMap(Html.chosenMsas)
     return true
   } else {
@@ -202,13 +120,7 @@ function makeList(collection) {
       btn.innerHTML = `<b>${msa.name}</b> (${msa.states})`
       li.appendChild(btn)
       list.appendChild(li)
-      const lit = Html.svgObj.getElementById(msa.code)
-      btn.addEventListener('mouseover', () => {
-        Html.highlightedMsa.appendChild(lit)
-      }, lit)
-      btn.addEventListener('mouseout', () => {
-        Html.chosenMsas.appendChild(lit)
-      }, lit)
+      EventListener.listItemMouseover(btn, msa.code)
     }
     mapMsas(collection)
   }
@@ -217,21 +129,13 @@ function makeList(collection) {
 function mapMsas(collection) {
   resetMap(Html.chosenMsas)
   for (const msa of collection) {
-    const loc = Html.svgObj.getElementById(msa.code)
-    if (loc) {
-      Html.chosenMsas.appendChild(loc)
+    const mapLoc = Html.svgObj.getElementById(msa.code)
+    if (mapLoc) {
+      Html.chosenMsas.appendChild(mapLoc)
     } else {
       console.log(`${msa.code} ${msa.name} was NOT found`)
     }
     const id = `msa-${msa.code}`
-    const btn = document.getElementById(id)
-    // const title = loc.removeChild(loc.childNodes[-1])
-    loc.addEventListener('mouseover', () => {
-      btn.classList.add('highlighted')
-    }, )
-    loc.addEventListener('mouseout', () => {
-      btn.classList.remove('highlighted')
-    }, )
-    // console.log(loc.childNodes[-2])
+    EventListener.mapMsaMouseover(mapLoc, id)
   }
 }
