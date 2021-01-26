@@ -1,12 +1,9 @@
 // Fetch metro area data
 
-const endPoint = 'http://localhost:3000/api/v1/metro-areas'
-
 let msas = null
 
 function getMsas() {
-  fetch(endPoint)
-    .then(res => res.json())
+  ApiAdapter.get('/metro-areas')
     .then(json => msas = json)
 }
 
@@ -14,13 +11,10 @@ getMsas()
 
 // Add event listeners to navbar
 
-const about = document.getElementById('about')
-const account = document.getElementById('account')
-const menuContent = document.getElementById('menu-content')
 let abClick = false
 let acClick = false
-about.addEventListener('click', () => showHideAbout())
-account.addEventListener('click', () => showHideAcct())
+Html.menuAbout.addEventListener('click', () => showHideAbout())
+Html.menuAccount.addEventListener('click', () => showHideAcct())
 clickOff()
 
 function showHideAbout() {
@@ -29,13 +23,13 @@ function showHideAbout() {
   }
   abClick = !abClick
   if (abClick) {
-    about.classList.add('active')
-    account.classList.remove('active')
+    Html.menuAbout.classList.add('active')
+    Html.menuAccount.classList.remove('active')
   } else {
-    about.classList.remove('active')
+    Html.menuAbout.classList.remove('active')
   }
   showHideContent()
-  menuContent.innerText = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat eaque accusamus reiciendis nobis corrupti quidem dolorem, hic ducimus, minus, tenetur cupiditate tempore laudantium amet perspiciatis repellendus iusto vitae! Perferendis, harum. Quaerat, qui incidunt ex error deleniti repudiandae ducimus nulla perferendis libero laborum, consequuntur vitae doloribus eum veniam aperiam aut minima asperiores sunt.'
+  Html.menuContent.innerText = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat eaque accusamus reiciendis nobis corrupti quidem dolorem, hic ducimus, minus, tenetur cupiditate tempore laudantium amet perspiciatis repellendus iusto vitae! Perferendis, harum. Quaerat, qui incidunt ex error deleniti repudiandae ducimus nulla perferendis libero laborum, consequuntur vitae doloribus eum veniam aperiam aut minima asperiores sunt.'
 }
 
 function showHideAcct() {
@@ -44,13 +38,13 @@ function showHideAcct() {
   }
   acClick = !acClick
   if (acClick) {
-    account.classList.add('active')
-    about.classList.remove('active')
+    Html.menuAccount.classList.add('active')
+    Html.menuAbout.classList.remove('active')
   } else {
-    account.classList.remove('active')
+    Html.menuAccount.classList.remove('active')
   }
   showHideContent()
-  menuContent.innerHTML = `
+  Html.menuContent.innerHTML = `
     <div id="menu-login">
       <h3>Sign up / Log in to save the lists and maps you create!</h3>
       <form action="">
@@ -79,19 +73,22 @@ function showHideAcct() {
 
 function showHideContent() {
   if (abClick || acClick) {
-    menuContent.className = 'active'
+    Html.menuContent.className = 'active'
   } else {
-    menuContent.className = 'inactive'
+    Html.menuContent.className = 'inactive'
   }
 }
 
 function clickOff() {
   document.addEventListener('click', (e) => {
-    const inElement = (menuContent.contains(e.target) || about.contains(e.target) || account.contains(e.target))
+    const content = Html.menuContent,
+          about = Html.menuAbout,
+          account = Html.menuAccount;
+    const inElement = (content.contains(e.target) || about.contains(e.target) || account.contains(e.target))
     if (!inElement) {
       about.classList.remove('active')
       account.classList.remove('active')
-      menuContent.className = 'inactive'
+      content.className = 'inactive'
       abClick = false
       acClick = false
     }
@@ -100,14 +97,6 @@ function clickOff() {
 
 // Add event listeners to filter form
 
-const heatCtrl = document.getElementById('heat'),
-      coldCtrl = document.getElementById('cold'),
-      precipCtrl = document.getElementById('precip'),
-      snowCtrl = document.getElementById('snow'),
-      wageCtrl = document.getElementById('wage'),
-      unempCtrl = document.getElementById('unemp'),
-      aqiCtrl = document.getElementById('aqi');
-      
 const heat = { name: 'heat', vals: {} },
       cold = { name: 'cold', vals: {} },
       precip = { name: 'precip', vals: {} },
@@ -119,33 +108,30 @@ const heat = { name: 'heat', vals: {} },
 const fHashes = [heat, cold, precip, snow, wage, unemp, aqi]
 
 function activate(attrCtrl, inputHash) {
-  attrCtrl.addEventListener('click', (e) => gatherInput(e, inputHash))
+  attrCtrl.addEventListener('click', (e) => addOrReplaceInput(e, inputHash))
 }
 
-function gatherInput(e, inputHash) {
-  const box = e.target
-  if (inputHash.vals[box.id]) {
-    delete inputHash.vals[box.id]
+function addOrReplaceInput(e, input) {
+  if (input.vals[e.target.id]) {
+    delete input.vals[e.target.id]
   } else {
-    inputHash.vals[box.id] = box.value
+    input.vals[e.target.id] = e.target.value
   }
 }
 
-activate(heatCtrl, heat)
-activate(coldCtrl, cold)
-activate(precipCtrl, precip)
-activate(snowCtrl, snow)
-activate(wageCtrl, wage)
-activate(unempCtrl, unemp)
-activate(aqiCtrl, aqi)
+activate(Html.heatCtrl, heat)
+activate(Html.coldCtrl, cold)
+activate(Html.precipCtrl, precip)
+activate(Html.snowCtrl, snow)
+activate(Html.wageCtrl, wage)
+activate(Html.unempCtrl, unemp)
+activate(Html.aqiCtrl, aqi)
 
 // make or update list & map when "Find" button is clicked
 
 let msaCollection = null
-const svgObj = document.getElementById('map')
-const chosen = document.getElementById('chosen-msas')
-const findBtns = document.getElementsByClassName('find')
-for (const btn of findBtns) {
+
+for (const btn of Html.findBtns) {
   btn.addEventListener('click', () => filterMsas())
 }
 
@@ -153,8 +139,8 @@ function filterMsas() {
   msaCollection = msas
   fHashesLoop:
   for (const f of fHashes) {
-    hash = f.vals
-    hashKeys = Object.keys(hash)
+    const hash = f.vals
+    const hashKeys = Object.keys(hash)
     if (hashKeys.length > 0) {
       const filter = createFilter(hash)
       msaCollection = applyFilter(f, filter)
@@ -188,29 +174,26 @@ function applyFilter(fHash, filter) {
 
 function checkIfEmpty(collection) {
   if (collection.length == 0) {
-    document.getElementById('metro-list').innerHTML = '<h3>No Matches</h3>'
-    const chosen = document.getElementById('chosen-msas')
-    resetMap(chosen)
+    Html.listMsg.innerHTML = '<h1>No Matches</h1><h2>None of the 100 most populated metropolitan areas in the USA meet the criteria you selected.</h2>'
+    resetMap(Html.chosenMsas)
     return true
   } else {
     return false
   }
 }
 
-function resetMap(chosen) {
-  const not_chosen = document.getElementById('not-chosen-msas')
-  while (chosen.hasChildNodes()) {
-    not_chosen.appendChild(chosen.firstChild)
+function resetMap(chosenMsas) {
+  while (chosenMsas.hasChildNodes()) {
+    Html.notChosenMsas.appendChild(chosenMsas.firstChild)
   }
 }
 
 function makeList(collection) {
-  const list = document.getElementById('list')
+  const list = Html.listContainer
   if (collection) {
     while (list.hasChildNodes()) {  
       list.removeChild(list.firstChild)
     }
-    const highlight = document.getElementById('highlight-msa')
     for (const msa of collection) {
       const li = document.createElement('li')
       const btn = document.createElement('button')
@@ -219,12 +202,12 @@ function makeList(collection) {
       btn.innerHTML = `<b>${msa.name}</b> (${msa.states})`
       li.appendChild(btn)
       list.appendChild(li)
-      const lit = svgObj.getElementById(msa.code)
+      const lit = Html.svgObj.getElementById(msa.code)
       btn.addEventListener('mouseover', () => {
-        highlight.appendChild(lit)
+        Html.highlightedMsa.appendChild(lit)
       }, lit)
       btn.addEventListener('mouseout', () => {
-        chosen.appendChild(lit)
+        Html.chosenMsas.appendChild(lit)
       }, lit)
     }
     mapMsas(collection)
@@ -232,12 +215,11 @@ function makeList(collection) {
 }
 
 function mapMsas(collection) {
-  resetMap(chosen)
-  const list = document.getElementById('list')
+  resetMap(Html.chosenMsas)
   for (const msa of collection) {
-    const loc = svgObj.getElementById(msa.code)
+    const loc = Html.svgObj.getElementById(msa.code)
     if (loc) {
-      chosen.appendChild(loc)
+      Html.chosenMsas.appendChild(loc)
     } else {
       console.log(`${msa.code} ${msa.name} was NOT found`)
     }
