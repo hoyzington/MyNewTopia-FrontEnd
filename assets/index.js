@@ -20,7 +20,7 @@ const menuContent = document.getElementById('menu-content')
 let abClick = false
 let acClick = false
 about.addEventListener('click', () => showHideAbout())
-account.addEventListener('click', () => showHideAccount())
+account.addEventListener('click', () => showHideAcct())
 clickOff()
 
 function showHideAbout() {
@@ -38,7 +38,7 @@ function showHideAbout() {
   menuContent.innerText = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat eaque accusamus reiciendis nobis corrupti quidem dolorem, hic ducimus, minus, tenetur cupiditate tempore laudantium amet perspiciatis repellendus iusto vitae! Perferendis, harum. Quaerat, qui incidunt ex error deleniti repudiandae ducimus nulla perferendis libero laborum, consequuntur vitae doloribus eum veniam aperiam aut minima asperiores sunt.'
 }
 
-function showHideAccount() {
+function showHideAcct() {
   if (abClick) {
     abClick = !abClick
   }
