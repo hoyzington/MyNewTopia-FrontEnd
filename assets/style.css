@@ -186,7 +186,7 @@ footer {
   flex-direction: row;
 }
 
-#filter, #list {
+#filter, #list-container {
   position: fixed;
   top: 6.5vh;
   height: 88vh;
@@ -270,20 +270,21 @@ svg {
     stroke: #202226;
   }
 
-#list {
+#list-container {
   right: 0%;
   overflow-y: auto;
 }
 
-  #list h3 {
+  #list-container h3 {
     margin-top: 0%;
   }
 
-  #promo {
-    padding: 0% 1.25%;
+  #list-msg {
+    padding: 0% 8%;
     color: rgb(1, 51, 143);
     font-weight: bolder;
-    text-align: center;
+    text-align: left;
+    word-spacing: -3px;
   }
 
   button.list-item {
