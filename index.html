@@ -7,32 +7,33 @@
     <link rel="stylesheet" href="assets/style.css"/>
     <script src="assets/js/api.js" defer></script>
     <script src="assets/js/html.js" defer></script>
+    <script src="assets/js/eventListener.js" defer></script>
     <!-- <script src="assets/js/msa.js" defer></script> -->
     <!-- <script src="assets/js/user.js" defer></script> -->
     <script src="assets/js/index.js" defer></script>
   </head>
   <body>
-    <div id="flex-container-a">
+    <div id="flex-container">
       <header>
         <span id="filter-header" class="side-header">
           <span id="filter-title" class="side-title">METRO AREA FILTER</span>
         </span>
-        <span id="nav-bar">
+        <span id="menu-bar">
           <span id="logo"><i>MyNewTopia</i></span>
-        </span>
-        <span id="list-header" class="side-header">
-          <span id="list-title" class="side-title">METRO AREA LIST&nbsp;</span>
         </span>
         <div id="menu-container">
           <div id="menu">
             <span id="about" class="menu-item">About</span>
             <span id="account" class="menu-item">Account</span>
           </div>
-          <div id="menu-content" class="inactive"></div>
+          <div id="menu-content" class="menu-inactive"></div>
         </div>
+        <span id="list-header" class="side-header">
+          <span id="list-title" class="side-title">METRO AREA LIST&nbsp;</span>
+        </span>
       </header>
-      <div id="flex-container-b">
-        <div id="filter">
+      <main id="flex-sub-container">
+        <section id="filter-container">
           <form id="filter-form">
             <button class="find" type="button">Find</button>
             <!-- <input type="submit" value="Edit">
@@ -134,7 +135,7 @@
             <br>
 
           </form>
-        </div>
+        </section>
         <svg id="map" viewbox="0 0 550 350" xmlns="http://www.w3.org/2000/svg">
           <g id="chosen-msas" stroke-width="1px"></g>
           <g id="highlight-msa" stroke-width="1px"></g>
@@ -9970,12 +9971,12 @@
             </path>
           </g>
         </svg>
-        <div id="list-container">
+        <section id="list-container">
           <div id="list-msg">
             <h2>Sign Up / Log In to save the lists and maps you create!</h2>
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
       <footer>
         <div id="footer-text">&copy; Scott Hoisington</div>
       </footer>

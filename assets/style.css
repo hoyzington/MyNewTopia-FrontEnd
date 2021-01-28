@@ -1,3 +1,5 @@
+/* GLOBAL */
+
 html {
   box-sizing: border-box;
   background-color: rgb(0, 115, 225);
@@ -9,12 +11,33 @@ body {
   background-color: #202226;
 }
 
-#flex-container-a {
+li {
+  list-style: none;
+}
+
+button {
+  padding: 1.75% 3.75%;
+  border-radius: 5px;
+  border-style: hidden;
+  background-color: rgb(0, 115, 225);
+  font-family: inherit;
+  font-size: large;
+  color: rgb(210, 230, 245);
+}
+
+button:hover, .highlighted {
+  background-color: rgb(32, 141, 250);
+}
+
+#flex-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 100vw;
 }
+
+
+/* HEADER/FOOTER */
 
 header, footer {
   position: fixed;
@@ -53,7 +76,15 @@ header {
     padding-right: 1vw;
   }
 
-  #nav-bar {
+  #list-header {
+    width: 20vw;
+  }
+  
+  #list-title {
+    padding-left: 1vw;
+  }
+
+  #menu-bar {
     float: left;
     width: 59.9vw;
     height: 6.5vh;
@@ -77,96 +108,88 @@ header {
     padding: 0vh 4vh;
   }
 
-  #menu {
-    position: inherit;
-    top: 1.55vh;
-    left: inherit;
-    width: inherit;
-    padding: inherit;
-    text-align: center;
-  }
-
-  .menu-item {
-    margin: 0% 13%;
-  }
-
-  .menu-item:hover {
-    color: rgb(215, 255, 245);
-  }
-
-  #menu-content {
-    position: inherit;
-    top: 6.5vh;
-    left: inherit;
-    width: inherit;
-    max-height: fit-content;
-    padding: 3vh 4vh 4vh;
-    background-color: rgb(3, 115, 219);
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    font-weight: normal;
-  }
-
-    #menu-login {
-      text-align: center;
-    }
-
-    #menu-login h3 {
-      margin: 0vh 0vh 1vh;
-    }
-
-    #menu-login label {
-      display: inline-block;
-    }
-
-    input#menu-submit {
-      padding: 1% 3% 1.35%;
-      margin-top: 3vh;
-      border-radius: 5px;
-      border-style: hidden;
-      background-color: rgb(0, 207, 162);
-      font-family: inherit;
-      font-size: large;
+    .menu-active {
       color: rgb(215, 255, 245);
     }
 
-    .inputs-row {
-      text-align: justify;
-    }
-
-    .inputs-row::after {
-      content: '';
-      display: table;
-      clear: both;
-    }
-
-    .col-25 {
-      float: left;
-      width: 33%;
-      margin: 2vh 0vh 0vh 3vh;
-    }
-
-    .col-75 {
-      float: left;
-      width: 48%;
-      margin-top: 2vh;
-    }
-
-    .active {
-      color: rgb(215, 255, 245);
-    }
-
-    .inactive {
+    .menu-inactive {
       visibility: hidden;
     }
 
-  #list-header {
-    width: 20vw;
-  }
-  
-  #list-title {
-    padding-left: 1vw;
-  }
+    #menu {
+      position: inherit;
+      top: 1.55vh;
+      left: inherit;
+      width: inherit;
+      padding: inherit;
+      text-align: center;
+    }
+
+      .menu-item {
+        margin: 0% 13%;
+      }
+
+      .menu-item:hover {
+        color: rgb(215, 255, 245);
+      }
+
+    #menu-content {
+      position: inherit;
+      top: 6.5vh;
+      left: inherit;
+      width: inherit;
+      max-height: fit-content;
+      padding: 3vh 4vh 4vh;
+      background-color: rgb(3, 115, 219);
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      font-weight: normal;
+    }
+
+      #menu-login {
+        text-align: center;
+      }
+
+      #menu-login h3 {
+        margin: 0vh 0vh 1vh;
+      }
+
+      #menu-login label {
+        display: inline-block;
+      }
+
+        .menu-inputs-row {
+          text-align: justify;
+        }
+
+        .menu-inputs-row::after {
+          content: '';
+          display: table;
+          clear: both;
+        }
+
+          .col-25 {
+            float: left;
+            width: 33%;
+            margin: 2vh 0vh 0vh 3vh;
+          }
+
+          .col-75 {
+            float: left;
+            width: 48%;
+            margin-top: 2vh;
+          }
+
+        #menu-submit {
+          padding: 1% 3% 1.35%;
+          margin-top: 3vh;
+          border-radius: 5px;
+          border-style: hidden;
+          background-color: rgb(0, 207, 162);
+          font-family: inherit;
+          font-size: large;
+          color: rgb(215, 255, 245);
+        }
 
 footer {
   bottom: 0px;
@@ -181,12 +204,15 @@ footer {
     font-size: 1vh;
   }
 
-#flex-container-b {
+
+/* SIDE BARS */
+
+#flex-sub-container {
   display: flex;
   flex-direction: row;
 }
 
-#filter, #list-container {
+#filter-container, #list-container {
   position: fixed;
   top: 6.5vh;
   height: 88vh;
@@ -195,40 +221,55 @@ footer {
   background-color: rgb(88, 188, 255);
 }
 
-#filter {
+#filter-container {
   left: 0%;
   overflow-y: scroll;
   line-height: 1.5em;
   color: rgb(245, 250, 255);
 }
 
-  #filter h3 {
+  #filter-container h3 {
     margin-top: 25px;
     margin-bottom: 5px;
   }
 
-  #filter h4 {
+  #filter-container h4 {
     margin-top: 19px;
     margin-bottom: 7px;
   }
 
-  #filter p {
+  #filter-container p {
     margin-top: 0px;
   }
 
-  button {
-    padding: 1.75% 3.75%;
-    border-radius: 5px;
-    border-style: hidden;
-    background-color: rgb(0, 115, 225);
-    font-family: inherit;
-    font-size: large;
-    color: rgb(210, 230, 245);
+#list-container {
+  right: 0%;
+  overflow-y: auto;
+}
+
+  #list-container h3 {
+    margin-top: 0%;
   }
 
-  button:hover, .highlighted {
-    background-color: rgb(32, 141, 250);
+  #list-msg {
+    padding: 0% 8%;
+    color: rgb(1, 51, 143);
+    font-weight: bolder;
+    text-align: left;
+    word-spacing: -3px;
   }
+
+  .list-item {
+    width: 92%;
+    padding: 4% 7%;
+    margin: 1.5% 4% 4%;
+    font-family: inherit;
+    font-size: 80%;
+    text-align: left;
+  }
+
+
+/* MAP */
 
 svg {
   position: fixed;
@@ -245,10 +286,9 @@ svg {
     stroke: rgb(0, 122, 112);
   }
 
-  #chosen-msas title {
+  /* #chosen-msas title {   -- NOT WORKING! --
     background: none;
-
-  }
+  } */
 
   #chosen-msas g:hover, #highlight-msa {
     fill: rgb(115, 255, 210);
@@ -269,33 +309,3 @@ svg {
     fill: none;
     stroke: #202226;
   }
-
-#list-container {
-  right: 0%;
-  overflow-y: auto;
-}
-
-  #list-container h3 {
-    margin-top: 0%;
-  }
-
-  #list-msg {
-    padding: 0% 8%;
-    color: rgb(1, 51, 143);
-    font-weight: bolder;
-    text-align: left;
-    word-spacing: -3px;
-  }
-
-  button.list-item {
-    width: 92%;
-    padding: 4% 7%;
-    margin: 1.5% 4% 4%;
-    font-family: inherit;
-    font-size: 80%;
-    text-align: left;
-  }
-
-li {
-  list-style: none;
-}

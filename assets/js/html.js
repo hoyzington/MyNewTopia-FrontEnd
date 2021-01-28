@@ -1,6 +1,6 @@
 class Html {
 
-// Navbar Elements
+// Menu Bar Elements
 
   static get menuAbout() {
     return document.getElementById('about')
@@ -25,7 +25,7 @@ static get accountContent() {
     <div id="menu-login">
       <h3>Sign up / Log in to save the lists and maps you create!</h3>
       <form action="">
-        <div class="inputs-row">
+        <div class="menu-inputs-row">
           <div class="col-25">
             <label for="username">Username</label>
           </div>
@@ -33,7 +33,7 @@ static get accountContent() {
             <input type="text" id="username" name="username">
           </div>
         </div>
-        <div class="inputs-row">
+        <div class="menu-inputs-row">
           <div class="col-25">
             <label for="password">Password</label>
           </div>

@@ -9,9 +9,73 @@ function getMsas() {
 
 getMsas()
 
-// Add event listeners to navbar
+// Add event listeners to menu bar
 
-EventListener.menuItems()
+const about = {
+  elem: Html.menuAbout,
+  stat: false
+}
+
+const account = {
+  elem: Html.menuAccount,
+  stat: false
+}
+
+const content = Html.menuContent
+
+activateMenuItems()
+
+function activateMenuItems() {
+  about.elem.addEventListener('click', () => {
+    processClick(about, account, Html.aboutContent)
+  })
+  account.elem.addEventListener('click', () => {
+    processClick(account, about, Html.accountContent)
+  })
+  clickOff()
+}
+
+function processClick(item1, item2, html) {
+  onOffSwitch(item1, item2)
+  highlight(item1, item2)
+  showOrHide(html)
+}
+
+function onOffSwitch(item1, item2) {
+  if (item2['stat']) {
+    item2['stat'] = !item2['stat']
+  }
+  item1['stat'] = !item1['stat']
+}
+
+function highlight(item1, item2) {
+  if (item1['stat']) {
+    item1['elem'].classList.add('menu-active')
+    item2['elem'].classList.remove('menu-active')
+  } else {
+    item1['elem'].classList.remove('menu-active')
+  }
+}
+
+function showOrHide(html) {
+  if (about.stat || account.stat) {
+    content.className = 'menu-active'
+  } else {
+    content.className = 'menu-inactive'
+  }
+  content.innerHTML = html
+}
+
+function clickOff () {
+  document.addEventListener('click', (e) => {
+    const inElement = (content.contains(e.target) || about['elem'].contains(e.target) || account['elem'].contains(e.target))
+    if (!inElement) {
+      about['elem'].classList.remove('menu-active')
+      account['elem'].classList.remove('menu-active')
+      content.className = 'menu-inactive'
+    }
+  })
+}
 
 // Add event listeners to filter form
 
