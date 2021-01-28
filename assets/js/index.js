@@ -79,60 +79,66 @@ function clickOff () {
 
 // Add event listeners to filter form
 
-const heat = { name: 'heat', vals: {} },
-      cold = { name: 'cold', vals: {} },
-      precip = { name: 'precip', vals: {} },
-      snow = { name: 'snow', vals: {} },
-      wage = { name: 'wage', vals: {} },
-      unemp = { name: 'unemp', vals: {} },
-      aqi = { name: 'aqi', vals: {} };
+const heat = {
+  name: 'heat', elem: Html.heatCtrl, vals: {}
+},
+      cold = {
+  name: 'cold', elem: Html.coldCtrl, vals: {}
+},
+      precip = {
+  name: 'precip', elem: Html.precipCtrl, vals: {}
+},
+      snow = {
+  name: 'snow', elem: Html.snowCtrl, vals: {}
+},
+      wage = {
+  name: 'wage', elem: Html.wageCtrl, vals: {}
+},
+      unemp = {
+  name: 'unemp', elem: Html.unempCtrl, vals: {}
+},
+      aqi = {
+  name: 'aqi', elem: Html.aqiCtrl, vals: {}
+};
 
 const fHashes = [heat, cold, precip, snow, wage, unemp, aqi]
 
-function activate(attrCtrl, inputHash) {
-  attrCtrl.addEventListener('click', (e) => addOrReplaceInput(e, inputHash))
+function activate(attr) {
+  attr['elem'].addEventListener('click', (e) => addOrReplaceInput(e, attr['vals']))
 }
 
 function addOrReplaceInput(e, input) {
-  if (input.vals[e.target.id]) {
-    delete input.vals[e.target.id]
+  if (input[e.target.id]) {
+    delete input[e.target.id]
   } else {
-    input.vals[e.target.id] = e.target.value
+    input[e.target.id] = e.target.value
   }
 }
 
-activate(Html.heatCtrl, heat)
-activate(Html.coldCtrl, cold)
-activate(Html.precipCtrl, precip)
-activate(Html.snowCtrl, snow)
-activate(Html.wageCtrl, wage)
-activate(Html.unempCtrl, unemp)
-activate(Html.aqiCtrl, aqi)
+fHashes.forEach(f => activate(f))
 
 // make or update list & map when "Find" button is clicked
-
-let msaCollection = null
 
 for (const btn of Html.findBtns) {
   btn.addEventListener('click', () => filterMsas())
 }
 
 function filterMsas() {
-  msaCollection = msas
+  let collection = msas
   fHashesLoop:
   for (const f of fHashes) {
     const hash = f.vals
     const hashKeys = Object.keys(hash)
     if (hashKeys.length > 0) {
       const filter = createFilter(hash)
-      msaCollection = applyFilter(f, filter)
-      if (checkIfEmpty(msaCollection)) {
-        msaCollection = null
+      collection = applyFilter(collection, f, filter)
+      if (checkIfEmpty(collection)) {
+        collection = null
         break fHashesLoop
       }
     }
   }
-  makeList(msaCollection)
+  makeList(collection)
 }
 
 function createFilter(hash) {
@@ -144,8 +150,8 @@ function createFilter(hash) {
   return filter
 }
 
-function applyFilter(fHash, filter) {
-  return msaCollection.filter((m) => {
+function applyFilter(collection, fHash, filter) {
+  return collection.filter((m) => {
     if (filter.length > 1) {
       return (m[fHash.name] >= filter[0]) && (m[fHash.name] <= filter[1])
     } else {
