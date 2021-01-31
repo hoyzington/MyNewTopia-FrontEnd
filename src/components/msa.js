@@ -1,0 +1,5 @@
+class Msa {
+  constructor() {
+
+  }
+}
