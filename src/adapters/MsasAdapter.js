@@ -3,8 +3,8 @@ class MsasAdapter {
     this.baseUrl = "http://localhost:3000/api/v1/metro-areas"
   }
 
-  getMsas() {
+  fetchMsas() {
     return fetch(this.baseUrl)
-      .then(r => r.json())
+      .then(res => res.json())
   }
 }

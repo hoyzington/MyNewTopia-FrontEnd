@@ -1,6 +1,11 @@
 const app = new App()
 
-// // Fetch metro area data
+
+
+
+
+
+// // Fetch Metro Area Data
 
 // let msas = null
 
@@ -11,7 +16,12 @@ const app = new App()
 
 // getMsas()
 
-// // Add event listeners to menu bar
+
+
+
+
+
+// // Add Event Listeners To Menu Bar
 
 // const about = {
 //   elem: Html.menuAbout,
@@ -79,7 +89,12 @@ const app = new App()
 //   })
 // }
 
-// // Add event listeners to filter form
+
+
+
+
+
+// // Add Event Listeners To Filter Form
 
 // const heat = {
 //   name: 'heat', elem: Html.heatCtrl, vals: {}
@@ -119,28 +134,33 @@ const app = new App()
 
 // fHashes.forEach(f => activate(f))
 
-// // make or update list & map when "Find" button is clicked
+
+
+
+
+
+// // Process Filter
 
 // for (const btn of Html.findBtns) {
 //   btn.addEventListener('click', () => filterMsas())
 // }
 
 // function filterMsas() {
-//   let collection = msas
+//   let msas = Msas.all
 //   fHashesLoop:
 //   for (const f of fHashes) {
 //     const hash = f.vals
 //     const hashKeys = Object.keys(hash)
 //     if (hashKeys.length > 0) {
 //       const filter = createFilter(hash)
-//       collection = applyFilter(collection, f, filter)
-//       if (checkIfEmpty(collection)) {
-//         collection = null
+//       msas = applyFilter(msas, f, filter)
+//       if (checkIfEmpty(msas)) {
+//         msas = null
 //         break fHashesLoop
 //       }
 //     }
 //   }
-//   makeList(collection)
+//   makeList(msas)
 // }
 
 // function createFilter(hash) {
@@ -164,6 +184,7 @@ const app = new App()
 
 // function checkIfEmpty(collection) {
 //   if (collection.length == 0) {
+//     clearListSection(Html.listContainer)
 //     Html.listMsg.innerHTML = Html.noMatches
 //     resetMap(Html.chosenMsas)
 //     return true
@@ -172,42 +193,14 @@ const app = new App()
 //   }
 // }
 
+// function clearListSection(list) {
+//   while (list.hasChildNodes()) {  
+//     list.removeChild(list.firstChild)
+//   }
+// }
+
 // function resetMap(chosenMsas) {
 //   while (chosenMsas.hasChildNodes()) {
 //     Html.notChosenMsas.appendChild(chosenMsas.firstChild)
-//   }
-// }
-
-// function makeList(collection) {
-//   const list = Html.listContainer
-//   if (collection) {
-//     while (list.hasChildNodes()) {  
-//       list.removeChild(list.firstChild)
-//     }
-//     for (const msa of collection) {
-//       const li = document.createElement('li')
-//       const btn = document.createElement('button')
-//       btn.className = 'list-item'
-//       btn.id = `msa-${msa.code}`
-//       btn.innerHTML = `<b>${msa.name}</b> (${msa.states})`
-//       li.appendChild(btn)
-//       list.appendChild(li)
-//       EventListener.listItemMouseover(btn, msa.code)
-//     }
-//     mapMsas(collection)
-//   }
-// }
-
-// function mapMsas(collection) {
-//   resetMap(Html.chosenMsas)
-//   for (const msa of collection) {
-//     const mapLoc = Html.svgObj.getElementById(msa.code)
-//     if (mapLoc) {
-//       Html.chosenMsas.appendChild(mapLoc)
-//     } else {
-//       console.log(`${msa.code} ${msa.name} was NOT found`)
-//     }
-//     const id = `msa-${msa.code}`
-//     EventListener.mapMsaMouseover(mapLoc, id)
 //   }
 // }

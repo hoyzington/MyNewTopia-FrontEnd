@@ -102,10 +102,6 @@ static get accountContent() {
     return document.getElementsByClassName('find')
   }
 
-  static get listContainer() {
-    return document.getElementById('list-container')
-  }
-
   static get listMsg() {
     return document.getElementById('list-msg')
   }
