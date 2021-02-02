@@ -290,7 +290,7 @@ svg {
     background: none;
   } */
 
-  #chosen-msas g:hover, #highlight-msa {
+  #chosen-msas g:hover, #highlighted-msa {
     fill: rgb(115, 255, 210);
     stroke: rgb(115, 255, 210);
   }

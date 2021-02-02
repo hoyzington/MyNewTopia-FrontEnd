@@ -1,4 +1,4 @@
-class Html {
+class HtmlItems {
 
 // Menu Bar Elements
 
@@ -78,38 +78,7 @@ static get accountContent() {
     return document.getElementById('aqi')
   }
 
-// SVG Elements
-
-  static get svgObj() {
-    return document.getElementById('map')
-  }
-
-  static get chosenMsas() {
-    return document.getElementById('chosen-msas')
-  }
-
-  static get notChosenMsas() {
-    return document.getElementById('not-chosen-msas')
-  }
-
-  static get highlightedMsa() {
-    return document.getElementById('highlight-msa')
-  }
-
-// MSA List Elements
-
   static get findBtns() {
     return document.getElementsByClassName('find')
   }
-
-  static get listMsg() {
-    return document.getElementById('list-msg')
-  }
-
-// MSA List Content
-
-  static get noMatches() {
-    return '<h1>No Matches</h1><h2>None of the 100 most populated metropolitan areas in the USA meet the criteria you selected.</h2>'
-  }
-
 }

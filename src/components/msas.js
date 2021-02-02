@@ -2,13 +2,19 @@ class Msas {
   constructor() {
     this.all = []
     this.adapter = new MsasAdapter
-    this.initBindingsAndEventListeners()
+    // this.initBindingsAndEventListeners()
     this.getAll()
   }
 
-  initBindingsAndEventListeners() {
-    this.listContainer = document.getElementById('list-container')
-  }
+  static list = document.getElementById('list-container')
+  static listMsg = document.getElementById('list-msg')
+  static listNoMsasMsg = '<h1>No Matches</h1><h2>None of the 100 most populated metropolitan areas in the USA meet the criteria you selected.</h2>'
+  static chosen = document.getElementById('chosen-msas')
+  static notChosen = document.getElementById('not-chosen-msas')
+
+  // initBindingsAndEventListeners() {
+
+  // }
 
   getAll() {
     this.adapter
@@ -16,51 +22,37 @@ class Msas {
       .then(msas => {
         msas.forEach(msa => this.all.push(new Msa(msa)))
       })
-      .then(() => this.renderList())
+      .then(() => this.renderMsaList())
   }
 
-  renderList() {
-    const container = this.listContainer
+  renderMsaList() {
     if (this.all) {
-      this.clearListSection(container)
+      this.resetList()
       for (const msa of this.all) {
-        const li = document.createElement('li')
-        const btn = document.createElement('button')
-        btn.className = 'list-item'
-        btn.id = `msa-${msa.code}`
-        btn.innerHTML = `<b>${msa.name}</b> (${msa.states})`
-        li.appendChild(btn)
-        container.appendChild(li)
-        EventListener.listItemMouseover(btn, msa.code)
+        const li = msa.createLi()
+        Msas.list.appendChild(li)
       }
-      this.mapMsas()
+      this.addMsasToMap()
     }
   }
 
-  clearListSection(list) {
+  resetList() {
+    const list = Msas.list
     while (list.hasChildNodes()) {  
       list.removeChild(list.firstChild)
     }
   }
 
-  mapMsas() {
-    this.resetMap(Html.chosenMsas)
+  addMsasToMap() {
+    this.resetMap()
     for (const msa of this.all) {
-      const mapLoc = Html.svgObj.getElementById(msa.code)
-      if (mapLoc) {
-        Html.chosenMsas.appendChild(mapLoc)
-      } else {
-        console.log(`${msa.code} ${msa.name} was NOT found`)
-      }
-      const id = `msa-${msa.code}`
-      EventListener.mapMsaMouseover(mapLoc, id)
+      msa.addToMap()
     }
   }
 
-  resetMap(chosenMsas) {
-    while (chosenMsas.hasChildNodes()) {
-      Html.notChosenMsas.appendChild(chosenMsas.firstChild)
+  resetMap() {
+    while (Msas.chosen.hasChildNodes()) {
+      Msas.notChosen.appendChild(Msas.chosen.firstChild)
     }
   }
-
 }
