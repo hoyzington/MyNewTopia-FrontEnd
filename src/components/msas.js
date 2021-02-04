@@ -1,14 +1,14 @@
 class Msas {
   constructor() {
     this.all = []
+    this.filtered = []
     this.adapter = new MsasAdapter
     // this.initBindingsAndEventListeners()
     this.getAll()
   }
 
   static list = document.getElementById('list-container')
-  static listMsg = document.getElementById('list-msg')
-  static listNoMsasMsg = '<h1>No Matches</h1><h2>None of the 100 most populated metropolitan areas in the USA meet the criteria you selected.</h2>'
+  static noMsasMsg = "<div id='list-msg'><h1>No Matches</h1><h2>None of the 100 most populated metropolitan areas in the USA meet the criteria you selected.</h2></div>"
   static chosen = document.getElementById('chosen-msas')
   static notChosen = document.getElementById('not-chosen-msas')
 
@@ -22,13 +22,31 @@ class Msas {
       .then(msas => {
         msas.forEach(msa => this.all.push(new Msa(msa)))
       })
-      .then(() => this.renderMsaList())
+  }
+
+  useFilter(filter) {
+    this.filtered = this.all
+    filterItemsLoop:
+    for (const fItem of filter.items) {
+      this.filtered = this.filtered.filter((msa) => msa.msaUseFilter(fItem))
+      if (this.filtered.length == 0) {
+        this.emptyList()
+        break filterItemsLoop
+      }
+    }
+    this.renderMsaList()
+  }
+
+  emptyList() {
+    this.resetList()
+    Msas.list.innerHTML = Msas.noMsasMsg
+    this.resetMap()
   }
 
   renderMsaList() {
-    if (this.all) {
+    if (this.filtered.length > 0) {
       this.resetList()
-      for (const msa of this.all) {
+      for (const msa of this.filtered) {
         const li = msa.createLi()
         Msas.list.appendChild(li)
       }
@@ -45,7 +63,7 @@ class Msas {
 
   addMsasToMap() {
     this.resetMap()
-    for (const msa of this.all) {
+    for (const msa of this.filtered) {
       msa.addToMap()
     }
   }
