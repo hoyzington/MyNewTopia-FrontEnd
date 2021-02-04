@@ -23,6 +23,16 @@ class Msa {
     this.mapLoc = Msa.map.getElementById(this.code)
   }
 
+  msaUseFilter(fItem) {
+    if (fItem.hiLoVals.length == 0) {
+      return true
+    } else if (fItem.hiLoVals.length > 1) {
+      return (this[fItem.msaAttr] >= fItem.hiLoVals[0]) && (this[fItem.msaAttr] <= fItem.hiLoVals[1])
+    } else {
+      return this.snow == fItem.hiLoVals[0]
+    }
+  }
+
   createLi() {
     const li = document.createElement('li')
     const btn = document.createElement('button')
