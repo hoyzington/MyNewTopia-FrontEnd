@@ -1,26 +1,10 @@
 class HtmlItems {
 
-// Menu Bar Elements
-
   static get menuAbout() {
-    return document.getElementById('about')
-  }
-
-  static get menuAccount() {
-    return document.getElementById('account')
-  }
-
-  static get menuContent() {
-    return document.getElementById('menu-content')
-  }
-
-// Menu Item Content
-
-  static get aboutContent() {
     return 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat eaque accusamus reiciendis nobis corrupti quidem dolorem, hic ducimus, minus, tenetur cupiditate tempore laudantium amet perspiciatis repellendus iusto vitae! Perferendis, harum. Quaerat, qui incidunt ex error deleniti repudiandae ducimus nulla perferendis libero laborum, consequuntur vitae doloribus eum veniam aperiam aut minima asperiores sunt.'
   }
 
-  static get accountContent() {
+  static get menuAccount() {
     return `
       <div id="menu-login">
         <h3>Sign up / Log in to save the lists and maps you create!</h3>
@@ -46,5 +30,9 @@ class HtmlItems {
           </div>
         </form>
       </div>`
+  }
+
+  static get menuLists() {
+    return ``
   }
 }
