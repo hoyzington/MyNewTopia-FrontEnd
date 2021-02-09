@@ -52,7 +52,7 @@ class MenuItem {
   addHtmlContent() {
     Menu.contentArea.innerHTML = this.htmlContent
     if (this.name == 'account') {
-      const logOrSignIn = document.getElementById('log-or-sign-in')
+      const logOrSignIn = document.getElementById('submit-row')
       logOrSignIn.addEventListener('click', (e) => {
         e.preventDefault()
         this.processSubmit(e)
@@ -62,11 +62,10 @@ class MenuItem {
 
   processSubmit(e) {
     const adapter = new UsersAdapter
-    const userData = {
-      username: document.getElementById('username').value,
-      password: document.getElementById('password').value
-    }
-    let urlSuffix = ''
+    const username = document.getElementById('username').value
+    const password = document.getElementById('password').value
+    const userData = { user: { username, password }}
+    let urlSuffix = 'signup'
     if (e.target.value == 'Log In') {
       urlSuffix = 'login'
     }

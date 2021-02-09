@@ -15,11 +15,9 @@ class UsersAdapter {
   }
 
   loginOrCreateUser(urlSuffix, userData) {
-    console.log(this.configObj(userData))
-    console.log(urlSuffix)
-    // return fetch(this.baseUrl + urlSuffix, this.configObj(userData))
-    //   .then(res => res.json())
-    //   .then(obj => console.log(obj))
-    //   .catch(err => alert(err.message))
+    return fetch(this.baseUrl + urlSuffix, this.configObj(userData))
+      .then(res => res.json())
+      .then(obj => console.log(obj))
+      .catch(err => alert(err.message))
   }
 }

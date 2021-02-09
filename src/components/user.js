@@ -1,7 +1,7 @@
 class User {
-  constructor(username, password) {
+  constructor(id, username) {
+    this.id = id
     this.username = username
-    this.password = password
     this.initBindingsAndEventListeners()
   }
 

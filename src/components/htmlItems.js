@@ -25,7 +25,7 @@ class HtmlItems {
               <input type="text" id="password" name="password">
             </div>
           </div>
-          <div class="submit-row">
+          <div id="submit-row">
             <input type="submit" id="login" class="menu-submit" value="Log In">
             <input type="submit" id="signup" class="menu-submit" value="Sign Up">
           </div>
