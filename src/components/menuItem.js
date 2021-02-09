@@ -1,6 +1,7 @@
 class MenuItem {
-  constructor(element, htmlContent) {
-    this.element = document.getElementById(element)
+  constructor(name, htmlContent) {
+    this.name = name
+    this.element = document.getElementById(name)
     this.htmlContent = htmlContent
     this.stat = false
     MenuItem.all.push(this)
@@ -8,44 +9,67 @@ class MenuItem {
   }
 
   static all = []
+  static logOrSignIn = null
 
   initBindingsAndEventListeners() {
     this.element.addEventListener('click', this.processClick.bind(this))
   }
 
   processClick() {
-    this.partner = MenuItem.all.find((item) => {
-      return item.element != this.element
+    const partner = MenuItem.all.find((item) => {
+      return item.name != this.name
     })
-    this.onOffSwitch()
-    this.highlight()
+    this.onOffSwitch(partner)
+    this.highlight(partner)
     this.showOrHide()
   }
 
-  onOffSwitch() {
-    if (this.partner.stat) {
-      this.partner.stat = !this.partner.stat
+  onOffSwitch(partner) {
+    if (partner.stat) {
+      partner.stat = !partner.stat
     }
     this.stat = !this.stat
   }
 
-  highlight() {
+  highlight(partner) {
     if (this.stat) {
       this.element.classList.add('menu-active')
-      this.partner.element.classList.remove('menu-active')
+      partner.element.classList.remove('menu-active')
     } else {
       this.element.classList.remove('menu-active')
     }
   }
 
   showOrHide() {
-    const content = Menu.contentArea
-    if (this.stat || this.partner.stat) {
-      content.className = 'menu-active'
+    if (this.stat) {
+      Menu.contentArea.className = 'menu-active'
     } else {
-      content.className = 'menu-inactive'
+      Menu.contentArea.className = 'menu-inactive'
     }
-    content.innerHTML = this.htmlContent
+    this.addHtmlContent()
   }
 
+  addHtmlContent() {
+    Menu.contentArea.innerHTML = this.htmlContent
+    if (this.name == 'account') {
+      const logOrSignIn = document.getElementById('log-or-sign-in')
+      logOrSignIn.addEventListener('click', (e) => {
+        e.preventDefault()
+        this.processSubmit(e)
+      })
+    }
+  }
+
+  processSubmit(e) {
+    const adapter = new UsersAdapter
+    const userData = {
+      username: document.getElementById('username').value,
+      password: document.getElementById('password').value
+    }
+    let urlSuffix = ''
+    if (e.target.value == 'Log In') {
+      urlSuffix = 'login'
+    }
+    adapter.loginOrCreateUser(urlSuffix, userData)
+  }
 }
