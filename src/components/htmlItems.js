@@ -6,7 +6,7 @@ class HtmlItems {
 
   static get menuAccount() {
     return `
-      <div id="menu-login">
+      <div id="menu-account">
         <h3>Log In / Sign Up to save the lists and maps you create!</h3>
         <form id="log-or-sign-in" action="">
           <div class="menu-inputs-row">
@@ -33,7 +33,13 @@ class HtmlItems {
       </div>`
   }
 
-  static get menuLists() {
-    return ``
+  static get menuMyAccount() {
+    return `
+      <div id="menu-account">
+        <div id="menu-lists"></div>
+        <div id="submit-row">
+          <input type="submit" id="logout" class="menu-submit" value="Log Out">
+        </div>
+      </div>`
   }
 }

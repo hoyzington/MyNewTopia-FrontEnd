@@ -9,7 +9,7 @@ class MenuItem {
   }
 
   static all = []
-  static logOrSignIn = null
+  // static logOrSignIn = null
 
   initBindingsAndEventListeners() {
     this.element.addEventListener('click', this.processClick.bind(this))
@@ -57,6 +57,8 @@ class MenuItem {
         e.preventDefault()
         this.processSubmit(e)
       })
+    } else if (this.name == 'myAccount') {
+      this.myAcctContent()
     }
   }
 
@@ -70,5 +72,27 @@ class MenuItem {
       urlSuffix = 'login'
     }
     adapter.loginOrCreateUser(urlSuffix, userData)
+      .then((user) => {
+        new User(user.id, user.username)
+      })
   }
+
+  myAcctContent() {
+    const user = User.all[0]
+    const listsArea = document.getElementById('menu-lists')
+    if (user.lists.length == 0) {
+      listsArea.innerHTML =
+        `<h3>Welcome ${user.username}!</h3>
+        <p>You can access your saved lists and maps from here after you save them.</p>`
+    } else {
+      listsArea.appendChild(
+        `<h3>${user.username}'s Lists</h3>`
+      )
+      // const lists = user.lists
+      // for (const list of lists) {
+        
+      // }
+    }
+  }
+
 }

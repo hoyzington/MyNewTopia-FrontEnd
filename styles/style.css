@@ -126,7 +126,7 @@ header {
     }
 
       .menu-item {
-        margin: 0% 13%;
+        margin: 0% 12%;
       }
 
       .menu-item:hover {
@@ -146,16 +146,16 @@ header {
       font-weight: normal;
     }
 
-      #menu-login {
+      #menu-account {
         text-align: center;
         word-spacing: -2px;
       }
 
-      #menu-login h3 {
+      #menu-account h3 {
         margin: 0vh 0vh 1vh;
       }
 
-      #menu-login label {
+      #menu-account label {
         display: inline-block;
       }
 

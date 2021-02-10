@@ -17,7 +17,6 @@ class UsersAdapter {
   loginOrCreateUser(urlSuffix, userData) {
     return fetch(this.baseUrl + urlSuffix, this.configObj(userData))
       .then(res => res.json())
-      .then(obj => console.log(obj))
       .catch(err => alert(err.message))
   }
 }
