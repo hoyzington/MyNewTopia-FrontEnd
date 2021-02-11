@@ -29,6 +29,7 @@ class Menu {
   hideMenuContent() {
     for (const item of this.items) {
       item.element.classList.remove('menu-active')
+      item.stat = false
     }
     Menu.contentArea.className = 'menu-inactive'
   }
