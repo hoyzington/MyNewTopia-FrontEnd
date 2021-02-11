@@ -9,7 +9,6 @@ class MenuItem {
   }
 
   static all = []
-  // static logOrSignIn = null
 
   initBindingsAndEventListeners() {
     this.element.addEventListener('click', this.processClick.bind(this))
@@ -63,23 +62,26 @@ class MenuItem {
   }
 
   processSubmit(e) {
-    const adapter = new UsersAdapter
-    const username = document.getElementById('username').value
-    const password = document.getElementById('password').value
-    const userData = { user: { username, password }}
     let urlSuffix = 'signup'
     if (e.target.value == 'Log In') {
       urlSuffix = 'login'
     }
+    const userData = this.packageFormData()
+    const adapter = new UsersAdapter
     adapter.loginOrCreateUser(urlSuffix, userData)
       .then((user) => {
-        console.log(user)
         if (user.message) {
           this.handleError(user.message)
         } else {
           new User(user.id, user.username)
         }
       })
+  }
+
+  packageFormData() {
+    const username = document.getElementById('username').value
+    const password = document.getElementById('password').value
+    return { user: { username, password }}
   }
 
   handleError(message) {

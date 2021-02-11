@@ -24,18 +24,17 @@ class User {
   }
 
   beginUX() {
-    // console.log(this)
     document.getElementById('list-msg').remove()
     document.getElementById('account').innerText = 'My Account'
     let myAccount = MenuItem.all[1]
     myAccount.name = 'myAccount'
     myAccount.htmlContent = HtmlItems.menuMyAccount
     myAccount.addHtmlContent()
-    const logout = document.getElementById('logout')
-    logout.addEventListener('click', e => this.logout(e))
+    this.logout()
   }
 
   logout(e) {
-    window.location.reload()
+    const logout = document.getElementById('logout')
+    logout.addEventListener('click', () => window.location.reload())
   }
 }
