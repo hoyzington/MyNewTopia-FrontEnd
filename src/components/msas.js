@@ -46,6 +46,7 @@ class Msas {
   renderMsaList() {
     if (this.filtered.length > 0) {
       this.resetList()
+      this.createBtn('save')
       for (const msa of this.filtered) {
         const li = msa.createLi()
         Msas.list.appendChild(li)
@@ -59,6 +60,13 @@ class Msas {
     while (list.hasChildNodes()) {  
       list.removeChild(list.firstChild)
     }
+  }
+
+  createBtn(purpose) {
+    const btn = document.createElement('button')
+    btn.id = purpose
+    btn.innerHTML = purpose.slice(0, 1).toUpperCase() + purpose.slice(1)
+    this.list.appendChild(btn)
   }
 
   addMsasToMap() {

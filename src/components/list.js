@@ -1,6 +1,8 @@
 class List {
-  constructor() {
-
+  constructor(id, name, demands) {
+    this.id = id
+    this.name = name
+    this.demands = demands
     // this.initBindingsAndEventListeners()
   }
 
@@ -8,4 +10,7 @@ class List {
 
   // }
 
+  buildMenuLink() {
+
+  }
 }

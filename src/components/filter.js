@@ -1,16 +1,10 @@
 class Filter {
   constructor() {
     this.items = []
-    // this.adapter = new FilterAdapter
     this.createFilterBase()
-    // this.initBindingsAndEventListeners()
   }
 
   static msaAttrs = ['heat', 'cold', 'precip', 'snow', 'wage', 'unemp', 'aqi']
-
-  // initBindingsAndEventListeners() {
-
-  // }
 
   createFilterBase() {
     for (const attr of Filter.msaAttrs) {

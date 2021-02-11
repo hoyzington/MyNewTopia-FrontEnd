@@ -106,11 +106,10 @@ class MenuItem {
       listsArea.appendChild(
         `<h3>${user.username}'s Lists</h3>`
       )
-      // const lists = user.lists
-      // for (const list of lists) {
-        
-      // }
+      const lists = user.lists
+      for (const list of lists) {
+        list.buildMenuLink()
+      }
     }
   }
-
 }
