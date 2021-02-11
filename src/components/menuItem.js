@@ -73,8 +73,24 @@ class MenuItem {
     }
     adapter.loginOrCreateUser(urlSuffix, userData)
       .then((user) => {
-        new User(user.id, user.username)
+        console.log(user)
+        if (user.message) {
+          this.handleError(user.message)
+        } else {
+          new User(user.id, user.username)
+        }
       })
+  }
+
+  handleError(message) {
+    const inputs = document.querySelectorAll("header input[type='text']")
+    for (const input of inputs) {
+      input.value = ''
+    }
+    const msg = document.createElement('div')
+    msg.className = 'alert'
+    msg.innerHTML = `<h3>${message}</h3>`
+    Menu.contentArea.prepend(msg)
   }
 
   myAcctContent() {

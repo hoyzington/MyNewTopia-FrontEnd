@@ -31,5 +31,11 @@ class User {
     myAccount.name = 'myAccount'
     myAccount.htmlContent = HtmlItems.menuMyAccount
     myAccount.addHtmlContent()
+    const logout = document.getElementById('logout')
+    logout.addEventListener('click', e => this.logout(e))
+  }
+
+  logout(e) {
+    window.location.reload()
   }
 }
