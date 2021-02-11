@@ -5,6 +5,7 @@ class User {
     this.lists = []
     this.createLists(lists)
     User.all.push(this)
+    sessionStorage.login = 'true'
     this.initBindingsAndEventListeners()
     this.beginUX()
   }
@@ -24,7 +25,11 @@ class User {
   }
 
   beginUX() {
-    document.getElementById('list-msg').remove()
+    if (sessionStorage.listMade == 'true') {
+      Msas.createBtn('save')
+    } else {
+      document.getElementById('list-msg').remove()
+    }
     document.getElementById('account').innerText = 'My Account'
     let myAccount = MenuItem.all[1]
     myAccount.name = 'myAccount'
@@ -35,6 +40,10 @@ class User {
 
   logout(e) {
     const logout = document.getElementById('logout')
-    logout.addEventListener('click', () => window.location.reload())
+    logout.addEventListener('click', () => {
+      localStorage.clear()
+      sessionStorage.clear()
+      window.location.reload()
+    })
   }
 }

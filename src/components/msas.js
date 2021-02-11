@@ -12,6 +12,13 @@ class Msas {
   static chosen = document.getElementById('chosen-msas')
   static notChosen = document.getElementById('not-chosen-msas')
 
+  static createBtn(purpose) {
+    const btn = document.createElement('button')
+    btn.id = purpose
+    btn.innerHTML = purpose.slice(0, 1).toUpperCase() + purpose.slice(1)
+    Msas.list.prepend(btn)
+  }
+
   // initBindingsAndEventListeners() {
 
   // }
@@ -46,7 +53,10 @@ class Msas {
   renderMsaList() {
     if (this.filtered.length > 0) {
       this.resetList()
-      this.createBtn('save')
+      sessionStorage.listMade = 'true'
+      if (sessionStorage.login == 'true') {
+        this.createBtn('save')
+      }
       for (const msa of this.filtered) {
         const li = msa.createLi()
         Msas.list.appendChild(li)
@@ -56,17 +66,11 @@ class Msas {
   }
 
   resetList() {
+    sessionStorage.listMade = 'false'
     const list = Msas.list
     while (list.hasChildNodes()) {  
       list.removeChild(list.firstChild)
     }
-  }
-
-  createBtn(purpose) {
-    const btn = document.createElement('button')
-    btn.id = purpose
-    btn.innerHTML = purpose.slice(0, 1).toUpperCase() + purpose.slice(1)
-    this.list.appendChild(btn)
   }
 
   addMsasToMap() {

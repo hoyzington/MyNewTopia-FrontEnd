@@ -9,6 +9,8 @@ class App {
   static findBtns = document.getElementsByClassName('find')
 
   initBindingsAndEventListeners() {
+    sessionStorage.setItem('login', 'false')
+    sessionStorage.setItem('listMade', 'false')
     for (const btn of App.findBtns) {
       btn.addEventListener('click', () => this.filterMsas())
     }
