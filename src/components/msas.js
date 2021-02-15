@@ -7,17 +7,10 @@ class Msas {
     this.getAll()
   }
 
-  static list = document.getElementById('list-container')
+  static listArea = document.getElementById('list-container')
   static noMsasMsg = "<div id='list-msg'><h1>No Matches</h1><h2>None of the 100 most populated metropolitan areas in the USA meet the criteria you selected.</h2></div>"
   static chosen = document.getElementById('chosen-msas')
   static notChosen = document.getElementById('not-chosen-msas')
-
-  static createBtn(purpose) {
-    const btn = document.createElement('button')
-    btn.id = purpose
-    btn.innerHTML = purpose.slice(0, 1).toUpperCase() + purpose.slice(1)
-    Msas.list.prepend(btn)
-  }
 
   // initBindingsAndEventListeners() {
 
@@ -25,7 +18,7 @@ class Msas {
 
   getAll() {
     this.adapter
-      .fetchMsas()
+      .fetchAll()
       .then(msas => {
         msas.forEach(msa => this.all.push(new Msa(msa)))
       })
@@ -33,41 +26,37 @@ class Msas {
 
   useFilter(filter) {
     this.filtered = this.all
-    filterItemsLoop:
     for (const fItem of filter.items) {
       this.filtered = this.filtered.filter((msa) => msa.msaUseFilter(fItem))
       if (this.filtered.length == 0) {
-        this.emptyList()
-        break filterItemsLoop
+        return this.emptyListArea()
       }
     }
-    this.renderMsaList()
+    sessionStorage.listMade = 'true'
+    this.renderMsaList(filter)
   }
 
-  emptyList() {
-    this.resetList()
-    Msas.list.innerHTML = Msas.noMsasMsg
+  emptyListArea() {
+    this.resetListArea()
+    sessionStorage.listMade = 'false'
+    Msas.listArea.innerHTML = Msas.noMsasMsg
     this.resetMap()
   }
 
-  renderMsaList() {
-    if (this.filtered.length > 0) {
-      this.resetList()
-      sessionStorage.listMade = 'true'
-      if (sessionStorage.login == 'true') {
-        this.createBtn('save')
-      }
-      for (const msa of this.filtered) {
-        const li = msa.createLi()
-        Msas.list.appendChild(li)
-      }
-      this.addMsasToMap()
+  renderMsaList(filter) {
+    this.resetListArea()
+    if (sessionStorage.login == 'true') {
+      // Lists.all[0].createBtn(filter)
     }
+    for (const msa of this.filtered) {
+      const li = msa.createLi()
+      Msas.listArea.appendChild(li)
+    }
+    this.addMsasToMap()
   }
 
-  resetList() {
-    sessionStorage.listMade = 'false'
-    const list = Msas.list
+  resetListArea() {
+    const list = Msas.listArea
     while (list.hasChildNodes()) {  
       list.removeChild(list.firstChild)
     }

@@ -54,62 +54,17 @@ class MenuItem {
       const logOrSignIn = document.getElementById('submit-row')
       logOrSignIn.addEventListener('click', (e) => {
         e.preventDefault()
-        this.processSubmit(e)
+        new Users(e)
       })
     } else if (this.name == 'myAccount') {
-      this.myAcctContent()
+      User.all[0].myAcctContent()
     }
   }
 
-  processSubmit(e) {
-    let urlSuffix = 'signup'
-    if (e.target.value == 'Log In') {
-      urlSuffix = 'login'
-    }
-    const userData = this.packageFormData()
-    const adapter = new UsersAdapter
-    adapter.loginOrCreateUser(urlSuffix, userData)
-      .then((user) => {
-        if (user.message) {
-          this.handleError(user.message)
-        } else {
-          new User(user.id, user.username)
-        }
-      })
-  }
-
-  packageFormData() {
-    const username = document.getElementById('username').value
-    const password = document.getElementById('password').value
-    return { user: { username, password }}
-  }
-
-  handleError(message) {
-    const inputs = document.querySelectorAll("header input[type='text']")
-    for (const input of inputs) {
-      input.value = ''
-    }
-    const msg = document.createElement('div')
-    msg.className = 'alert'
-    msg.innerHTML = `<h3>${message}</h3>`
-    Menu.contentArea.prepend(msg)
-  }
-
-  myAcctContent() {
-    const user = User.all[0]
-    const listsArea = document.getElementById('menu-lists')
-    if (user.lists.length == 0) {
-      listsArea.innerHTML =
-        `<h3>Welcome ${user.username}!</h3>
-        <p>You can access your saved lists and maps from here after you save them.</p>`
-    } else {
-      listsArea.appendChild(
-        `<h3>${user.username}'s Lists</h3>`
-      )
-      const lists = user.lists
-      for (const list of lists) {
-        list.buildMenuLink()
-      }
-    }
+  logInEffect() {
+    this.name = 'myAccount'
+    this.element.innerText = 'My Account'
+    this.htmlContent = HtmlItems.menuMyAccount
+    this.addHtmlContent()
   }
 }

@@ -11,6 +11,17 @@ class Menu {
 
   static contentArea = document.getElementById('menu-content')
 
+  static handleAccountError(message) {
+    const inputs = document.querySelectorAll("header input[type='text']")
+    for (const input of inputs) {
+      input.value = ''
+    }
+    const msg = document.createElement('div')
+    msg.className = 'alert'
+    msg.innerHTML = `<h3>${message}</h3>`
+    Menu.contentArea.prepend(msg)
+  }
+  
   initBindingsAndEventListeners() {
     document.addEventListener('click', (e) => this.clickOff(e))
   }

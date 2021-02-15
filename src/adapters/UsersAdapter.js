@@ -3,19 +3,19 @@ class UsersAdapter {
     this.baseUrl = "http://localhost:3000/api/v1/"
   }
 
-  configObj(userData) {
+  configObj(data) {
     return {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify(userData)
+      body: JSON.stringify(data)
     }
   }
 
-  loginOrCreateUser(urlSuffix, userData) {
-    return fetch(this.baseUrl + urlSuffix, this.configObj(userData))
+  create(data, urlSuffix) {
+    return fetch(this.baseUrl + urlSuffix, this.configObj(data))
       .then(res => res.json())
       .catch(err => alert(err.message))
   }
