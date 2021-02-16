@@ -32,13 +32,14 @@ class Msas {
         return this.emptyListArea()
       }
     }
-    sessionStorage.listMade = 'true'
+    sessionStorage.newFilter = 'true'
     this.renderMsaList(filter)
+    return 'true'
   }
 
   emptyListArea() {
     this.resetListArea()
-    sessionStorage.listMade = 'false'
+    sessionStorage.newFilter = 'false'
     Msas.listArea.innerHTML = Msas.noMsasMsg
     this.resetMap()
   }
@@ -46,7 +47,7 @@ class Msas {
   renderMsaList(filter) {
     this.resetListArea()
     if (sessionStorage.login == 'true') {
-      // Lists.all[0].createBtn(filter)
+      // Filters.all[0].createBtn(filter)
     }
     for (const msa of this.filtered) {
       const li = msa.createLi()

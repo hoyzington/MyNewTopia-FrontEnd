@@ -20,7 +20,7 @@ class FilterItem {
     }
   }
 
-  isolateHiLoVals() {
+  createHiLoVals() {
     const valsHash = this.vals
     const valsHashKeys = Object.keys(valsHash)
     if (valsHashKeys.length > 0) {

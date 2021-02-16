@@ -14,7 +14,8 @@ class Filter {
 
   prepFilterItems() {
     for (const filterItem of this.items) {
-      filterItem.isolateHiLoVals()
+      filterItem.createHiLoVals()
     }
+    return this
   }
 }

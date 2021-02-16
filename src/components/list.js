@@ -1,8 +1,8 @@
 class List {
-  constructor(id, name, demands) {
+  constructor(id, name, choices=[]) {
     this.id = id
     this.name = name
-    this.demands = demands
+    this.choices = choices
     // this.initBindingsAndEventListeners()
   }
 
