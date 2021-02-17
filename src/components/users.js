@@ -20,7 +20,7 @@ class Users {
         if (user.message) {
           Menu.handleAccountError(user.message)
         } else {
-          new User(user.id, user.username, user.lists)
+          new User(user.id, user.username, user.filters)
         }
       })
   }

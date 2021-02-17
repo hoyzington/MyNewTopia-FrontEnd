@@ -1,6 +1,6 @@
 class Filters {
   constructor() {
-    this.all = []
+    // this.all = []
     this.adapter = new FiltersAdapter
     this.currentFilter = new Filter
     this.initBindingsAndEventListeners()
@@ -14,18 +14,8 @@ class Filters {
   }
 
   finishNewFilter() {
-    // console.log(this.newFilter)
     return this.currentFilter.prepFilterItems()
   }
-
-  // createFilters() {
-  //   if (this.filters.length > 0) {
-  //     for (const filter of filters) {
-  //       this.all.push(new Filter(filter.id, filter.name, filter.choices))
-  //     }
-
-  //   }
-  // }
 
   createBtn(purpose) {
     const li = document.createElement('li')
@@ -35,19 +25,43 @@ class Filters {
     btn.innerHTML = purpose.slice(0, 1).toUpperCase() + purpose.slice(1)
     li.appendChild(btn)
     Msas.listArea.prepend(li)
-    btn.addEventListener('click', (e) => {
-      e.preventDefault()
-      if (purpose == 'save') {
-        // const adapter = new ListsAdapter
-        // const data = []
-        // const urlSuffix = 'users/'
-        // adapter.create(data, urlSuffix)
-        //   .then(list => new List(list.id, list.name, list.choices))
-        //   .then()
-      } else {
+    btn.addEventListener('click', (e) => this.processClick(e, purpose))
+  }
 
-      }
-    })
+  processClick(e, purpose) {
+    e.preventDefault()
+    if (purpose == 'save') {
+      this.getFilterName()
+    } else {
+      console.log('deleting')
+    }
+  }
+
+  getFilterName() {
+    const myAccount = MenuItem.all[1]
+    myAccount.buildSaveForm()
+    const saveBtn = document.getElementById('save-with-name')
+    saveBtn.addEventListener('click', (e) => this.saveFilter(e, myAccount)) 
+  }
+
+  saveFilter(e, myAccount) {
+    e.preventDefault()
+    const name = document.getElementById('name').value
+    if (name) {
+      const filter = this.currentFilter
+      const user = User.all[0]
+      filter.name = name
+      filter.items = JSON.stringify(filter.items)
+      const urlSuffix = `users/${user.id}/filters`
+      this.adapter.create(filter, urlSuffix)
+        .then((APIFilter) => {
+          filter.id = APIFilter.id
+          user.filters.push(filter)
+          myAccount.showFiltersArea()
+        })
+    } else {
+      document.querySelector('#menu-account h3').className = 'alert'
+    }
   }
 
 }

@@ -1,8 +1,9 @@
 class User {
-  constructor(id, username, filterCollection) {
+  constructor(id, username, filterObjs) {
     this.id = id
     this.username = username
-    this.filters = filterCollection
+    this.filters = []
+    this.addFilters(filterObjs)
     User.all.push(this)
     sessionStorage.login = 'true'
     this.initBindingsAndEventListeners()
@@ -13,6 +14,12 @@ class User {
 
   initBindingsAndEventListeners() {
     this.acctArea = document.getElementById('menu-account')
+  }
+
+  addFilters(filterObjs) {
+    for (const obj of filterObjs) {
+      this.filters.push(new Filter(obj.id, obj.name, eval(obj.items)))
+    }
   }
 
   beginUX() {
@@ -26,7 +33,6 @@ class User {
 
   myAcctContent() {
     const filters = this.filters
-    // console.log(filters)
     const listsArea = document.getElementById('menu-lists')
     if (filters.length == 0) {
       listsArea.innerHTML =
@@ -37,7 +43,8 @@ class User {
       title.innerText = `${this.username}'s Lists`
       listsArea.appendChild(title)
       for (const filter of filters) {
-        filter.buildMenuLink()
+        const listBtn = filter.buildMenuLink()
+        listsArea.appendChild(listBtn)
       }
     }
     this.logoutBtn()

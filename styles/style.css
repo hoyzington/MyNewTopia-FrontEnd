@@ -29,6 +29,10 @@ button:hover, .highlighted {
   background-color: rgb(32, 141, 250);
 }
 
+.alert {
+  color: lightcoral;
+}
+
 .alert h3 {
   margin-top: 0vh;
   color: lightcoral;
@@ -176,15 +180,27 @@ header {
           clear: both;
         }
 
-          .col-25 {
+          .col-33 {
             float: left;
             width: 33%;
             margin: 2vh 0vh 0vh 3vh;
           }
 
-          .col-75 {
+          .col-48 {
             float: left;
             width: 48%;
+            margin-top: 2vh;
+          }
+
+          .col-20 {
+            float: left;
+            width: 20%;
+            margin: 2vh 0vh 0vh 6vh;
+          }
+
+          .col-60 {
+            float: left;
+            width: 60%;
             margin-top: 2vh;
           }
 

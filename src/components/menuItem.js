@@ -21,6 +21,7 @@ class MenuItem {
     this.onOffSwitch(partner)
     this.highlight(partner)
     this.showOrHide()
+    this.addHtmlContent()
   }
 
   onOffSwitch(partner) {
@@ -45,7 +46,6 @@ class MenuItem {
     } else {
       Menu.contentArea.className = 'menu-inactive'
     }
-    this.addHtmlContent()
   }
 
   addHtmlContent() {
@@ -64,7 +64,19 @@ class MenuItem {
   logInEffect() {
     this.name = 'myAccount'
     this.element.innerText = 'My Account'
+    this.showFiltersArea()
+  }
+
+  showFiltersArea() {
     this.htmlContent = HtmlItems.menuMyAccount
     this.addHtmlContent()
   }
+
+  buildSaveForm() {
+    this.stat = true
+    this.element.classList.add('menu-active')
+    Menu.contentArea.innerHTML = HtmlItems.saveForm
+    Menu.contentArea.className = 'menu-active'
+  }
+
 }

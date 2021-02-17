@@ -10,18 +10,18 @@ class HtmlItems {
         <h3>Log In / Sign Up to save the lists and maps you create!</h3>
         <form id="log-or-sign-in" action="">
           <div class="menu-inputs-row">
-            <div class="col-25">
+            <div class="col-33">
               <label for="username">Username</label>
             </div>
-            <div class="col-75">
+            <div class="col-48">
               <input type="text" id="username" name="username" autofocus="true">
             </div>
           </div>
           <div class="menu-inputs-row">
-            <div class="col-25">
+            <div class="col-33">
               <label for="password">Password</label>
             </div>
-            <div class="col-75">
+            <div class="col-48">
               <input type="text" id="password" name="password">
             </div>
           </div>
@@ -40,6 +40,26 @@ class HtmlItems {
         <div id="submit-row">
           <input type="submit" id="logout" class="menu-submit" value="Log Out">
         </div>
+      </div>`
+  }
+
+  static get saveForm() {
+    return `
+      <div id="menu-account">
+        <h3>Provide a name for this map and list</h3>
+        <form id="add-name" action="">
+          <div class="menu-inputs-row">
+            <div class="col-20">
+              <label for="name">Name</label>
+            </div>
+            <div class="col-60">
+              <input type="text" id="name" name="name" autofocus="true">
+            </div>
+          </div>
+          <div id="submit-row">
+            <input type="submit" id="save-with-name" class="menu-submit" value="Save">
+          </div>
+        </form>
       </div>`
   }
 }

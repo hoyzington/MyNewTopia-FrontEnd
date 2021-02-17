@@ -1,14 +1,18 @@
 class Filter {
-  constructor() {
-    this.items = []
+  constructor(id=null, name=null, items=[]) {
+    this.id = id
+    this.name = name
+    this.items = items
     this.createFilterBase()
   }
 
   static msaAttrs = ['heat', 'cold', 'precip', 'snow', 'wage', 'unemp', 'aqi']
 
   createFilterBase() {
-    for (const attr of Filter.msaAttrs) {
-      this.items.push(new FilterItem(attr))
+    if (this.items.length == 0) {
+      for (const attr of Filter.msaAttrs) {
+        this.items.push(new FilterItem(attr))
+      }
     }
   }
 
@@ -17,5 +21,15 @@ class Filter {
       filterItem.createHiLoVals()
     }
     return this
+  }
+
+  buildMenuLink() {
+    const li = document.createElement('li')
+    const btn = document.createElement('button')
+    btn.className = 'menu-submit'
+    btn.id = `${this.id}`
+    btn.innerHTML = `<b>${this.name}</b>`
+    li.appendChild(btn)
+    return li
   }
 }

@@ -23,7 +23,7 @@ class Menu {
   }
   
   initBindingsAndEventListeners() {
-    document.addEventListener('click', (e) => this.clickOff(e))
+    document.addEventListener('click', (e) => this.clickOff(e), true)
   }
 
   createMenuItems() {
