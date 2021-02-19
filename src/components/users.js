@@ -11,7 +11,7 @@ class Users {
 
   processSubmit() {
     let urlSuffix = 'signup'
-    if (this.event.target.value == 'Log In') {
+    if (this.event.target.innerText == 'Log In') {
       urlSuffix = 'login'
     }
     const userData = this.packageFormData()

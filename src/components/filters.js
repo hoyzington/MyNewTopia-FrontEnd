@@ -21,7 +21,7 @@ class Filters {
     const li = document.createElement('li')
     const btn = document.createElement('button')
     btn.id = purpose
-    btn.className = 'list-control'
+    btn.classList.add('list-btn', 'blue')
     btn.innerHTML = purpose.slice(0, 1).toUpperCase() + purpose.slice(1)
     li.appendChild(btn)
     Msas.listArea.prepend(li)

@@ -26,8 +26,8 @@ class HtmlItems {
             </div>
           </div>
           <div id="submit-row">
-            <input type="submit" id="login" class="menu-submit" value="Log In">
-            <input type="submit" id="signup" class="menu-submit" value="Sign Up">
+            <button type="button" id="login" class="menu-submit-btn green">Log In</button>
+            <button type="button" id="signup" class="menu-submit-btn green">Sign Up</button>
           </div>
         </form>
       </div>`
@@ -38,7 +38,7 @@ class HtmlItems {
       <div id="menu-account">
         <div id="menu-lists"></div>
         <div id="submit-row">
-          <input type="submit" id="logout" class="menu-submit" value="Log Out">
+          <button type="button" id="logout" class="menu-submit-btn green">Log Out</button>
         </div>
       </div>`
   }
@@ -57,7 +57,7 @@ class HtmlItems {
             </div>
           </div>
           <div id="submit-row">
-            <input type="submit" id="save-with-name" class="menu-submit" value="Save">
+            <button type="button" id="save-with-name" class="menu-submit-btn green">Save</button>
           </div>
         </form>
       </div>`

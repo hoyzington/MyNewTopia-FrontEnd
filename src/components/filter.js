@@ -26,9 +26,9 @@ class Filter {
   buildMenuLink() {
     const li = document.createElement('li')
     const btn = document.createElement('button')
-    btn.className = 'menu-submit'
+    btn.classList.add('menu-btn', 'dark-blue')
     btn.id = `${this.id}`
-    btn.innerHTML = `<b>${this.name}</b>`
+    btn.innerHTML = `${this.name}`
     li.appendChild(btn)
     return li
   }

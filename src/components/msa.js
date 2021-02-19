@@ -36,7 +36,7 @@ class Msa {
   createLi() {
     const li = document.createElement('li')
     const btn = document.createElement('button')
-    btn.className = 'list-item'
+    btn.classList.add('msa-btn', 'blue')
     btn.id = `msa-${this.code}`
     btn.innerHTML = `<b>${this.name}</b> (${this.states})`
     li.appendChild(btn)
