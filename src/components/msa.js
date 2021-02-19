@@ -50,13 +50,13 @@ class Msa {
       Msa.highlighted.appendChild(this.mapLoc)
     })
     msaBtn.addEventListener('mouseout', () => {
-      this.mgr.chosen.appendChild(this.mapLoc)
+      MsaMgr.chosen.appendChild(this.mapLoc)
     })
   }
 
   addToMap() {
     if (this.mapLoc) {
-      this.mgr.chosen.appendChild(this.mapLoc)
+      MsaMgr.chosen.appendChild(this.mapLoc)
     } else {
       console.log(`Incorrect MSA code ${this.code} for ${this.name}`)
     }

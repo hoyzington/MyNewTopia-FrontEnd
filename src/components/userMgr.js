@@ -4,6 +4,7 @@ class UserMgr {
     this.all = []
     this.adapter = new UsersAdapter
     // this.initBindingsAndEventListeners()
+    UserMgr.all.push(this)
     this.processSubmit()
   }
 

@@ -1,9 +1,9 @@
 class MenuItem {
-  constructor(name, htmlContent, mgr) {
+  constructor(name, htmlContent) {
     this.name = name
     this.element = document.getElementById(name)
     this.htmlContent = htmlContent
-    this.mgr = mgr
+    this.mgr = MenuMgr.all[0]
     this.stat = false
     MenuItem.all.push(this)
     this.initBindingsAndEventListeners()

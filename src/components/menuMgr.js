@@ -1,10 +1,12 @@
 class MenuMgr {
   constructor() {
     this.items = []
-    this.createMenuItems()
     this.initBindingsAndEventListeners()
+    MenuMgr.all.push(this)
+    this.createMenuItems()
   }
 
+  static all = []
   static handleAccountError(message) {
     const inputs = document.querySelectorAll("header input[type='text']")
     for (const input of inputs) {
@@ -23,8 +25,8 @@ class MenuMgr {
 
   createMenuItems() {
     const menuItemArgs = [
-      ['about', HtmlItems.menuAbout, this],
-      ['account', HtmlItems.menuAccount, this]
+      ['about', HtmlItems.menuAbout],
+      ['account', HtmlItems.menuAccount]
     ]
     for (const mItemArg of menuItemArgs) {
       this.items.push(new MenuItem(...mItemArg))

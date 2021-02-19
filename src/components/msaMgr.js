@@ -4,9 +4,11 @@ class MsaMgr {
     this.filtered = []
     this.adapter = new MsasAdapter
     // this.initBindingsAndEventListeners()
+    MsaMgr.all.push(this)
     this.getAll()
   }
 
+  static all = []
   static listArea = document.getElementById('list-container')
   static noMsasMsg = "<div id='list-msg'><h1>No Matches</h1><h2>None of the 100 most populated metropolitan areas in the USA meet the criteria you selected.</h2></div>"
   static chosen = document.getElementById('chosen-msas')
@@ -40,7 +42,7 @@ class MsaMgr {
   emptyListArea() {
     this.resetListArea()
     sessionStorage.newFilter = 'false'
-    Msas.listArea.innerHTML = Msas.noMsasMsg
+    MsaMgr.listArea.innerHTML = MsaMgr.noMsasMsg
     this.resetMap()
   }
 
@@ -51,13 +53,13 @@ class MsaMgr {
     }
     for (const msa of this.filtered) {
       const li = msa.createLi()
-      Msas.listArea.appendChild(li)
+      MsaMgr.listArea.appendChild(li)
     }
     this.addMsasToMap()
   }
 
   resetListArea() {
-    const list = Msas.listArea
+    const list = MsaMgr.listArea
     while (list.hasChildNodes()) {  
       list.removeChild(list.firstChild)
     }
@@ -71,8 +73,8 @@ class MsaMgr {
   }
 
   resetMap() {
-    while (Msas.chosen.hasChildNodes()) {
-      Msas.notChosen.appendChild(Msas.chosen.firstChild)
+    while (MsaMgr.chosen.hasChildNodes()) {
+      MsaMgr.notChosen.appendChild(MsaMgr.chosen.firstChild)
     }
   }
 }
