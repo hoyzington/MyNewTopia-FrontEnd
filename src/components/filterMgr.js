@@ -1,10 +1,9 @@
-class Filters {
+class FilterMgr {
   constructor() {
-    // this.all = []
     this.adapter = new FiltersAdapter
-    this.currentFilter = new Filter
+    this.newFilter = new Filter
     this.initBindingsAndEventListeners()
-    Filters.all.push(this)
+    FilterMgr.all.push(this)
   }
 
   static all = []
@@ -14,7 +13,7 @@ class Filters {
   }
 
   finishNewFilter() {
-    return this.currentFilter.prepFilterItems()
+    return this.newFilter.prepFilterItems()
   }
 
   createBtn(purpose) {
@@ -24,7 +23,7 @@ class Filters {
     btn.classList.add('list-btn', 'blue')
     btn.innerHTML = purpose.slice(0, 1).toUpperCase() + purpose.slice(1)
     li.appendChild(btn)
-    Msas.listArea.prepend(li)
+    MsaMgr.listArea.prepend(li)
     btn.addEventListener('click', (e) => this.processClick(e, purpose))
   }
 
@@ -48,7 +47,7 @@ class Filters {
     e.preventDefault()
     const name = document.getElementById('name').value
     if (name) {
-      const filter = this.currentFilter
+      const filter = this.newFilter
       const user = User.all[0]
       filter.name = name
       filter.items = JSON.stringify(filter.items)

@@ -3,6 +3,7 @@ class Filter {
     this.id = id
     this.name = name
     this.items = items
+    this.mgr = FilterMgr.all[0]
     this.createFilterBase()
   }
 
@@ -11,7 +12,7 @@ class Filter {
   createFilterBase() {
     if (this.items.length == 0) {
       for (const attr of Filter.msaAttrs) {
-        this.items.push(new FilterItem(attr))
+        this.items.push(new FilterItem(attr, this))
       }
     }
   }

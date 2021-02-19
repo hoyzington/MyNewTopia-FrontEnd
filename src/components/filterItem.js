@@ -1,8 +1,9 @@
 class FilterItem {
-  constructor(attr) {
+  constructor(attr, filter) {
     this.msaAttr = attr
     this.element = document.getElementById(attr)
     this.vals = {}
+    this.filter = filter
     this.initBindingsAndEventListeners()
   }
 

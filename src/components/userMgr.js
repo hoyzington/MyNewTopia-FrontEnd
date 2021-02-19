@@ -1,4 +1,4 @@
-class Users {
+class UserMgr {
   constructor(e) {
     this.event = e
     this.all = []

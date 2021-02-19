@@ -1,8 +1,8 @@
 class App {
   constructor() {
-    this.menu = new Menu
-    this.msas = new Msas
-    this.filters = new Filters
+    this.menu = new MenuMgr
+    this.msas = new MsaMgr
+    this.filters = new FilterMgr
     this.initBindingsAndEventListeners()
   }
 

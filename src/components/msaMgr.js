@@ -1,4 +1,4 @@
-class Msas {
+class MsaMgr {
   constructor() {
     this.all = []
     this.filtered = []

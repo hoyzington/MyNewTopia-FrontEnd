@@ -1,8 +1,9 @@
 class MenuItem {
-  constructor(name, htmlContent) {
+  constructor(name, htmlContent, mgr) {
     this.name = name
     this.element = document.getElementById(name)
     this.htmlContent = htmlContent
+    this.mgr = mgr
     this.stat = false
     MenuItem.all.push(this)
     this.initBindingsAndEventListeners()
@@ -11,6 +12,7 @@ class MenuItem {
   static all = []
 
   initBindingsAndEventListeners() {
+    this.contentArea = this.mgr.contentArea
     this.element.addEventListener('click', this.processClick.bind(this))
   }
 
@@ -42,19 +44,19 @@ class MenuItem {
 
   showOrHide() {
     if (this.stat) {
-      Menu.contentArea.className = 'menu-active'
+      this.contentArea.className = 'menu-active'
     } else {
-      Menu.contentArea.className = 'menu-inactive'
+      this.contentArea.className = 'menu-inactive'
     }
   }
 
   addHtmlContent() {
-    Menu.contentArea.innerHTML = this.htmlContent
+    this.contentArea.innerHTML = this.htmlContent
     if (this.name == 'account') {
       const logOrSignIn = document.getElementById('submit-row')
       logOrSignIn.addEventListener('click', (e) => {
         e.preventDefault()
-        new Users(e)
+        new UserMgr(e)
       })
     } else if (this.name == 'myAccount') {
       User.all[0].myAcctContent()
@@ -75,8 +77,8 @@ class MenuItem {
   buildSaveForm() {
     this.stat = true
     this.element.classList.add('menu-active')
-    Menu.contentArea.innerHTML = HtmlItems.saveForm
-    Menu.contentArea.className = 'menu-active'
+    this.contentArea.innerHTML = HtmlItems.saveForm
+    this.contentArea.className = 'menu-active'
   }
 
 }

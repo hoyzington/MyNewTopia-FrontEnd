@@ -3,6 +3,7 @@ class User {
     this.id = id
     this.username = username
     this.filters = []
+    this.mgr = UserMgr.all[0]
     this.addFilters(filterObjs)
     User.all.push(this)
     sessionStorage.login = 'true'
@@ -25,7 +26,7 @@ class User {
   beginUX() {
     MenuItem.all[1].logInEffect()
     if (sessionStorage.newFilter == 'true') {
-      Filters.all[0].createBtn('save')
+      FilterMgr.all[0].createBtn('save')
     } else {
       document.getElementById('list-msg').remove()
     }

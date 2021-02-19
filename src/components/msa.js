@@ -13,6 +13,7 @@ class Msa {
     this.precip = json.precip
     this.snow = json.snow
     this.aqi = json.aqi
+    this.mgr = MsaMgr.all[0]
     this.initBindingsAndEventListeners()
   }
 
@@ -49,13 +50,13 @@ class Msa {
       Msa.highlighted.appendChild(this.mapLoc)
     })
     msaBtn.addEventListener('mouseout', () => {
-      Msas.chosen.appendChild(this.mapLoc)
+      this.mgr.chosen.appendChild(this.mapLoc)
     })
   }
 
   addToMap() {
     if (this.mapLoc) {
-      Msas.chosen.appendChild(this.mapLoc)
+      this.mgr.chosen.appendChild(this.mapLoc)
     } else {
       console.log(`Incorrect MSA code ${this.code} for ${this.name}`)
     }
