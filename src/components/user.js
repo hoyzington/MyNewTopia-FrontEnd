@@ -40,7 +40,7 @@ class User {
         <p>You can access your saved lists and maps from here after you save them.</p>`
     } else {
       const title = document.createElement('h3')
-      title.innerText = `${this.username}'s Lists`
+      title.innerText = `${this.username}'s Lists (${this.filters.length})`
       listsArea.appendChild(title)
       for (const filter of filters) {
         const listBtn = filter.buildMenuLink()
