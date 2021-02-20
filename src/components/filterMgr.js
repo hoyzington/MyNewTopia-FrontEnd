@@ -1,7 +1,7 @@
 class FilterMgr {
   constructor() {
     this.adapter = new FiltersAdapter
-    this.newFilter = new Filter
+    this.currentFilter = new Filter
     this.initBindingsAndEventListeners()
     FilterMgr.all.push(this)
   }
@@ -9,58 +9,24 @@ class FilterMgr {
   static all = []
 
   initBindingsAndEventListeners() {
-
-  }
-
-  finishNewFilter() {
-    return this.newFilter.prepFilterItems()
-  }
-
-  createBtn(purpose) {
-    const li = document.createElement('li')
-    const btn = document.createElement('button')
-    btn.id = purpose
-    btn.classList.add('list-btn', 'blue')
-    btn.innerHTML = purpose.slice(0, 1).toUpperCase() + purpose.slice(1)
-    li.appendChild(btn)
-    MsaMgr.listArea.prepend(li)
-    btn.addEventListener('click', (e) => this.processClick(e, purpose))
-  }
-
-  processClick(e, purpose) {
-    e.preventDefault()
-    if (purpose == 'save') {
-      this.getFilterName()
-    } else {
-      console.log('deleting')
+    this.findBtns = document.getElementsByClassName('find')
+    for (const btn of this.findBtns) {
+      btn.addEventListener('click', () => this.currentFilter.processFind())
     }
   }
 
-  getFilterName() {
-    const myAccount = MenuItem.all[1]
-    myAccount.buildSaveForm()
-    const saveBtn = document.getElementById('save-with-name')
-    saveBtn.addEventListener('click', (e) => this.saveFilter(e, myAccount)) 
+  saveFilter(name) {
+    const filter = this.currentFilter
+    filter.name = name
+    filter.items = JSON.stringify(filter.items)
+    filter.vals = JSON.stringify(filter.changedVals)
+    const user = User.all[0]
+    const urlSuffix = `users/${user.id}/filters`
+    this.adapter.create(filter, urlSuffix)
+      .then((APIFilter) => {
+        filter = user.addFilter(APIFilter)
+        filter.createBtn('delete')
+        MenuItem.all[1].showFiltersArea()
+      })
   }
-
-  saveFilter(e, myAccount) {
-    e.preventDefault()
-    const name = document.getElementById('name').value
-    if (name) {
-      const filter = this.newFilter
-      const user = User.all[0]
-      filter.name = name
-      filter.items = JSON.stringify(filter.items)
-      const urlSuffix = `users/${user.id}/filters`
-      this.adapter.create(filter, urlSuffix)
-        .then((APIFilter) => {
-          filter.id = APIFilter.id
-          user.filters.push(filter)
-          myAccount.showFiltersArea()
-        })
-    } else {
-      document.querySelector('#menu-account h3').className = 'alert'
-    }
-  }
-
 }

@@ -26,22 +26,21 @@ class MsaMgr {
       })
   }
 
-  useFilter(filter) {
+  use(filter) {
     this.filtered = this.all
     for (const fItem of filter.items) {
       this.filtered = this.filtered.filter((msa) => msa.msaUseFilter(fItem))
       if (this.filtered.length == 0) {
-        return this.emptyListArea()
+        this.emptyListArea()
+        return false
       }
     }
-    sessionStorage.newFilter = 'true'
     this.renderMsaList(filter)
-    return 'true'
+    return true
   }
 
   emptyListArea() {
     this.resetListArea()
-    sessionStorage.newFilter = 'false'
     MsaMgr.listArea.innerHTML = MsaMgr.noMsasMsg
     this.resetMap()
   }

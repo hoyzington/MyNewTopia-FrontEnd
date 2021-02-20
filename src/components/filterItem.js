@@ -1,9 +1,10 @@
 class FilterItem {
-  constructor(attr, filter) {
+  constructor(attr, filterId) {
     this.msaAttr = attr
     this.element = document.getElementById(attr)
     this.vals = {}
-    this.filter = filter
+    this.valCount = this.getValCount()
+    this.filterId = filterId
     this.initBindingsAndEventListeners()
   }
 
@@ -11,6 +12,14 @@ class FilterItem {
     this.element.addEventListener('click', (e) => {
       this.checkboxToggle(e)
     })
+  }
+
+  getValCount() {
+    if (this.msaAttr == 'unemp') {
+      return 3
+    } else {
+      return 4
+    }
   }
 
   checkboxToggle(e) {

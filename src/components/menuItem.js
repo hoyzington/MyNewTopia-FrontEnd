@@ -3,7 +3,6 @@ class MenuItem {
     this.name = name
     this.element = document.getElementById(name)
     this.htmlContent = htmlContent
-    this.mgr = MenuMgr.all[0]
     this.stat = false
     MenuItem.all.push(this)
     this.initBindingsAndEventListeners()
@@ -12,11 +11,11 @@ class MenuItem {
   static all = []
 
   initBindingsAndEventListeners() {
-    this.contentArea = this.mgr.contentArea
-    this.element.addEventListener('click', this.processClick.bind(this))
+    this.contentArea = MenuMgr.all[0].contentArea
+    this.element.addEventListener('click', this.processMenuItemClick.bind(this))
   }
 
-  processClick() {
+  processMenuItemClick() {
     const partner = MenuItem.all.find((item) => {
       return item.name != this.name
     })
@@ -79,6 +78,19 @@ class MenuItem {
     this.element.classList.add('menu-active')
     this.contentArea.innerHTML = HtmlItems.saveForm
     this.contentArea.className = 'menu-active'
+    const name = document.getElementById('name')
+    name.focus()
+    const saveBtn = document.getElementById('save-with-name')
+    saveBtn.addEventListener('click', (e) => this.processFilterSaveClick(e, name)) 
+  }
+
+  processFilterSaveClick(e, name) {
+    e.preventDefault()
+    if (name.value) {
+      FilterMgr.all[0].saveFilter(name.value)
+    } else {
+      document.querySelector('#menu-account h3').className = 'alert'
+    }
   }
 
 }

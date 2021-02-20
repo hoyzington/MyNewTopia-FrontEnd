@@ -3,10 +3,8 @@ class User {
     this.id = id
     this.username = username
     this.filters = []
-    this.mgr = UserMgr.all[0]
     this.addFilters(filterObjs)
     User.all.push(this)
-    sessionStorage.login = 'true'
     this.initBindingsAndEventListeners()
     this.beginUX()
   }
@@ -18,18 +16,19 @@ class User {
   }
 
   addFilters(filterObjs) {
-    for (const obj of filterObjs) {
-      this.filters.push(new Filter(obj.id, obj.name, eval(obj.items)))
-    }
+    for (const obj of filterObjs) { this.addFilter(obj) }
+  }
+
+  addFilter(obj) {
+    filter = new Filter(obj.id, obj.name, eval(obj.items), eval(obj.vals))
+    this.filters.push(filter)
+    return filter
   }
 
   beginUX() {
+    sessionStorage.login = 'true'
     MenuItem.all[1].logInEffect()
-    if (sessionStorage.newFilter == 'true') {
-      FilterMgr.all[0].createBtn('save')
-    } else {
-      document.getElementById('list-msg').remove()
-    }
+    FilterMgr.all[0].currentFilter.logInEffect()
   }
 
   myAcctContent() {
