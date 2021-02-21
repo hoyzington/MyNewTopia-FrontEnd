@@ -20,7 +20,7 @@ class User {
   }
 
   addFilter(obj) {
-    filter = new Filter(obj.id, obj.name, eval(obj.items), eval(obj.vals))
+    const filter = new Filter(obj.id, obj.name, eval(obj.items), eval(obj.vals))
     this.filters.push(filter)
     return filter
   }
@@ -35,9 +35,7 @@ class User {
     const filters = this.filters
     const listsArea = document.getElementById('menu-lists')
     if (filters.length == 0) {
-      listsArea.innerHTML =
-        `<h3>Welcome ${this.username}!</h3>
-        <p>You can access your saved lists and maps from here after you save them.</p>`
+      listsArea.innerHTML = HtmlItems.menuWelcome(this.username)
     } else {
       const title = document.createElement('h3')
       title.innerText = `${this.username}'s Lists (${this.filters.length})`

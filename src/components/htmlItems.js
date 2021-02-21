@@ -43,7 +43,13 @@ class HtmlItems {
       </div>`
   }
 
-  static get saveForm() {
+  static menuWelcome(username) {
+    return `
+      <h3>Welcome ${username}!</h3>
+      <p>You can access your saved lists and maps from here after you save them.</p>`
+  }
+
+  static get menuSaveForm() {
     return `
       <div id="menu-account">
         <h3>Provide a name for this map and list</h3>
@@ -60,6 +66,14 @@ class HtmlItems {
             <button type="button" id="save-with-name" class="menu-submit-btn green">Save</button>
           </div>
         </form>
+      </div>`
+  }
+
+  static get listNoMsas() {
+    return `
+      <div id="no-msas" class="list-msg">
+        <h1>No Matches</h1>
+        <h2>None of the 100 most populated metropolitan areas in the USA meet the criteria you selected.</h2>
       </div>`
   }
 }

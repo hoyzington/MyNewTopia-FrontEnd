@@ -9,8 +9,7 @@ class MsaMgr {
   }
 
   static all = []
-  static listArea = document.getElementById('list-container')
-  static noMsasMsg = "<div id='list-msg'><h1>No Matches</h1><h2>None of the 100 most populated metropolitan areas in the USA meet the criteria you selected.</h2></div>"
+  static listArea = document.getElementById('list-area')
   static chosen = document.getElementById('chosen-msas')
   static notChosen = document.getElementById('not-chosen-msas')
 
@@ -35,21 +34,18 @@ class MsaMgr {
         return false
       }
     }
-    this.renderMsaList(filter)
+    this.renderMsaList()
     return true
   }
 
   emptyListArea() {
     this.resetListArea()
-    MsaMgr.listArea.innerHTML = MsaMgr.noMsasMsg
+    MsaMgr.listArea.innerHTML = HtmlItems.listNoMsas
     this.resetMap()
   }
 
-  renderMsaList(filter) {
+  renderMsaList() {
     this.resetListArea()
-    if (sessionStorage.login == 'true') {
-      // Filters.all[0].createBtn(filter)
-    }
     for (const msa of this.filtered) {
       const li = msa.createLi()
       MsaMgr.listArea.appendChild(li)

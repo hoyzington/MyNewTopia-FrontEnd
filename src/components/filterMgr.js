@@ -16,7 +16,7 @@ class FilterMgr {
   }
 
   saveFilter(name) {
-    const filter = this.currentFilter
+    let filter = this.currentFilter
     filter.name = name
     filter.items = JSON.stringify(filter.items)
     filter.vals = JSON.stringify(filter.changedVals)

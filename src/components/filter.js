@@ -11,13 +11,14 @@ class Filter {
   }
 
   static msaAttrs = ['heat', 'cold', 'precip', 'snow', 'wage', 'unemp', 'aqi']
+  static defaultVals = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
   createFilterBase() {
     if (this.items.length == 0) {
       for (const attr of Filter.msaAttrs) {
         this.items.push(new FilterItem(attr, this.id))
       }
-      this.vals = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      this.vals = Filter.defaultVals
     } else {
       this.made = true
       this.saved = true
@@ -42,7 +43,8 @@ class Filter {
 
   changed() {
     this.changedVals = this.makeState()
-    if (this.statesDiff(this.vals, this.changedVals)) { return true }
+    if (this.valsDiff(this.vals, this.changedVals)) { 
+      return true }
     this.changedVals = null
     return false
   }
@@ -51,7 +53,7 @@ class Filter {
     const state = []
     for (const item of this.items) {
       for (let i = 0; i < item.valCount; i++) {
-        if (item.vals[i]) {
+        if (item.vals[(i + 1)]) {
           state.push(1)
         } else {
           state.push(0)
@@ -61,7 +63,7 @@ class Filter {
     return state
   }
 
-  statesDiff(array1, array2) {
+  valsDiff(array1, array2) {
     for (let i = 0; i < array1.length; i++) {
       if (array2[i] != array1[i]) {
         return true
@@ -77,7 +79,11 @@ class Filter {
     btn.classList.add('list-btn', 'blue')
     btn.innerHTML = purpose.slice(0, 1).toUpperCase() + purpose.slice(1)
     li.appendChild(btn)
-    MsaMgr.listArea.prepend(li)
+    const btnArea = document.getElementById('filter-btn')
+    if (btnArea.hasChildNodes()) {
+      btnArea.removeChild(btnArea.firstChild)
+    }
+    btnArea.appendChild(li)
     btn.addEventListener('click', (e) => this.processClick(e, purpose))
   }
 
@@ -94,14 +100,14 @@ class Filter {
     if (this.made && this.unique()) {
       this.createBtn('save')
     } else {
-      const element = document.getElementById('intro-msg')
+      const element = document.getElementById('intro')
       if (element) { element.remove() }
     }
   }
 
   unique() {
     for (const filter of User.all[0].filters) {
-      if (!this.statesDiff(filter.vals, this.vals)) { return false }
+      if (!this.valsDiff(filter.vals, this.changedVals)) { return false }
     }
     return true
   }

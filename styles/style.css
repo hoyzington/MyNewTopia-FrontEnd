@@ -324,7 +324,7 @@ footer {
     margin-top: 0%;
   }
 
-  #list-msg {
+  .list-msg {
     padding: 0% 8%;
     color: rgb(1, 51, 143);
     font-weight: bolder;

@@ -76,7 +76,7 @@ class MenuItem {
   buildSaveForm() {
     this.stat = true
     this.element.classList.add('menu-active')
-    this.contentArea.innerHTML = HtmlItems.saveForm
+    this.contentArea.innerHTML = HtmlItems.menuSaveForm
     this.contentArea.className = 'menu-active'
     const name = document.getElementById('name')
     name.focus()
