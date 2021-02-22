@@ -60,6 +60,8 @@ class MenuItem {
       })
     } else if (this.name == 'myAccount') {
       User.all[0].myAcctContent()
+    } else {
+      this.htmlContent = HtmlItems.menuAbout
     }
   }
 
@@ -95,4 +97,8 @@ class MenuItem {
     }
   }
 
+  show(msa) {
+    this.htmlContent = HtmlItems.msaDetails(msa)
+    this.processMenuItemClick()
+  }
 }

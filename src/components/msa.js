@@ -41,6 +41,7 @@ class Msa {
     btn.innerHTML = `<b>${this.name}</b> (${this.states})`
     li.appendChild(btn)
     this.btnMouseover(btn)
+    btn.addEventListener('click', () => MenuItem.all[0].show(this))
     return li
   }
 
@@ -73,5 +74,23 @@ class Msa {
       msaBtn.classList.remove('highlighted')
     }, )
     // console.log(mapLoc.childNodes[-2])
+  }
+
+  timeZone() {
+    const zone = this.zone
+    switch (zone) {
+      case 'EST':
+        return 'Eastern Standard Time'
+      case 'CST':
+        return 'Central Standard Time'
+      case 'MST':
+        return 'Mountain Standard Time'
+      case 'PST':
+        return 'Pacific Standard Time'
+      case 'AST':
+        return 'Alaska Standard Time'
+      case 'HAT':
+        return 'Hawaii-Aleutian Time'
+    }
   }
 }

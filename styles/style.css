@@ -55,6 +55,10 @@ button {
     text-align: left;
   }
 
+  .msa-btn b {
+    color: rgb(235, 170, 160);
+  }
+
   .green {
     background-color: rgb(0, 190, 150);
     color: rgb(215, 255, 245);
@@ -262,6 +266,17 @@ header {
           min-height: fit-content;
           max-height: 40vh;
           overflow-y: auto;
+        }
+
+        #msa-details h3 {
+          margin-top: 0vh;
+          color: rgb(235, 170, 160);
+        }
+
+        #msa-details b, h6 {
+          margin-bottom: 0vh;
+          color: rgb(130, 205, 255);
+          /* color: rgb(235, 170, 160); */
         }
 
 footer {

@@ -76,4 +76,22 @@ class HtmlItems {
         <h2>None of the 100 most populated metropolitan areas in the USA meet the criteria you selected.</h2>
       </div>`
   }
+
+  static msaDetails(msa) {
+    return `
+      <div id="msa-details">
+        <h3>${msa.name}</h3>
+        <h4>${msa.states}</h4>
+        <p><b>Time Zone: </b>${msa.timeZone()}</p>
+        <p><b>Population: </b>${msa.pop.toLocaleString('en', { useGrouping: true })}</p>
+        <p><b>Median Hourly Wage: </b>$${msa.wage}</p>
+        <p><b>Unemployment Rate: </b>${msa.unemp}%</p>
+        <p><b>Highest Summer Heat Index: </b>${msa.heat}</p>
+        <p><b>Coldest Winter Temperature: </b>${msa.cold}&deg; F</p>
+        <p><b>Annual Precipitation: </b>${msa.precip} inches</p>
+        <p><b>Annual Snowfall: </b>${msa.snow} inches</p>
+        <p><b>Air Quality Index: </b>${msa.aqi}% Good Days</p>
+        <h6>(Climate values represent what's normal for this metro area. Other values are the annual amounts from the latest available year as of Jan 2021.) </h6>
+      </div>`
+  }
 }
