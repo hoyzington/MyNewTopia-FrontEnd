@@ -53,6 +53,7 @@ class MenuItem {
     this.contentArea.innerHTML = this.htmlContent
     if (this.name == 'account') {
       const logOrSignIn = document.getElementById('submit-row')
+      document.getElementById('username').focus()
       logOrSignIn.addEventListener('click', (e) => {
         e.preventDefault()
         new UserMgr(e)
@@ -90,6 +91,7 @@ class MenuItem {
       FilterMgr.all[0].saveFilter(name.value)
     } else {
       document.querySelector('#menu-account h3').className = 'alert'
+      document.getElementById('name').focus()
     }
   }
 

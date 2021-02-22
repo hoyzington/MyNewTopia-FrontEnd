@@ -14,7 +14,7 @@ class HtmlItems {
               <label for="username">Username</label>
             </div>
             <div class="col-48">
-              <input type="text" id="username" name="username" autofocus="true">
+              <input type="text" id="username" name="username">
             </div>
           </div>
           <div class="menu-inputs-row">
@@ -59,7 +59,7 @@ class HtmlItems {
               <label for="name">Name</label>
             </div>
             <div class="col-60">
-              <input type="text" id="name" name="name" autofocus="true">
+              <input type="text" id="name" name="name">
             </div>
           </div>
           <div id="submit-row">

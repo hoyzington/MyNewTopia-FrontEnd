@@ -19,7 +19,7 @@ class UserMgr {
     this.adapter.create(userData, urlSuffix)
       .then((user) => {
         if (user.message) {
-          Menu.handleAccountError(user.message)
+          MenuMgr.all[0].handleAccountError(user.message)
         } else {
           new User(user.id, user.username, user.filters)
         }

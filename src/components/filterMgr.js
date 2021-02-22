@@ -24,9 +24,30 @@ class FilterMgr {
     const urlSuffix = `users/${user.id}/filters`
     this.adapter.create(filter, urlSuffix)
       .then((APIFilter) => {
-        filter = user.addFilter(APIFilter)
+        this.currentFilter = user.addFilter(APIFilter)
+        // console.log(user.filters)
         filter.createBtn('delete')
         MenuItem.all[1].showFiltersArea()
+      })
+  }
+
+  deleteFilter() {
+    const user = User.all[0]
+    const filter = this.currentFilter
+    const urlSuffix = `filters/${filter.id}`
+    this.adapter.delete(urlSuffix)
+      .then((deleted) => {
+        // console.log(deleted)
+        // console.log(`displayed filter: ${filter.id}`)
+        // console.log(user.filters)
+        user.filters = user.filters.filter((f) => {
+          return f.id != deleted.id
+        })
+        // console.log(user.filters)
+        filter.id = null
+        filter.name = null
+        filter.saved = false
+        filter.createBtn('save')
       })
   }
 }

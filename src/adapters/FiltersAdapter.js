@@ -3,7 +3,7 @@ class FiltersAdapter {
     this.baseUrl = "http://localhost:3000/api/v1/"
   }
 
-  configObj(data) {
+  saveObj(data) {
     return {
       method: 'POST',
       headers: {
@@ -15,7 +15,17 @@ class FiltersAdapter {
   }
 
   create(data, urlSuffix) {
-    return fetch(this.baseUrl + urlSuffix, this.configObj(data))
+    return fetch(this.baseUrl + urlSuffix, this.saveObj(data))
+      .then(res => res.json())
+      .catch(err => alert(err.message))
+  }
+
+  deleteObj() {
+    return { method: 'DELETE' }
+  }
+
+  delete(urlSuffix) {
+    return fetch(this.baseUrl + urlSuffix, this.deleteObj())
       .then(res => res.json())
       .catch(err => alert(err.message))
   }

@@ -92,7 +92,7 @@ class Filter {
     if (purpose == 'save') {
       MenuItem.all[1].buildSaveForm()
     } else {
-      console.log('deleting')
+      FilterMgr.all[0].deleteFilter()
     }
   }
 
