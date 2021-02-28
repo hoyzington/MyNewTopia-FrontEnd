@@ -13,6 +13,17 @@ class FilterMgr {
     for (const btn of this.findBtns) {
       btn.addEventListener('click', () => this.currentFilter.processFind())
     }
+    const clearBtns = document.getElementsByClassName('clear')
+    for (const btn of clearBtns) {
+      btn.addEventListener('click', () => this.processClear())
+    }
+  }
+
+  processClear() {
+    MsaMgr.all[0].resetMap()
+    MsaMgr.all[0].resetListArea()
+    document.getElementById('filter-form').reset()
+    this.currentFilter = new Filter
   }
 
   saveFilter(name) {

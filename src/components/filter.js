@@ -1,5 +1,5 @@
 class Filter {
-  constructor(id=null, name=null, items=[], vals = null) {
+  constructor(id=null, name=null, items=[], vals=null) {
     this.id = id
     this.name = name
     this.items = items
@@ -79,7 +79,7 @@ class Filter {
     btn.classList.add('list-btn', 'blue')
     btn.innerHTML = purpose.slice(0, 1).toUpperCase() + purpose.slice(1)
     li.appendChild(btn)
-    const btnArea = document.getElementById('filter-btn')
+    const btnArea = document.getElementById('save-btn-area')
     if (btnArea.hasChildNodes()) {
       btnArea.removeChild(btnArea.firstChild)
     }
@@ -121,7 +121,17 @@ class Filter {
     li.appendChild(btn)
     btn.addEventListener('click', (e) => {
       e.preventDefault()
-      console.log('show list & map')
+      document.getElementById('filter-form').reset()
+      this.items.forEach((item) => {
+        const formItem = document.getElementById(item.msaAttr)
+        for (const key in item.vals) {
+          formItem.querySelector(`input[id='${key}']`).checked = true
+        }
+      })
+      FilterMgr.all[0].currentFilter = this
+      MenuMgr.all[0].hideMenuContent()
+      MsaMgr.all[0].use(this)
+      this.createBtn('delete')
     })
     return li
   }

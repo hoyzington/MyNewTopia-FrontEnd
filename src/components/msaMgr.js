@@ -58,6 +58,10 @@ class MsaMgr {
     while (list.hasChildNodes()) {  
       list.removeChild(list.firstChild)
     }
+    const btnArea = document.getElementById('save-btn-area')
+    while (btnArea.hasChildNodes()) {  
+      btnArea.removeChild(btnArea.firstChild)
+    }
   }
 
   addMsasToMap() {
