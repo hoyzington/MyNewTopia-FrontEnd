@@ -12,19 +12,20 @@
     <script src="src/components/htmlItems.js" defer></script>
 
     <script src="src/components/menuItem.js" defer></script>
-    <script src="src/components/menu.js" defer></script>
+    <script src="src/components/menuMgr.js" defer></script>
 
     <script src="src/components/msa.js" defer></script>
-    <script src="src/components/msas.js" defer></script>
+    <script src="src/components/msaMgr.js" defer></script>
     <script src="src/adapters/MsasAdapter.js" defer></script>
 
     <script src="src/components/filterItem.js" defer></script>
     <script src="src/components/filter.js" defer></script>
+    <script src="src/components/filterMgr.js" defer></script>
+    <script src="src/adapters/FiltersAdapter.js" defer></script>
 
     <script src="src/components/user.js" defer></script>
+    <script src="src/components/userMgr.js" defer></script>
     <script src="src/adapters/UsersAdapter.js" defer></script>
-
-    <script src="src/components/list.js" defer></script>
 
     <script src="src/index.js" defer></script>
 
@@ -52,9 +53,8 @@
       <main id="flex-sub-container">
         <section id="filter-container">
           <form id="filter-form">
-            <button class="find" type="button">Find</button>
-            <!-- <input type="submit" value="Edit">
-            <input type="submit" value="Save"> -->
+            <button type="button" class="find blue">Find</button>
+            <button type="button" class="clear blue">Clear</button>
             <br>
 
             <h3>CLIMATE</h3>
@@ -144,11 +144,11 @@
               <input type="checkbox" id="3" name="aqi3" value="51,75">
                 <label for="3"> 51% - 75% Good Days</label><br>
               <input type="checkbox" id="4" name="aqi4" value="0,50">
-                <label for="4"> 0% - 50% Good Days</label><br><br>         </div>
+                <label for="4"> 0% - 50% Good Days</label><br><br>
+            </div>
 
-            <button class="find" type="button">Find</button>
-            <!-- <input type="submit" id="edit" value="Edit">
-            <input type="submit" id="save" value="Save"> -->
+            <button type="button" class="find blue">Find</button>
+            <button type="button" class="clear blue">Clear</button>
             <br>
 
           </form>
@@ -9989,8 +9989,11 @@
           </g>
         </svg>
         <section id="list-container">
-          <div id="list-msg">
-            <h2>Log In / Sign Up to save the lists and maps you create!</h2>
+          <div id="save-btn-area"></div>
+          <div id="list-area">
+            <div id="intro" class="list-msg">
+              <h2>Log In / Sign Up to save the lists and maps you create!</h2>
+            </div>
           </div>
         </section>
       </main>

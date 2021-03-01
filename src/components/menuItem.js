@@ -11,16 +11,21 @@ class MenuItem {
   static all = []
 
   initBindingsAndEventListeners() {
-    this.element.addEventListener('click', this.processClick.bind(this))
+    this.contentArea = document.getElementById('menu-content')
+    this.element.addEventListener('click', this.processMenuItemClick.bind(this))
   }
 
-  processClick() {
+  processMenuItemClick() {
+    if (sessionStorage.msaAbout != 'null') {
+      this.stat = false
+    }
     const partner = MenuItem.all.find((item) => {
       return item.name != this.name
     })
     this.onOffSwitch(partner)
     this.highlight(partner)
     this.showOrHide()
+    this.addHtmlContent()
   }
 
   onOffSwitch(partner) {
@@ -41,76 +46,70 @@ class MenuItem {
 
   showOrHide() {
     if (this.stat) {
-      Menu.contentArea.className = 'menu-active'
+      this.contentArea.className = 'menu-active'
     } else {
-      Menu.contentArea.className = 'menu-inactive'
+      this.contentArea.className = 'menu-inactive'
     }
-    this.addHtmlContent()
   }
 
   addHtmlContent() {
-    Menu.contentArea.innerHTML = this.htmlContent
+    this.contentArea.innerHTML = this.htmlContent
     if (this.name == 'account') {
       const logOrSignIn = document.getElementById('submit-row')
+      document.getElementById('username').focus()
       logOrSignIn.addEventListener('click', (e) => {
         e.preventDefault()
-        this.processSubmit(e)
+        new UserMgr(e)
       })
     } else if (this.name == 'myAccount') {
-      this.myAcctContent()
-    }
-  }
-
-  processSubmit(e) {
-    let urlSuffix = 'signup'
-    if (e.target.value == 'Log In') {
-      urlSuffix = 'login'
-    }
-    const userData = this.packageFormData()
-    const adapter = new UsersAdapter
-    adapter.loginOrCreateUser(urlSuffix, userData)
-      .then((user) => {
-        if (user.message) {
-          this.handleError(user.message)
-        } else {
-          new User(user.id, user.username)
-        }
-      })
-  }
-
-  packageFormData() {
-    const username = document.getElementById('username').value
-    const password = document.getElementById('password').value
-    return { user: { username, password }}
-  }
-
-  handleError(message) {
-    const inputs = document.querySelectorAll("header input[type='text']")
-    for (const input of inputs) {
-      input.value = ''
-    }
-    const msg = document.createElement('div')
-    msg.className = 'alert'
-    msg.innerHTML = `<h3>${message}</h3>`
-    Menu.contentArea.prepend(msg)
-  }
-
-  myAcctContent() {
-    const user = User.all[0]
-    const listsArea = document.getElementById('menu-lists')
-    if (user.lists.length == 0) {
-      listsArea.innerHTML =
-        `<h3>Welcome ${user.username}!</h3>
-        <p>You can access your saved lists and maps from here after you save them.</p>`
+      User.all[0].myAcctContent()
     } else {
-      listsArea.appendChild(
-        `<h3>${user.username}'s Lists</h3>`
-      )
-      // const lists = user.lists
-      // for (const list of lists) {
-        
-      // }
+      this.htmlContent = HtmlItems.menuAbout
+    }
+    sessionStorage.msaAbout = 'null'
+  }
+
+  logInEffect() {
+    this.name = 'myAccount'
+    this.element.innerText = 'My Account'
+    this.showFiltersArea()
+  }
+
+  showFiltersArea() {
+    this.htmlContent = HtmlItems.menuMyAccount
+    this.addHtmlContent()
+  }
+
+  buildSaveForm() {
+    this.stat = true
+    this.element.classList.add('menu-active')
+    this.contentArea.innerHTML = HtmlItems.menuSaveForm
+    this.contentArea.className = 'menu-active'
+    const name = document.getElementById('name')
+    name.focus()
+    const saveBtn = document.getElementById('save-with-name')
+    saveBtn.addEventListener('click', (e) => this.processFilterSaveClick(e, name)) 
+  }
+
+  processFilterSaveClick(e, name) {
+    e.preventDefault()
+    if (name.value) {
+      FilterMgr.all[0].saveFilter(name.value)
+    } else {
+      document.querySelector('#menu-account h3').className = 'alert'
+      document.getElementById('name').focus()
     }
   }
 
+  show(msa) {
+    if (sessionStorage.msaAbout == msa.code) {
+      MenuMgr.all[0].hideMenuContent()
+      sessionStorage.msaAbout = 'null'
+    } else {
+      this.stat = false
+      this.htmlContent = HtmlItems.msaDetails(msa)
+      this.processMenuItemClick()
+      sessionStorage.msaAbout = msa.code
+    }
+  }
 }

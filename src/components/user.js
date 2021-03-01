@@ -1,9 +1,9 @@
 class User {
-  constructor(id, username, lists) {
+  constructor(id, username, filterObjs) {
     this.id = id
     this.username = username
-    this.lists = []
-    this.createLists(lists)
+    this.filters = []
+    this.addFilters(filterObjs)
     User.all.push(this)
     this.initBindingsAndEventListeners()
     this.beginUX()
@@ -15,26 +15,46 @@ class User {
     this.acctArea = document.getElementById('menu-account')
   }
 
-  createLists(lists) {
-    if (lists) {
-      for (const list of lists) {
-        this.lists.push(new List(list))
-      }
-    }
+  addFilters(filterObjs) {
+    for (const obj of filterObjs) { this.addFilter(obj) }
+  }
+
+  addFilter(obj) {
+    const filter = new Filter(obj.id, obj.name, eval(obj.items), eval(obj.vals))
+    this.filters.push(filter)
+    return filter
   }
 
   beginUX() {
-    document.getElementById('list-msg').remove()
-    document.getElementById('account').innerText = 'My Account'
-    let myAccount = MenuItem.all[1]
-    myAccount.name = 'myAccount'
-    myAccount.htmlContent = HtmlItems.menuMyAccount
-    myAccount.addHtmlContent()
-    this.logout()
+    sessionStorage.login = 'true'
+    MenuItem.all[1].logInEffect()
+    FilterMgr.all[0].currentFilter.logInEffect()
   }
 
-  logout(e) {
+  myAcctContent() {
+    const filters = this.filters
+    const listsArea = document.getElementById('menu-lists')
+    if (filters.length == 0) {
+      listsArea.innerHTML = HtmlItems.menuWelcome(this.username)
+    } else {
+      const title = document.createElement('h3')
+      title.innerText = `${this.username}'s Lists (${this.filters.length})`
+      listsArea.appendChild(title)
+      for (const filter of filters) {
+        const listBtn = filter.buildMenuLink()
+        listsArea.appendChild(listBtn)
+      }
+    }
+    this.logoutBtn()
+  }
+
+  logoutBtn() {
     const logout = document.getElementById('logout')
-    logout.addEventListener('click', () => window.location.reload())
+    logout.addEventListener('click', (e) => {
+      e.preventDefault()
+      localStorage.clear()
+      sessionStorage.clear()
+      window.location.reload()
+    })
   }
 }

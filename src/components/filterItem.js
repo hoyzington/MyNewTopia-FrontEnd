@@ -1,8 +1,10 @@
 class FilterItem {
-  constructor(attr) {
+  constructor(attr, filterId) {
     this.msaAttr = attr
     this.element = document.getElementById(attr)
     this.vals = {}
+    this.valCount = this.getValCount()
+    this.filterId = filterId
     this.initBindingsAndEventListeners()
   }
 
@@ -10,6 +12,14 @@ class FilterItem {
     this.element.addEventListener('click', (e) => {
       this.checkboxToggle(e)
     })
+  }
+
+  getValCount() {
+    if (this.msaAttr == 'unemp') {
+      return 3
+    } else {
+      return 4
+    }
   }
 
   checkboxToggle(e) {
@@ -20,7 +30,7 @@ class FilterItem {
     }
   }
 
-  isolateHiLoVals() {
+  createHiLoVals() {
     const valsHash = this.vals
     const valsHashKeys = Object.keys(valsHash)
     if (valsHashKeys.length > 0) {

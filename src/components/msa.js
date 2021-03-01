@@ -36,11 +36,12 @@ class Msa {
   createLi() {
     const li = document.createElement('li')
     const btn = document.createElement('button')
-    btn.className = 'list-item'
+    btn.classList.add('msa-btn', 'blue')
     btn.id = `msa-${this.code}`
     btn.innerHTML = `<b>${this.name}</b> (${this.states})`
     li.appendChild(btn)
     this.btnMouseover(btn)
+    btn.addEventListener('click', () => MenuItem.all[0].show(this))
     return li
   }
 
@@ -49,13 +50,13 @@ class Msa {
       Msa.highlighted.appendChild(this.mapLoc)
     })
     msaBtn.addEventListener('mouseout', () => {
-      Msas.chosen.appendChild(this.mapLoc)
+      MsaMgr.chosen.appendChild(this.mapLoc)
     })
   }
 
   addToMap() {
     if (this.mapLoc) {
-      Msas.chosen.appendChild(this.mapLoc)
+      MsaMgr.chosen.appendChild(this.mapLoc)
     } else {
       console.log(`Incorrect MSA code ${this.code} for ${this.name}`)
     }
@@ -65,13 +66,29 @@ class Msa {
   mapLocMouseover() {
     const id = `msa-${this.code}`
     const msaBtn = document.getElementById(id)
-    // const title = mapLoc.removeChild(mapLoc.childNodes[-1])
     this.mapLoc.addEventListener('mouseover', () => {
       msaBtn.classList.add('highlighted')
     }, )
     this.mapLoc.addEventListener('mouseout', () => {
       msaBtn.classList.remove('highlighted')
     }, )
-    // console.log(mapLoc.childNodes[-2])
+  }
+
+  timeZone() {
+    const zone = this.zone
+    switch (zone) {
+      case 'EST':
+        return 'Eastern Standard Time'
+      case 'CST':
+        return 'Central Standard Time'
+      case 'MST':
+        return 'Mountain Standard Time'
+      case 'PST':
+        return 'Pacific Standard Time'
+      case 'AST':
+        return 'Alaska Standard Time'
+      case 'HAT':
+        return 'Hawaii-Aleutian Time'
+    }
   }
 }

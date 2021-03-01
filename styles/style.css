@@ -11,22 +11,91 @@ body {
   background-color: #202226;
 }
 
+#flex-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+
+/* BUTTONS */
+
+button {
+  padding: 1.5% 4% 2.25%;
+  border-radius: 4px;
+  border-style: hidden;
+  font-family: inherit;
+  font-size: large;
+  font-weight: bold;
+  word-spacing: -3px;
+}
+
+  .menu-btn {
+    margin: 1vh;
+    font-weight: normal;
+  }
+
+  .menu-submit-btn {
+    margin: 3vh 3vh 0vh 3vh;
+    padding: 1.5% 3.5% 2%;
+  }
+
+  .list-btn {
+    margin: 1.5% 4% 12%;
+    padding: 1.75% 4% 2.5%;
+  }
+
+  .msa-btn {
+    width: 92%;
+    margin: 1.5% 4% 4%;
+    padding: 4% 6% 5%;
+    font-size: 80%;
+    font-weight: normal;
+    text-align: left;
+  }
+
+  .msa-btn b {
+    color: rgb(235, 170, 160);
+  }
+
+  .green {
+    background-color: rgb(0, 190, 150);
+    color: rgb(215, 255, 245);
+  }
+
+    .green:hover {
+      background-color: rgb(15, 205, 165);
+    }
+
+  .blue {
+    margin-right: 0.5vw;
+    background-color: rgb(0, 110, 225);
+    color: rgb(210, 230, 245);
+  }
+
+    .blue:hover, .highlighted {
+      background-color: rgb(25, 135, 250);
+    }
+
+  .dark-blue {
+    background-color: rgb(2, 44, 160);
+    color: rgb(210, 230, 245);
+  }
+
+    .dark-blue:hover {
+      background-color: rgb(2, 57, 207);
+    }
+
+
+/* MISC */
+
 li {
   list-style: none;
 }
 
-button {
-  padding: 1.75% 3.75%;
-  border-radius: 5px;
-  border-style: hidden;
-  background-color: rgb(0, 115, 225);
-  font-family: inherit;
-  font-size: large;
-  color: rgb(210, 230, 245);
-}
-
-button:hover, .highlighted {
-  background-color: rgb(32, 141, 250);
+.alert {
+  color: lightcoral;
 }
 
 .alert h3 {
@@ -36,20 +105,13 @@ button:hover, .highlighted {
   text-align: center;
 }
 
-#flex-container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 100vw;
-}
-
 
 /* HEADER/FOOTER */
 
 header, footer {
   position: fixed;
   left: 0vw;
-  background-color: rgb(0, 115, 225);
+  background-color: rgb(0, 110, 225);
   font-weight: bold;
   color: rgb(2, 228, 179);
 }
@@ -66,7 +128,7 @@ header {
     float: left;
     text-align: center;
     height: 6.5vh;
-    background-color: rgb(1, 51, 143);
+    background-color: rgb(2, 44, 160);
   }
 
   .side-title {
@@ -145,9 +207,10 @@ header {
       top: 6.5vh;
       left: inherit;
       width: inherit;
+      min-height: fit-content;
       max-height: fit-content;
       padding: 3vh 4vh 4vh;
-      background-color: rgb(3, 115, 219);
+      background-color: rgb(3, 110, 225);
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
       font-weight: normal;
@@ -176,29 +239,44 @@ header {
           clear: both;
         }
 
-          .col-25 {
+          .col-33 {
             float: left;
             width: 33%;
             margin: 2vh 0vh 0vh 3vh;
           }
 
-          .col-75 {
+          .col-48 {
             float: left;
             width: 48%;
             margin-top: 2vh;
           }
 
-        .menu-submit {
-          padding: 1% 3% 1.35%;
-          margin: 3vh 3vh 0vh 3vh;
-          border-radius: 5px;
-          border-style: hidden;
-          background-color: rgb(0, 207, 162);
-          font-family: inherit;
-          font-size: large;
-          font-weight: bold;
-          word-spacing: -3px;
-          color: rgb(215, 255, 245);
+          .col-20 {
+            float: left;
+            width: 20%;
+            margin: 2vh 0vh 0vh 6vh;
+          }
+
+          .col-60 {
+            float: left;
+            width: 60%;
+            margin-top: 2vh;
+          }
+
+        #menu-lists {
+          min-height: fit-content;
+          max-height: 40vh;
+          overflow-y: auto;
+        }
+
+        #msa-details h3 {
+          margin-top: 0vh;
+          color: rgb(235, 170, 160);
+        }
+
+        #msa-details b, h6 {
+          margin-bottom: 0vh;
+          color: rgb(130, 205, 255);
         }
 
 footer {
@@ -261,21 +339,12 @@ footer {
     margin-top: 0%;
   }
 
-  #list-msg {
+  .list-msg {
     padding: 0% 8%;
     color: rgb(1, 51, 143);
     font-weight: bolder;
     text-align: left;
     word-spacing: -3px;
-  }
-
-  .list-item {
-    width: 92%;
-    padding: 4% 7%;
-    margin: 1.5% 4% 4%;
-    font-family: inherit;
-    font-size: 80%;
-    text-align: left;
   }
 
 
@@ -292,17 +361,13 @@ svg {
 }
 
   #chosen-msas {
-    fill: rgb(0, 122, 112);
-    stroke: rgb(0, 122, 112);
+    fill: rgb(215, 120, 110);
+    stroke: rgb(215, 120, 110);
   }
 
-  /* #chosen-msas title {   -- NOT WORKING! --
-    background: none;
-  } */
-
   #chosen-msas g:hover, #highlighted-msa {
-    fill: rgb(115, 255, 210);
-    stroke: rgb(115, 255, 210);
+    fill: rgb(235, 170, 160);
+    stroke: rgb(235, 170, 160);
   }
 
   #not-chosen-msas {

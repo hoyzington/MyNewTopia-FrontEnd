@@ -1,22 +1,13 @@
 class App {
   constructor() {
-    this.menu = new Menu
-    this.msas = new Msas
-    this.filter = new Filter
+    this.menuMgr = new MenuMgr
+    this.msaMgr = new MsaMgr
+    this.filterMgr = new FilterMgr
     this.initBindingsAndEventListeners()
   }
 
-  static findBtns = document.getElementsByClassName('find')
-
   initBindingsAndEventListeners() {
-    for (const btn of App.findBtns) {
-      btn.addEventListener('click', () => this.filterMsas())
-    }
+    sessionStorage.setItem('login', 'false')
+    sessionStorage.setItem('msaAbout', 'null')
   }
-
-  filterMsas() {
-    this.filter.prepFilterItems()
-    this.msas.useFilter(this.filter)
-  }
-
 }
