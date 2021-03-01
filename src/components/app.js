@@ -8,5 +8,6 @@ class App {
 
   initBindingsAndEventListeners() {
     sessionStorage.setItem('login', 'false')
+    sessionStorage.setItem('msaAbout', 'null')
   }
 }

@@ -66,14 +66,12 @@ class Msa {
   mapLocMouseover() {
     const id = `msa-${this.code}`
     const msaBtn = document.getElementById(id)
-    // const title = mapLoc.removeChild(mapLoc.childNodes[-1])
     this.mapLoc.addEventListener('mouseover', () => {
       msaBtn.classList.add('highlighted')
     }, )
     this.mapLoc.addEventListener('mouseout', () => {
       msaBtn.classList.remove('highlighted')
     }, )
-    // console.log(mapLoc.childNodes[-2])
   }
 
   timeZone() {

@@ -277,7 +277,6 @@ header {
         #msa-details b, h6 {
           margin-bottom: 0vh;
           color: rgb(130, 205, 255);
-          /* color: rgb(235, 170, 160); */
         }
 
 footer {
@@ -362,19 +361,11 @@ svg {
 }
 
   #chosen-msas {
-    /* fill: rgb(0, 122, 112);
-    stroke: rgb(0, 122, 112); */
     fill: rgb(215, 120, 110);
     stroke: rgb(215, 120, 110);
   }
 
-  /* #chosen-msas title {   -- NOT WORKING! --
-    background: none;
-  } */
-
   #chosen-msas g:hover, #highlighted-msa {
-    /* fill: rgb(115, 255, 210);
-    stroke: rgb(115, 255, 210); */
     fill: rgb(235, 170, 160);
     stroke: rgb(235, 170, 160);
   }

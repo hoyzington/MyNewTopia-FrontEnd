@@ -24,8 +24,12 @@ class MenuMgr {
   }
 
   clickOff(e) {
-    const inElement = (this.contentArea.contains(e.target) || this.items[0].element.contains(e.target) || this.items[1].element.contains(e.target))
-    if (!inElement) { this.hideMenuContent() }
+    if (e.target.classList.contains('msa-btn') || e.target.parentNode.classList.contains('msa-btn')) {
+      return
+    } else {
+      const inElement = (this.contentArea.contains(e.target) || this.items[0].element.contains(e.target) || this.items[1].element.contains(e.target))
+      if (!inElement) { this.hideMenuContent() }
+    }
   }
 
   hideMenuContent() {
@@ -34,6 +38,7 @@ class MenuMgr {
       item.stat = false
     }
     this.contentArea.className = 'menu-inactive'
+    sessionStorage.msaAbout = 'null'
   }
 
   handleAccountError(message) {

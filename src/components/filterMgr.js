@@ -36,7 +36,6 @@ class FilterMgr {
     this.adapter.create(filter, urlSuffix)
       .then((APIFilter) => {
         this.currentFilter = user.addFilter(APIFilter)
-        // console.log(user.filters)
         filter.createBtn('delete')
         MenuItem.all[1].showFiltersArea()
       })
@@ -48,13 +47,9 @@ class FilterMgr {
     const urlSuffix = `filters/${filter.id}`
     this.adapter.delete(urlSuffix)
       .then((deleted) => {
-        // console.log(deleted)
-        // console.log(`displayed filter: ${filter.id}`)
-        // console.log(user.filters)
         user.filters = user.filters.filter((f) => {
           return f.id != deleted.id
         })
-        // console.log(user.filters)
         filter.id = null
         filter.name = null
         filter.saved = false

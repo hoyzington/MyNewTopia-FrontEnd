@@ -11,11 +11,14 @@ class MenuItem {
   static all = []
 
   initBindingsAndEventListeners() {
-    this.contentArea = MenuMgr.all[0].contentArea
+    this.contentArea = document.getElementById('menu-content')
     this.element.addEventListener('click', this.processMenuItemClick.bind(this))
   }
 
   processMenuItemClick() {
+    if (sessionStorage.msaAbout != 'null') {
+      this.stat = false
+    }
     const partner = MenuItem.all.find((item) => {
       return item.name != this.name
     })
@@ -63,6 +66,7 @@ class MenuItem {
     } else {
       this.htmlContent = HtmlItems.menuAbout
     }
+    sessionStorage.msaAbout = 'null'
   }
 
   logInEffect() {
@@ -98,7 +102,14 @@ class MenuItem {
   }
 
   show(msa) {
-    this.htmlContent = HtmlItems.msaDetails(msa)
-    this.processMenuItemClick()
+    if (sessionStorage.msaAbout == msa.code) {
+      MenuMgr.all[0].hideMenuContent()
+      sessionStorage.msaAbout = 'null'
+    } else {
+      this.stat = false
+      this.htmlContent = HtmlItems.msaDetails(msa)
+      this.processMenuItemClick()
+      sessionStorage.msaAbout = msa.code
+    }
   }
 }
