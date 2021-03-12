@@ -2,6 +2,8 @@ class FilterMgr {
   constructor() {
     this.adapter = new FiltersAdapter
     this.currentFilter = new Filter
+    this.currentFilter.createFilterItems()
+    this.currentFilter.addElements()
     this.initBindingsAndEventListeners()
     FilterMgr.all.push(this)
   }
@@ -23,19 +25,21 @@ class FilterMgr {
     MsaMgr.all[0].resetMap()
     MsaMgr.all[0].resetListArea()
     document.getElementById('filter-form').reset()
-    this.currentFilter = new Filter
+    this.currentFilter.reset()
   }
 
   saveFilter(name) {
-    let filter = this.currentFilter
-    filter.name = name
-    filter.items = JSON.stringify(filter.items)
-    filter.vals = JSON.stringify(filter.changedVals)
+    const filter = this.currentFilter
+    filter.items.forEach((item) => item.save())
+    const filterToSave = new Filter(null, name)
+    filterToSave.items = JSON.stringify(filter.items)
     const user = User.all[0]
     const urlSuffix = `users/${user.id}/filters`
-    this.adapter.create(filter, urlSuffix)
-      .then((APIFilter) => {
-        this.currentFilter = user.addFilter(APIFilter)
+    this.adapter.create(filterToSave, urlSuffix)
+      .then((json) => {
+        user.addFilter(json)
+        filter.id = json.id
+        filter.saved = true
         filter.createBtn('delete')
         MenuItem.all[1].showFiltersArea()
       })
@@ -50,10 +54,7 @@ class FilterMgr {
         user.filters = user.filters.filter((f) => {
           return f.id != deleted.id
         })
-        filter.id = null
-        filter.name = null
-        filter.saved = false
-        filter.createBtn('save')
+        filter.backToPreSave()
       })
   }
 }

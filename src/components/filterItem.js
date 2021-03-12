@@ -1,25 +1,24 @@
 class FilterItem {
-  constructor(attr, filterId) {
+  constructor(attr, vals={}, savedVals={}, hiLoVals=[]) {
     this.msaAttr = attr
-    this.element = document.getElementById(attr)
-    this.vals = {}
-    this.valCount = this.getValCount()
-    this.filterId = filterId
-    this.initBindingsAndEventListeners()
+    this.vals = vals
+    this.savedVals = savedVals
+    this.hiLoVals = hiLoVals
   }
 
-  initBindingsAndEventListeners() {
-    this.element.addEventListener('click', (e) => {
-      this.checkboxToggle(e)
-    })
-  }
-
-  getValCount() {
-    if (this.msaAttr == 'unemp') {
-      return 3
-    } else {
-      return 4
+  static different(obj1, obj2) {
+    for (const key in obj1) {
+      if (!!!obj2[key]) { return true }
     }
+    for (const key in obj2) {
+      if (!!!obj1[key]) { return true }
+    }
+    return false
+  }
+
+  addElement() {
+    this.element = document.getElementById(this.msaAttr)
+    this.element.addEventListener('change', (e) => this.checkboxToggle(e))
   }
 
   checkboxToggle(e) {
@@ -43,5 +42,19 @@ class FilterItem {
     } else {
       this.hiLoVals = []
     }
+  }
+
+  save() {
+    this.savedVals = Object.assign({}, this.vals)
+  }
+
+  unsave() {
+    this.savedVals = {}
+  }
+
+  reset() {
+    this.vals = {}
+    this.savedVals = {}
+    this.hiLoVals = []
   }
 }

@@ -20,7 +20,8 @@ class User {
   }
 
   addFilter(obj) {
-    const filter = new Filter(obj.id, obj.name, eval(obj.items), eval(obj.vals))
+    const filter = new Filter(obj.id, obj.name, eval(obj.items))
+    filter.createFilterItems()
     this.filters.push(filter)
     return filter
   }
