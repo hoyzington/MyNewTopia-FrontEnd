@@ -1,13 +1,15 @@
-class App {
-  constructor() {
-    this.menuMgr = new MenuMgr
-    this.msaMgr = new MsaMgr
-    this.filterMgr = new FilterMgr
-    this.initBindingsAndEventListeners()
-  }
+/* global MenuMgr, MsaMgr, FilterMgr */
 
-  initBindingsAndEventListeners() {
-    sessionStorage.setItem('login', 'false')
-    sessionStorage.setItem('msaAbout', 'null')
-  }
+class App {
+	constructor() {
+		this.menuMgr = new MenuMgr();
+		this.msaMgr = new MsaMgr();
+		this.filterMgr = new FilterMgr();
+		this.initBindingsAndEventListeners();
+	}
+
+	initBindingsAndEventListeners() {
+		sessionStorage.setItem('login', 'false');
+		sessionStorage.setItem('msaAbout', 'null');
+	}
 }

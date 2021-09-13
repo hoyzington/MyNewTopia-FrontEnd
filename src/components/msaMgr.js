@@ -1,79 +1,77 @@
+/* global MsasAdapter, Msa, HtmlItems,  */
+
+const listArea = document.getElementById('list-area'),
+			chosen = document.getElementById('chosen-msas'),
+			notChosen = document.getElementById('not-chosen-msas');
+
 class MsaMgr {
-  constructor() {
-    this.all = []
-    this.filtered = []
-    this.adapter = new MsasAdapter
-    // this.initBindingsAndEventListeners()
-    MsaMgr.all.push(this)
-    this.getAll()
-  }
+	constructor() {
+		this.all = [];
+		this.filtered = [];
+		this.adapter = new MsasAdapter();
+		MsaMgr.all.push(this);
+		this.getAll();
+	}
 
-  static all = []
-  static listArea = document.getElementById('list-area')
-  static chosen = document.getElementById('chosen-msas')
-  static notChosen = document.getElementById('not-chosen-msas')
+	static all = [];
+	
+	getAll() {
+		this.adapter
+			.fetchAll()
+			.then(msas => {
+				msas.forEach(msa => this.all.push(new Msa(msa)));
+			});
+	}
 
-  // initBindingsAndEventListeners() {
+	use(filter) {
+		this.filtered = this.all;
+		for (const fItem of filter.items) {
+			this.filtered = this.filtered.filter(msa => msa.msaUseFilter(fItem));
+			if (this.filtered.length === 0) {
+				this.emptyListArea();
+				return false;
+			}
+		}
+		this.renderMsaList();
+		return true;
+	}
 
-  // }
+	emptyListArea() {
+		this.resetListArea();
+		MsaMgr.listArea.innerHTML = HtmlItems.listNoMsas;
+		this.resetMap();
+	}
 
-  getAll() {
-    this.adapter
-      .fetchAll()
-      .then(msas => {
-        msas.forEach(msa => this.all.push(new Msa(msa)))
-      })
-  }
+	renderMsaList() {
+		this.resetListArea();
+		for (const msa of this.filtered) {
+			const li = msa.createLi();
+			MsaMgr.listArea.appendChild(li);
+		}
+		this.addMsasToMap();
+	}
 
-  use(filter) {
-    this.filtered = this.all
-    for (const fItem of filter.items) {
-      this.filtered = this.filtered.filter((msa) => msa.msaUseFilter(fItem))
-      if (this.filtered.length == 0) {
-        this.emptyListArea()
-        return false
-      }
-    }
-    this.renderMsaList()
-    return true
-  }
+	resetListArea() {
+		const list = MsaMgr.listArea;
+		while (list.hasChildNodes()) {
+			list.removeChild(list.firstChild);
+		}
+		const btnArea = document.getElementById('save-btn-area');
+		while (btnArea.hasChildNodes()) {
+			btnArea.removeChild(btnArea.firstChild);
+		}
+	}
 
-  emptyListArea() {
-    this.resetListArea()
-    MsaMgr.listArea.innerHTML = HtmlItems.listNoMsas
-    this.resetMap()
-  }
+	addMsasToMap() {
+		this.resetMap();
+		for (const msa of this.filtered) {
+			msa.addToMap();
+		}
+	}
 
-  renderMsaList() {
-    this.resetListArea()
-    for (const msa of this.filtered) {
-      const li = msa.createLi()
-      MsaMgr.listArea.appendChild(li)
-    }
-    this.addMsasToMap()
-  }
-
-  resetListArea() {
-    const list = MsaMgr.listArea
-    while (list.hasChildNodes()) {  
-      list.removeChild(list.firstChild)
-    }
-    const btnArea = document.getElementById('save-btn-area')
-    while (btnArea.hasChildNodes()) {  
-      btnArea.removeChild(btnArea.firstChild)
-    }
-  }
-
-  addMsasToMap() {
-    this.resetMap()
-    for (const msa of this.filtered) {
-      msa.addToMap()
-    }
-  }
-
-  resetMap() {
-    while (MsaMgr.chosen.hasChildNodes()) {
-      MsaMgr.notChosen.appendChild(MsaMgr.chosen.firstChild)
-    }
-  }
+	resetMap() {
+		while (MsaMgr.chosen.hasChildNodes()) {
+			MsaMgr.notChosen.appendChild(MsaMgr.chosen.firstChild);
+		}
+	}
 }
