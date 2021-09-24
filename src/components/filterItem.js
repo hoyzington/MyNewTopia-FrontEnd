@@ -26,10 +26,10 @@ class FilterItem {
 	}
 
 	checkboxToggle(e) {
-		if (this['vals'][e.target.id]) {
-			delete this['vals'][e.target.id];
+		if (this.vals[e.target.id]) {
+			delete this.vals[e.target.id];
 		} else {
-			this['vals'][e.target.id] = e.target.value;
+			this.vals[e.target.id] = e.target.value;
 		}
 	}
 
