@@ -24,7 +24,8 @@ class User {
 	}
 
 	addFilter(obj) {
-		const filter = new Filter(obj.id, obj.name, eval(obj.items));
+		const unstringify = eval;
+		const filter = new Filter(obj.id, obj.name, unstringify(obj.items));
 		filter.createFilterItems();
 		this.filters.push(filter);
 		return filter;
