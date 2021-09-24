@@ -14,7 +14,7 @@ class MsaMgr {
 	}
 
 	static all = [];
-	
+
 	getAll() {
 		this.adapter
 			.fetchAll()
