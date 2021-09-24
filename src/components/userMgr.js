@@ -1,4 +1,4 @@
-/* global UsersAdapter, MenuMgr */
+/* global UsersAdapter, User, MenuMgr */
 
 class UserMgr {
 	constructor(e) {
@@ -19,7 +19,7 @@ class UserMgr {
 				if (user.message) {
 					MenuMgr.all[0].handleAccountError(user.message);
 				} else {
-					new User(user.id, user.username, user.filters);
+					const user = new User(user.id, user.username, user.filters);
 				}
 			});
 	}

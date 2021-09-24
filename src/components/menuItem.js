@@ -10,7 +10,7 @@ class MenuItem {
 		this.initBindingsAndEventListeners();
 	}
 
-	// static all = [];
+	static all = [];
 
 	initBindingsAndEventListeners() {
 		this.contentArea = document.getElementById('menu-content');
@@ -61,7 +61,7 @@ class MenuItem {
 			document.getElementById('username').focus();
 			logOrSignIn.addEventListener('click', e => {
 				e.preventDefault();
-				new UserMgr(e);
+				const userMgr = new UserMgr(e);
 			});
 		} else if (this.name === 'myAccount') {
 			User.all[0].myAcctContent();
