@@ -39,6 +39,11 @@
 			"error", "single", {
 				"avoidEscape": true
 			}
+		],
+		"no-eval": [
+			"error", {
+				"allowIndirect": true
+			}
 		]
 	}
 }
