@@ -16,16 +16,9 @@
       "error",
       "as-needed"
     ],
-		"object-curly-spacing": "off",
-		"quote-props": [
-			"error",
-			"consistent"
-		],
-		"padding-line-between-statements": 0,
-		"one-var": 0,
 		"indent": [
 			"error",
-			"tab",
+			2,
 			{ "VariableDeclarator": {
 					"var": 2,
 					"let": 2,
@@ -34,15 +27,23 @@
 				"SwitchCase": 1
 			}
 		],
-		"no-unused-vars": 0,
-		"quotes": [
-			"error", "single", {
-				"avoidEscape": true
-			}
-		],
+    "no-alert": 0,
 		"no-eval": [
 			"error", {
 				"allowIndirect": true
+			}
+		],
+		"object-curly-spacing": "off",
+		"one-var": 0,
+		"padding-line-between-statements": 0,
+		"no-unused-vars": 0,
+		"quote-props": [
+			"error",
+			"consistent"
+		],
+		"quotes": [
+			"error", "single", {
+				"avoidEscape": true
 			}
 		]
 	}
