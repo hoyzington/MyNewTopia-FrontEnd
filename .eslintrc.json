@@ -1,50 +1,50 @@
 {
-	"env": {
-		"browser": true,
-		"es2021": true
-	},
-	"extends": [
-		"eslint:recommended",
-		"xo"
-	],
-	"parserOptions": {
-		"sourceType": "script",
-		"ecmaVersion": "latest"
-	},
+  "env": {
+      "browser": true,
+      "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "xo"
+  ],
+  "parserOptions": {
+    "sourceType": "script",
+    "ecmaVersion": "latest"
+    },
   "rules": {
     "arrow-parens": [
       "error",
       "as-needed"
     ],
-		"indent": [
-			"error",
-			2,
-			{ "VariableDeclarator": {
-					"var": 2,
-					"let": 2,
-					"const": 3
-				},
-				"SwitchCase": 1
-			}
-		],
+    "indent": [
+      "error",
+      2,
+      { "VariableDeclarator": {
+          "var": 2,
+          "let": 2,
+          "const": 3
+        },
+        "SwitchCase": 1
+      }
+    ],
     "no-alert": 0,
-		"no-eval": [
-			"error", {
-				"allowIndirect": true
-			}
-		],
-		"object-curly-spacing": "off",
-		"one-var": 0,
-		"padding-line-between-statements": 0,
-		"no-unused-vars": 0,
-		"quote-props": [
-			"error",
-			"consistent"
-		],
-		"quotes": [
-			"error", "single", {
-				"avoidEscape": true
-			}
-		]
-	}
+    "no-eval": [
+      "error", {
+        "allowIndirect": true
+      }
+    ],
+    "object-curly-spacing": "off",
+    "one-var": 0,
+    "padding-line-between-statements": 0,
+    "no-unused-vars": 0,
+    "quote-props": [
+      "error",
+      "consistent"
+    ],
+    "quotes": [
+      "error", "single", {
+        "avoidEscape": true
+      }
+    ]
+  }
 }
