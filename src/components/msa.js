@@ -22,7 +22,7 @@ class Msa {
   }
 
   initBindingsAndEventListeners() {
-    this.mapLoc = Msa.map.getElementById(this.code);
+    this.mapLoc = map.getElementById(this.code);
   }
 
   msaUseFilter(fItem) {
@@ -49,7 +49,7 @@ class Msa {
 
   btnMouseover(msaBtn) {
     msaBtn.addEventListener('mouseover', () => {
-      Msa.highlighted.appendChild(this.mapLoc);
+      highlighted.appendChild(this.mapLoc);
     });
     msaBtn.addEventListener('mouseout', () => {
       MsaMgr.chosen.appendChild(this.mapLoc);

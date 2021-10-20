@@ -1,7 +1,6 @@
 /* global MsasAdapter, Msa, HtmlItems,  */
 
 const listArea = document.getElementById('list-area'),
-      chosen = document.getElementById('chosen-msas'),
       notChosen = document.getElementById('not-chosen-msas');
 
 class MsaMgr {
@@ -14,6 +13,8 @@ class MsaMgr {
   }
 
   static all = [];
+
+  static chosen = document.getElementById('chosen-msas');
 
   getAll() {
     this.adapter
