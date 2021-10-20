@@ -39,7 +39,7 @@ class MsaMgr {
 
   emptyListArea() {
     this.resetListArea();
-    MsaMgr.listArea.innerHTML = HtmlItems.listNoMsas;
+    listArea.innerHTML = HtmlItems.listNoMsas;
     this.resetMap();
   }
 
@@ -47,13 +47,13 @@ class MsaMgr {
     this.resetListArea();
     for (const msa of this.filtered) {
       const li = msa.createLi();
-      MsaMgr.listArea.appendChild(li);
+      listArea.appendChild(li);
     }
     this.addMsasToMap();
   }
 
   resetListArea() {
-    const list = MsaMgr.listArea;
+    const list = listArea;
     while (list.hasChildNodes()) {
       list.removeChild(list.firstChild);
     }
@@ -72,7 +72,7 @@ class MsaMgr {
 
   resetMap() {
     while (MsaMgr.chosen.hasChildNodes()) {
-      MsaMgr.notChosen.appendChild(MsaMgr.chosen.firstChild);
+      notChosen.appendChild(MsaMgr.chosen.firstChild);
     }
   }
 }
