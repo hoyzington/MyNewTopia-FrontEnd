@@ -1,24 +1,24 @@
-/* global FilterItem, MsaItem, MsaMgr, User, MenuItem, FilterMgr, MenuMgr */
+/* global FilterChoice, MsaMgr, User, MenuItem, FilterMgr, MenuMgr */
 
 const msaAttrs = ['heat', 'cold', 'precip', 'snow', 'wage', 'unemp', 'aqi'];
 
 class Filter {
-  constructor(id = null, name = null, items = []) {
+  constructor(id = null, name = null, choices = []) {
     this.id = id;
     this.name = name;
-    this.items = items;
+    this.choices = choices;
     this.made = false;
     this.saved = false;
   }
 
-  createFilterItems() {
-    if (this.items.length === 0) {
+  createFilterChoices() {
+    if (this.choices.length === 0) {
       for (const attr of msaAttrs) {
-        this.items.push(new FilterItem(attr));
+        this.choices.push(new FilterChoice(attr));
       }
     } else {
-      this.items = this.items.map(item => new FilterItem(
-        item.msaAttr, item.vals, item.savedVals, item.hiLoVals,
+      this.choices = this.choices.map(choice => new FilterChoice(
+        choice.msaAttr, choice.vals, choice.savedVals, choice.hiLoVals,
       ));
       this.made = true;
       this.saved = true;
@@ -26,7 +26,7 @@ class Filter {
   }
 
   addElements() {
-    this.items.forEach(item => item.addElement());
+    this.choices.forEach(choice => choice.addElement());
   }
 
   reset() {
@@ -34,14 +34,14 @@ class Filter {
     this.name = null;
     this.made = false;
     this.saved = false;
-    this.items.forEach(item => item.reset());
+    this.choices.forEach(choice => choice.reset());
   }
 
   processFind() {
     const changed = this.changed();
     if (changed) {
-      for (const item of this.items) {
-        item.createHiLoVals();
+      for (const choice of this.choices) {
+        choice.createHiLoVals();
       }
     }
     const success = MsaMgr.all[0].use(this);
@@ -54,8 +54,8 @@ class Filter {
   }
 
   changed() {
-    for (const item of this.items) {
-      if (FilterItem.different(item.vals, item.savedVals)) {
+    for (const choice of this.choices) {
+      if (FilterChoice.different(choice.vals, choice.savedVals)) {
         return true;
       }
     }
@@ -75,14 +75,14 @@ class Filter {
   }
 
   identicalTo(filter) {
-    for (let i = 0; i < 7; i++) { // Every filter has 7 items
-      for (const key in this.items[i].vals) {
-        if (!filter.items[i].vals[key]) {
+    for (let i = 0; i < 7; i++) { // Every filter has 7 choices
+      for (const key in this.choices[i].vals) {
+        if (!filter.choices[i].vals[key]) {
           return false;
         }
       }
-      for (const key in filter.items[i].vals) {
-        if (!this.items[i].vals[key]) {
+      for (const key in filter.choices[i].vals) {
+        if (!this.choices[i].vals[key]) {
           return false;
         }
       }
@@ -137,19 +137,19 @@ class Filter {
       document.getElementById('filter-form').reset();
       const filter = FilterMgr.all[0].currentFilter;
       filter.id = this.id;
-      filter.items.forEach(item => item.reset());
+      filter.choices.forEach(choice => choice.reset());
       filter.made = true;
       filter.saved = true;
-      this.items.forEach((item, i) => {
-        const formItem = document.getElementById(item.msaAttr);
-        for (const key in item.savedVals) {
-          if ({}.hasOwnProperty.call(item.savedVals, key)) {
-            formItem.querySelector(`input[id='${key}']`).checked = true;
+      this.choices.forEach((choice, i) => {
+        const formchoice = document.getElementById(choice.msaAttr);
+        for (const key in choice.savedVals) {
+          if ({}.hasOwnProperty.call(choice.savedVals, key)) {
+            formchoice.querySelector(`input[id='${key}']`).checked = true;
           }
         }
-        filter.items[i].vals = {...item.vals};
-        filter.items[i].savedVals = {...item.savedVals};
-        filter.items[i].hiLoVals.push(...item.hiLoVals);
+        filter.choices[i].vals = {...choice.vals};
+        filter.choices[i].savedVals = {...choice.savedVals};
+        filter.choices[i].hiLoVals.push(...choice.hiLoVals);
       });
       MenuMgr.all[0].hideMenuContent();
       MsaMgr.all[0].use(FilterMgr.all[0].currentFilter);
@@ -161,7 +161,7 @@ class Filter {
   backToPreSave() {
     this.id = null;
     this.name = null;
-    this.items.forEach(item => item.unsave());
+    this.choices.forEach(choice => choice.unsave());
     this.saved = false;
     this.createBtn('save');
   }

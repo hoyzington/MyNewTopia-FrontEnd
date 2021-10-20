@@ -4,7 +4,7 @@ class FilterMgr {
   constructor() {
     this.adapter = new FiltersAdapter();
     this.currentFilter = new Filter();
-    this.currentFilter.createFilterItems();
+    this.currentFilter.createFilterchoices();
     this.currentFilter.addElements();
     this.initBindingsAndEventListeners();
     FilterMgr.all.push(this);
@@ -32,19 +32,21 @@ class FilterMgr {
 
   saveFilter(name) {
     const filter = this.currentFilter;
-    filter.items.forEach(item => item.save());
+    filter.choices.forEach(choice => choice.save());
     const filterToSave = new Filter(null, name);
-    filterToSave.items = JSON.stringify(filter.items);
-    const user = User.all[0];
-    const urlSuffix = `users/${user.id}/filters`;
-    this.adapter.create(filterToSave, urlSuffix)
-      .then(json => {
-        user.addFilter(json);
-        filter.id = json.id;
-        filter.saved = true;
-        filter.createBtn('delete');
-        MenuItem.all[1].showFiltersArea();
-      });
+    filterToSave.choices = JSON.stringify(filter.choices);
+    console.log(filterToSave)
+
+    // const user = User.all[0];
+    // const urlSuffix = `users/${user.id}/filters`;
+    // this.adapter.create(filterToSave, urlSuffix)
+    //   .then(json => {
+    //     user.addFilter(json);
+    //     filter.id = json.id;
+    //     filter.saved = true;
+    //     filter.createBtn('delete');
+    //     MenuItem.all[1].showFiltersArea();
+    //   });
   }
 
   deleteFilter() {

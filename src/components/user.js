@@ -25,10 +25,10 @@ class User {
 
   addFilter(obj) {
     const unstringify = eval;
-    const filter = new Filter(obj.id, obj.name, unstringify(obj.items));
-    filter.createFilterItems();
+    const filter = new Filter(obj.id, obj.name, unstringify(obj.choices));
+    filter.createFilterChoices();
     this.filters.push(filter);
-    return filter;
+    // return filter;
   }
 
   beginUX() {

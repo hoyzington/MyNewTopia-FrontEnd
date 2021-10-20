@@ -26,8 +26,8 @@ class MsaMgr {
 
   use(filter) {
     this.filtered = this.all;
-    for (const fItem of filter.items) {
-      this.filtered = this.filtered.filter(msa => msa.msaUseFilter(fItem));
+    for (const fChoice of filter.choices) {
+      this.filtered = this.filtered.filter(msa => msa.msaUseFilter(fChoice));
       if (this.filtered.length === 0) {
         this.emptyListArea();
         return false;
