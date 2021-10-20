@@ -19,7 +19,7 @@ class UserMgr {
         if (user.message) {
           MenuMgr.all[0].handleAccountError(user.message);
         } else {
-          const user = new User(user.id, user.username, user.filters);
+          const newUser = new User(user.id, user.username, user.filters)
         }
       });
   }
