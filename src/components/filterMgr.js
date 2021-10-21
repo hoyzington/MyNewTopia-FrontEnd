@@ -4,7 +4,7 @@ class FilterMgr {
   constructor() {
     this.adapter = new FiltersAdapter();
     this.currentFilter = new Filter();
-    this.currentFilter.createFilterchoices();
+    this.currentFilter.createFilterChoices();
     this.currentFilter.addElements();
     this.initBindingsAndEventListeners();
     FilterMgr.all.push(this);
@@ -35,18 +35,16 @@ class FilterMgr {
     filter.choices.forEach(choice => choice.save());
     const filterToSave = new Filter(null, name);
     filterToSave.choices = JSON.stringify(filter.choices);
-    console.log(filterToSave)
-
-    // const user = User.all[0];
-    // const urlSuffix = `users/${user.id}/filters`;
-    // this.adapter.create(filterToSave, urlSuffix)
-    //   .then(json => {
-    //     user.addFilter(json);
-    //     filter.id = json.id;
-    //     filter.saved = true;
-    //     filter.createBtn('delete');
-    //     MenuItem.all[1].showFiltersArea();
-    //   });
+    const user = User.all[0];
+    const urlSuffix = `users/${user.id}/filters`;
+    this.adapter.create(filterToSave, urlSuffix)
+      .then(json => {
+        user.addFilter(json);
+        filter.id = json.id;
+        filter.saved = true;
+        filter.createBtn('delete');
+        MenuItem.all[1].showFiltersArea();
+      });
   }
 
   deleteFilter() {
