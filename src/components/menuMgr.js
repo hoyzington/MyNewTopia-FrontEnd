@@ -43,15 +43,14 @@ class MenuMgr {
     sessionStorage.msaAbout = 'null';
   }
 
-  handleAccountError(message) {
-    const inputs = document.querySelectorAll("header input[type='text']");
-    for (const input of inputs) {
-      input.value = '';
+  handleAccountErrors(errors) {
+    this.items[1].addHtmlContent();
+    for (const message of errors) {
+      const msg = document.createElement('div');
+      msg.className = 'alert';
+      msg.innerHTML = `<h3>${message}</h3>`;
+      this.contentArea.prepend(msg);
     }
-    const msg = document.createElement('div');
-    msg.className = 'alert';
-    msg.innerHTML = `<h3>${message}</h3>`;
-    this.contentArea.prepend(msg);
     document.getElementById('username').focus();
   }
 }

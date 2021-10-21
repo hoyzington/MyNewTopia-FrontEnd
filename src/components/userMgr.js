@@ -16,8 +16,8 @@ class UserMgr {
     const userData = this.packageFormData();
     this.adapter.create(userData, urlSuffix)
       .then(user => {
-        if (user.message) {
-          MenuMgr.all[0].handleAccountError(user.message);
+        if (user.errors) {
+          MenuMgr.all[0].handleAccountErrors(user.errors);
         } else {
           const newUser = new User(user.id, user.username, user.filters)
         }
